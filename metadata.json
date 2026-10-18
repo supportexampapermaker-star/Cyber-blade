@@ -1,0 +1,8 @@
+{
+  "name": "CYBER BLADE: CHRONO STRIKE",
+  "description": "High-octane slow-motion 2D cyberpunk action game featuring 0.11x bullet-time, katana chain-dashes, 15 levels, 4 speed modes, Chrono Overdrive, 3 epic boss battles, and cyber armory.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
