@@ -577,7 +577,35 @@
       margin-top: 4px;
     }
 
-    /* LEVEL SELECT GRID & STAGE TABS */
+    /* LEVEL SELECT GRID & MISSION / STAGE TABS */
+    .mission-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .mission-tab-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-muted);
+      padding: 8px 6px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      border-radius: 7px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+
+    .mission-tab-btn.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.22) 0%, rgba(168, 85, 247, 0.25) 100%);
+      border-color: var(--cyan);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
+    }
+
     .stage-tabs {
       display: flex;
       gap: 6px;
@@ -841,6 +869,35 @@
     }
 
     /* SIDE MENU LEVEL SELECTOR STYLING */
+    .side-mission-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .side-mission-btn {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      font-size: 9.5px;
+      font-weight: 900;
+      padding: 6px 4px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      white-space: nowrap;
+    }
+
+    .side-mission-btn.active {
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.2) 0%, rgba(168, 85, 247, 0.22) 100%);
+      color: #fff;
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+    }
+
     .side-stage-tabs {
       display: flex;
       gap: 4px;
@@ -1739,30 +1796,36 @@
       </div>
     </div>
 
-    <!-- LEVEL SELECT MODAL (3 STAGES // 30 LEVELS) -->
+    <!-- LEVEL SELECT MODAL (MISSION 1: 1–30 // MISSION 2: 31–60) -->
     <div class="modal-overlay hidden" id="modal-level-select">
-      <div class="modal-box" style="max-width: 640px;">
+      <div class="modal-box" style="max-width: 660px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
           <div>
-            <h2 class="modal-title" style="text-align: left; font-size: 18px;">CAMPAIGN MISSIONS (1–30)</h2>
-            <div class="modal-subtitle" style="text-align: left;" id="stage-desc-text">Stage 1: Neo-Tokyo Rooftops (Levels 1–10)</div>
+            <h2 class="modal-title" id="level-select-main-title" style="text-align: left; font-size: 18px;">CAMPAIGN MISSIONS (60 TOTAL)</h2>
+            <div class="modal-subtitle" style="text-align: left;" id="stage-desc-text">Mission 1 · Stage 1: Neo-Tokyo Rooftops (Levels 1–10)</div>
           </div>
           <button class="btn-secondary" id="btn-close-level-select" style="padding: 6px 12px;">✕</button>
         </div>
 
-        <!-- Stage Filter Tabs -->
-        <div class="stage-tabs">
-          <button class="stage-tab-btn active" data-stage="1" id="tab-stage-1">STAGE 1: ROOFTOPS (1-10)</button>
-          <button class="stage-tab-btn" data-stage="2" id="tab-stage-2">STAGE 2: CRYO-VAULT (11-20)</button>
-          <button class="stage-tab-btn" data-stage="3" id="tab-stage-3">STAGE 3: VOID CORE (21-30)</button>
+        <!-- Mission Selection Tabs (Mission 1 vs Mission 2) -->
+        <div class="mission-tabs" id="modal-mission-tabs">
+          <button class="mission-tab-btn active" data-mission="1" id="tab-mission-1">⚡ MISSION 1: CHRONO MATRIX (1–30)</button>
+          <button class="mission-tab-btn" data-mission="2" id="tab-mission-2">🚀 MISSION 2: CYBER OUTSKIRTS (31–60)</button>
+        </div>
+
+        <!-- Stage Filter Tabs (Populated / Updated dynamically) -->
+        <div class="stage-tabs" id="modal-stage-tabs-container">
+          <button class="stage-tab-btn active" data-stage="1" id="tab-stage-1">STAGE 1 (1–10)</button>
+          <button class="stage-tab-btn" data-stage="2" id="tab-stage-2">STAGE 2 (11–20)</button>
+          <button class="stage-tab-btn" data-stage="3" id="tab-stage-3">STAGE 3 (21–30)</button>
         </div>
 
         <div class="level-select-grid" id="level-buttons-container">
           <!-- Dynamically generated for selected stage -->
         </div>
 
-        <div style="text-align: center; font-size: 11px; color: var(--text-muted); padding-top: 4px;">
-          Boss confrontation at Levels 5, 10, 15, 20, 25, and Grand Finale at Level 30.
+        <div style="text-align: center; font-size: 11px; color: var(--text-muted); padding-top: 4px;" id="level-select-footer-hint">
+          Boss confrontation every 5 levels. Defeat all enemies to secure each sector.
         </div>
       </div>
     </div>
@@ -2048,29 +2111,35 @@
           </div>
         </div>
 
-        <!-- PANE: LEVELS (30 CAMPAIGN MISSIONS) -->
+        <!-- PANE: LEVELS (60 CAMPAIGN MISSIONS // MISSION 1 & 2) -->
         <div class="side-pane" id="pane-levels">
           <!-- Header and Progress Status -->
-          <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 9px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 9px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <div>
-              <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">CAMPAIGN MISSIONS (1–30)</div>
-              <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="side-levels-progress-text">Highest: LVL 1 / 30</div>
+              <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">CAMPAIGN MISSIONS (60 TOTAL)</div>
+              <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="side-levels-progress-text">Highest: LVL 1 / 60</div>
             </div>
             <button class="btn-primary" id="btn-side-resume-level" style="padding: 6px 10px; font-size: 10.5px; white-space: nowrap;">
               ▶️ PLAY LVL <span id="side-resume-lvl-num">1</span>
             </button>
           </div>
 
+          <!-- Mission Switcher Tabs -->
+          <div class="side-mission-tabs" id="side-mission-tabs-container">
+            <button class="side-mission-btn active" data-side-mission="1" id="side-m-btn-1">⚡ MISSION 1 (1–30)</button>
+            <button class="side-mission-btn" data-side-mission="2" id="side-m-btn-2">🚀 MISSION 2 (31–60)</button>
+          </div>
+
           <!-- Stage Selection Tabs -->
-          <div class="side-stage-tabs">
+          <div class="side-stage-tabs" id="side-stage-tabs-container">
             <button class="side-stage-btn active" data-side-stage="1" id="side-stage-tab-1">STAGE 1 (1–10)</button>
             <button class="side-stage-btn" data-side-stage="2" id="side-stage-tab-2">STAGE 2 (11–20)</button>
             <button class="side-stage-btn" data-side-stage="3" id="side-stage-tab-3">STAGE 3 (21–30)</button>
           </div>
 
           <!-- Stage Description -->
-          <div style="font-size: 9.5px; color: #94a3b8; padding: 2px 4px;" id="side-stage-desc">
-            Stage 1: Neo-Tokyo Rooftops (Levels 1–10) · Jump Pads & Barrels
+          <div style="font-size: 9.5px; color: #94a3b8; padding: 2px 4px; margin-top: 4px;" id="side-stage-desc">
+            Mission 1 · Stage 1: Neo-Tokyo Rooftops (Levels 1–10) · Jump Pads & Barrels
           </div>
 
           <!-- Levels Grid (10 Levels per stage) -->
@@ -3011,6 +3080,11 @@
     // --- GAME ENGINE CONSTANTS & STATE ---
     let VIRTUAL_WIDTH = 1200;
     let VIRTUAL_HEIGHT = 750;
+    let currentWorldWidth = 1200; // 1200 for Mission 1, 2400-2800 for Mission 2 Side-Scrolling
+    let currentSelectedMission = 1;
+    let currentSelectedStage = 1;
+    let currentSideMission = 1;
+    let currentSideStage = 1;
     let isFullScreenAdapt = true; // Auto-fits phone screen width without black bars or cutouts
     window.portraitDismissed = false;
 
@@ -3058,7 +3132,6 @@
     // Game Core State
     let gameMode = 'CAMPAIGN';
     let currentLevelIndex = 1;
-    let currentSelectedStage = 1;
     let endlessWave = 1;
     let endlessScore = 0;
     let gameState = 'TITLE';
@@ -3201,7 +3274,7 @@
         id: 'golden_shogun',
         category: 'suits',
         name: '👑 Golden Shogun Exo-Armor',
-        desc: 'Increases starting Max Health to 3 Hearts (❤️❤️❤️), blocks the 1st hit per level free, and grants a golden aura.',
+        desc: 'Increases starting Max Health to 4 Hearts (❤️❤️❤️❤️), blocks the 1st hit per level free, and grants a golden aura.',
         cost: 15000,
         color: '#fbbf24'
       },
@@ -3254,9 +3327,9 @@
         this.dashSpeed = SPEED_MODES[currentSpeedIndex].dash;
         this.canDash = true;
 
-        // Health & Hearts System
+        // Health & Hearts System (3 Base Lives / Hearts per user requirement)
         const hasGoldenShogun = progression.data.equippedSuit === 'golden_shogun';
-        this.maxHearts = hasGoldenShogun ? 3 : 2;
+        this.maxHearts = hasGoldenShogun ? 4 : 3;
         this.hearts = this.maxHearts;
         this.freeHitShield = hasGoldenShogun; // 1 free hit per level
 
@@ -3393,13 +3466,13 @@
           }
         }
 
-        // Screen Boundaries
+        // Screen & World Boundaries (Clamped to currentWorldWidth for Side-Scrolling)
         if (this.x < this.radius + 12) {
           this.x = this.radius + 12;
           this.vx = 0;
         }
-        if (this.x > VIRTUAL_WIDTH - this.radius - 12) {
-          this.x = VIRTUAL_WIDTH - this.radius - 12;
+        if (this.x > currentWorldWidth - this.radius - 12) {
+          this.x = currentWorldWidth - this.radius - 12;
           this.vx = 0;
         }
         if (this.y < this.radius) {
@@ -3925,22 +3998,43 @@
     }
 
     // --- ENEMY CLASS ---
+    // --- ENEMY CLASS (With Dynamic Movement & Mission 2 Bosses) ---
     class Enemy {
       constructor(type, x, y, opts = {}) {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.radius = type.startsWith('boss') ? 34 : 18;
+        this.startX = x;
+        this.startY = y;
+        this.radius = type.startsWith('boss') ? 34 : (type === 'heavy_mech' ? 24 : 18);
         this.facing = opts.facing || 1;
-        this.isShieldActive = type === 'shield';
+        this.isShieldActive = (type === 'shield' || type === 'heavy_mech');
         this.frozenTimer = 0;
         this.stunTimer = 0;
         this.shootTimer = 1.0 + Math.random() * 1.5;
 
+        // Dynamic Movement System
+        this.moveType = opts.moveType || (type === 'patrol' || type === 'hover_drone' || type === 'chaser' ? type : (type.startsWith('boss') ? 'boss' : 'static'));
+        this.moveSpeed = opts.moveSpeed || (type === 'chaser' ? 120 : (type === 'hover_drone' ? 85 : 75));
+        this.patrolMinX = opts.patrolMinX !== undefined ? opts.patrolMinX : (x - 130);
+        this.patrolMaxX = opts.patrolMaxX !== undefined ? opts.patrolMaxX : (x + 130);
+        this.floatAngle = Math.random() * Math.PI * 2;
+        this.walkAnimTimer = 0;
+
+        // Health Points Assignment
         if (type === 'boss_drone') this.hp = 6;
         else if (type === 'boss_shogun') this.hp = 10;
         else if (type === 'boss_titan') this.hp = 15;
+        else if (type === 'boss_mantis') this.hp = 8;
+        else if (type === 'boss_phantom') this.hp = 12;
+        else if (type === 'boss_dread_drone') this.hp = 14;
+        else if (type === 'boss_shogun_neo') this.hp = 16;
+        else if (type === 'boss_void_dragon') this.hp = 18;
+        else if (type === 'boss_titan_prime') this.hp = 24;
+        else if (type === 'heavy_mech') this.hp = 3;
+        else if (type === 'chaser') this.hp = 2;
         else this.hp = 1;
+
         this.maxHp = this.hp;
       }
 
@@ -3954,10 +4048,70 @@
           return;
         }
 
+        this.walkAnimTimer += dt * 8;
+
+        // 1. DYNAMIC ENEMY MOVEMENT
+        if (this.moveType === 'patrol') {
+          this.x += this.facing * this.moveSpeed * dt;
+          if (this.x <= this.patrolMinX) {
+            this.x = this.patrolMinX;
+            this.facing = 1;
+          } else if (this.x >= this.patrolMaxX) {
+            this.x = this.patrolMaxX;
+            this.facing = -1;
+          }
+        } else if (this.moveType === 'hover_drone') {
+          this.floatAngle += dt * 2.4;
+          this.y = this.startY + Math.sin(this.floatAngle) * 32;
+          this.x += this.facing * this.moveSpeed * dt;
+          if (this.x <= this.patrolMinX) {
+            this.x = this.patrolMinX;
+            this.facing = 1;
+          } else if (this.x >= this.patrolMaxX) {
+            this.x = this.patrolMaxX;
+            this.facing = -1;
+          }
+        } else if (this.moveType === 'chaser') {
+          if (player && player.hearts > 0) {
+            const dist = Math.hypot(player.x - this.x, player.y - this.y);
+            if (dist < 850 && dist > 20) {
+              const dir = player.x > this.x ? 1 : -1;
+              this.facing = dir;
+              this.x += dir * this.moveSpeed * dt;
+              if (this.x < 30) this.x = 30;
+              if (this.x > currentWorldWidth - 30) this.x = currentWorldWidth - 30;
+            }
+          }
+        } else if (this.type.startsWith('boss')) {
+          this.floatAngle += dt * 2.0;
+          if (this.type === 'boss_mantis') {
+            this.x += this.facing * 110 * dt;
+            if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; this.facing = 1; }
+            else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; this.facing = -1; }
+          } else if (this.type === 'boss_dread_drone' || this.type === 'boss_void_dragon') {
+            this.y = this.startY + Math.sin(this.floatAngle) * 45;
+            this.x += this.facing * 90 * dt;
+            if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; this.facing = 1; }
+            else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; this.facing = -1; }
+          } else if (this.type === 'boss_phantom' || this.type === 'boss_shogun_neo') {
+            if (player && player.hearts > 0) {
+              const dir = player.x > this.x ? 1 : -1;
+              this.facing = dir;
+              this.x += dir * 65 * dt;
+            }
+          } else if (this.type === 'boss_titan_prime') {
+            this.y = this.startY + Math.sin(this.floatAngle) * 25;
+            this.x += this.facing * 50 * dt;
+            if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; this.facing = 1; }
+            else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; this.facing = -1; }
+          }
+        }
+
+        // 2. SHOOTING SYSTEM
         this.shootTimer -= dt;
         if (this.shootTimer <= 0 && player && player.hearts > 0) {
           this.fireProjectile();
-          this.shootTimer = this.type.startsWith('boss') ? 1.4 : 2.5;
+          this.shootTimer = this.type.startsWith('boss') ? 1.35 : (this.type === 'heavy_mech' ? 2.0 : 2.5);
         }
       }
 
@@ -3999,6 +4153,38 @@
 
         if (this.type === 'sniper') {
           createBullet(baseAngle, 540, 4.5, '#ff0055');
+        } else if (this.type === 'heavy_mech') {
+          createBullet(baseAngle - 0.12, 380, 6, '#38bdf8');
+          createBullet(baseAngle + 0.12, 380, 6, '#38bdf8');
+        } else if (this.type === 'chaser') {
+          createBullet(baseAngle, 370, 5, '#ff0055');
+        } else if (this.type === 'hover_drone') {
+          createBullet(baseAngle, 390, 5.5, '#00f0ff');
+        } else if (this.type === 'boss_mantis') {
+          createBullet(baseAngle - 0.2, 360, 6, '#10b981');
+          createBullet(baseAngle, 420, 7.5, '#ff0055');
+          createBullet(baseAngle + 0.2, 360, 6, '#10b981');
+        } else if (this.type === 'boss_phantom') {
+          createBullet(baseAngle - 0.25, 420, 6.5, '#a855f7');
+          createBullet(baseAngle, 450, 7, '#ff0055');
+          createBullet(baseAngle + 0.25, 420, 6.5, '#a855f7');
+        } else if (this.type === 'boss_dread_drone') {
+          createBullet(baseAngle - 0.35, 340, 6, '#f59e0b');
+          createBullet(baseAngle - 0.12, 360, 6.5, '#ff0055');
+          createBullet(baseAngle + 0.12, 360, 6.5, '#ff0055');
+          createBullet(baseAngle + 0.35, 340, 6, '#f59e0b');
+        } else if (this.type === 'boss_shogun_neo') {
+          createBullet(baseAngle - 0.2, 430, 7.5, '#c084fc');
+          createBullet(baseAngle, 460, 8.5, '#00f0ff');
+          createBullet(baseAngle + 0.2, 430, 7.5, '#c084fc');
+        } else if (this.type === 'boss_void_dragon') {
+          for (let k = -2; k <= 2; k++) {
+            createBullet(baseAngle + k * 0.18, 380, 6, '#ff5500');
+          }
+        } else if (this.type === 'boss_titan_prime') {
+          for (let k = -2; k <= 2; k++) {
+            createBullet(baseAngle + k * 0.22, 410, 7, k === 0 ? '#fbbf24' : '#ff0055');
+          }
         } else if (this.type === 'boss_drone') {
           createBullet(baseAngle - 0.22, 340, 6, '#f59e0b');
           createBullet(baseAngle, 360, 7, '#ff0055');
@@ -4025,7 +4211,7 @@
       die() {
         const isBoss = this.type.startsWith('boss');
         const greed = progression.getGreedMultiplier();
-        let shardReward = isBoss ? Math.round(80 * greed) : Math.round(5 * Math.max(1, airCombo) * greed);
+        let shardReward = isBoss ? Math.round(90 * greed) : Math.round(5 * Math.max(1, airCombo) * greed);
 
         if (this.frozenTimer > 0) {
           shardReward += Math.round(15 * greed); // Frost Zero bonus!
@@ -4065,25 +4251,80 @@
           c.strokeRect(-this.radius - 4, -this.radius - 4, (this.radius + 4) * 2, (this.radius + 4) * 2);
         }
 
-        c.fillStyle = this.type.startsWith('boss') ? '#831843' : '#1e1b4b';
-        c.strokeStyle = this.type.startsWith('boss') ? '#f43f5e' : '#a855f7';
+        // Distinct styling based on enemy archetype
+        let bodyColor = '#1e1b4b';
+        let strokeColor = '#a855f7';
+        if (this.type.startsWith('boss')) {
+          bodyColor = '#831843';
+          strokeColor = '#f43f5e';
+        } else if (this.type === 'heavy_mech') {
+          bodyColor = '#0f172a';
+          strokeColor = '#38bdf8';
+        } else if (this.type === 'chaser') {
+          bodyColor = '#450a0a';
+          strokeColor = '#ef4444';
+        } else if (this.type === 'hover_drone') {
+          bodyColor = '#064e3b';
+          strokeColor = '#00f0ff';
+        }
+
+        c.fillStyle = bodyColor;
+        c.strokeStyle = strokeColor;
         c.lineWidth = 2.5;
+
+        // Animated movement indicators (hover thruster or walker feet)
+        if (this.moveType === 'hover_drone' || this.type === 'boss_drone' || this.type === 'boss_dread_drone') {
+          c.save();
+          c.strokeStyle = 'rgba(0, 240, 255, 0.6)';
+          c.lineWidth = 2;
+          c.beginPath();
+          c.ellipse(0, this.radius + 4, this.radius * 0.8, 3, 0, 0, Math.PI * 2);
+          c.stroke();
+          c.restore();
+        } else if (this.moveType === 'patrol' || this.moveType === 'chaser') {
+          // Dynamic walking legs animation
+          c.save();
+          c.strokeStyle = strokeColor;
+          c.lineWidth = 3;
+          const legWiggle = Math.sin(this.walkAnimTimer) * 5;
+          c.beginPath();
+          c.moveTo(-6, this.radius - 2);
+          c.lineTo(-6 + legWiggle, this.radius + 5);
+          c.moveTo(6, this.radius - 2);
+          c.lineTo(6 - legWiggle, this.radius + 5);
+          c.stroke();
+          c.restore();
+        }
 
         c.beginPath();
         c.arc(0, 0, this.radius, 0, Math.PI * 2);
         c.fill();
         c.stroke();
 
-        // Eye
+        // Eye / Visor
         c.fillStyle = '#ff0055';
         c.fillRect(this.facing === 1 ? 2 : -8, -3, 6, 4);
 
+        // Heavy mech or Shield unit frontal barrier
+        if (this.isShieldActive) {
+          c.save();
+          c.strokeStyle = '#00f0ff';
+          c.lineWidth = 3;
+          c.shadowColor = '#00f0ff';
+          c.shadowBlur = 8;
+          c.beginPath();
+          const shieldAngle = this.facing === 1 ? 0 : Math.PI;
+          c.arc(0, 0, this.radius + 6, shieldAngle - 1.0, shieldAngle + 1.0);
+          c.stroke();
+          c.restore();
+        }
+
         // Boss Health Bar
         if (this.maxHp > 1 && this.hp > 0) {
-          const barW = 50;
-          c.fillStyle = 'rgba(0,0,0,0.6)';
+          const barW = Math.max(50, this.radius * 2);
+          c.fillStyle = 'rgba(0,0,0,0.7)';
           c.fillRect(-barW / 2, -this.radius - 14, barW, 6);
-          c.fillStyle = '#ff0055';
+          c.fillStyle = this.hp > (this.maxHp * 0.3) ? '#ff0055' : '#fbbf24';
           c.fillRect(-barW / 2, -this.radius - 14, (this.hp / this.maxHp) * barW, 6);
         }
 
@@ -4176,92 +4417,271 @@
       }
     }
 
-    // --- 30 CAMPAIGN LEVEL DEFINITIONS ACROSS 3 STAGES ---
+    // --- 60 CAMPAIGN LEVELS (MISSION 1: 1–30 // MISSION 2: 31–60) ---
     function generateCampaignLevel(lvl) {
-      platforms = [{ x: 0, y: 660, w: 1200, h: 40 }];
       enemies = [];
       hazards = [];
 
-      // Determine Stage theme
+      // Determine Mission & Stage
+      const isMission2 = lvl > 30;
       let stage = 1;
-      if (lvl > 20) stage = 3;
+      if (lvl > 50) stage = 6;
+      else if (lvl > 40) stage = 5;
+      else if (lvl > 30) stage = 4;
+      else if (lvl > 20) stage = 3;
       else if (lvl > 10) stage = 2;
+      else stage = 1;
 
+      // Set World Width for Side-Scrolling in Mission 2
+      if (isMission2) {
+        currentWorldWidth = (stage === 6) ? 2800 : ((stage === 5) ? 2600 : 2400);
+      } else {
+        currentWorldWidth = 1200;
+      }
+
+      platforms = [{ x: 0, y: 660, w: currentWorldWidth, h: 40 }];
       player = new Player(140, 590);
 
-      // STAGE 1: NEO-TOKYO ROOFTOPS (1-10)
-      if (stage === 1) {
-        platforms.push({ x: 300, y: 480, w: 220, h: 20 });
-        platforms.push({ x: 680, y: 440, w: 220, h: 20 });
-        hazards.push(new Hazard('jump_pad', 220, 660));
-        hazards.push(new Hazard('barrel', 550, 630));
-        hazards.push(new Hazard('grapple_orb', 600, 260));
+      // =========================================================================
+      // MISSION 1: CHRONO MATRIX (LEVELS 1–30)
+      // =========================================================================
+      if (lvl <= 30) {
+        // STAGE 1: NEO-TOKYO ROOFTOPS (1-10)
+        if (stage === 1) {
+          platforms.push({ x: 300, y: 480, w: 220, h: 20 });
+          platforms.push({ x: 680, y: 440, w: 220, h: 20 });
+          hazards.push(new Hazard('jump_pad', 220, 660));
+          hazards.push(new Hazard('barrel', 550, 630));
+          hazards.push(new Hazard('grapple_orb', 600, 260));
 
-        if (lvl === 5) {
-          enemies.push(new Enemy('boss_drone', 600, 280));
-        } else if (lvl === 10) {
-          enemies.push(new Enemy('boss_shogun', 600, 300));
-        } else {
-          const enemyCount = Math.min(3 + Math.floor(lvl * 0.4), 6);
-          const types = ['grunt', 'grunt', 'sniper'];
-          for (let i = 0; i < enemyCount; i++) {
-            const tName = types[i % types.length];
-            enemies.push(new Enemy(tName, 450 + i * 110, 400 + (i % 2) * 120));
+          if (lvl === 5) {
+            enemies.push(new Enemy('boss_drone', 600, 280));
+          } else if (lvl === 10) {
+            enemies.push(new Enemy('boss_shogun', 600, 300));
+          } else {
+            const enemyCount = Math.min(3 + Math.floor(lvl * 0.4), 6);
+            const types = ['grunt', 'grunt', 'sniper'];
+            for (let i = 0; i < enemyCount; i++) {
+              const tName = types[i % types.length];
+              enemies.push(new Enemy(tName, 450 + i * 110, 400 + (i % 2) * 120));
+            }
+          }
+        }
+        // STAGE 2: CRYO-LABS & LASER VAULT (11-20)
+        else if (stage === 2) {
+          platforms.push({ x: 220, y: 490, w: 200, h: 20 });
+          platforms.push({ x: 780, y: 490, w: 200, h: 20 });
+          platforms.push({ x: 500, y: 340, w: 200, h: 20 });
+          hazards.push(new Hazard('portal', 140, 420, { color: '#00f0ff' }));
+          hazards.push(new Hazard('portal', 1060, 420, { color: '#ffaa00' }));
+          hazards.push(new Hazard('jump_pad', 500, 660));
+
+          if (lvl === 15) {
+            enemies.push(new Enemy('boss_drone', 600, 250));
+            enemies.push(new Enemy('sniper', 240, 450));
+            enemies.push(new Enemy('sniper', 960, 450));
+          } else if (lvl === 20) {
+            enemies.push(new Enemy('boss_shogun', 600, 280));
+            enemies.push(new Enemy('shield', 320, 450));
+            enemies.push(new Enemy('shield', 880, 450, { facing: -1 }));
+          } else {
+            const enemyCount = Math.min(4 + Math.floor((lvl - 10) * 0.5), 7);
+            const types = ['shield', 'sniper', 'grunt'];
+            for (let i = 0; i < enemyCount; i++) {
+              const tName = types[i % types.length];
+              enemies.push(new Enemy(tName, 320 + i * 110, 400 + (i % 2) * 100));
+            }
+          }
+        }
+        // STAGE 3: ORBITAL VOID CORE (21-30)
+        else {
+          platforms.push({ x: 180, y: 500, w: 180, h: 20 });
+          platforms.push({ x: 840, y: 500, w: 180, h: 20 });
+          platforms.push({ x: 500, y: 320, w: 200, h: 20 });
+          hazards.push(new Hazard('jump_pad', 300, 660));
+          hazards.push(new Hazard('jump_pad', 900, 660));
+          hazards.push(new Hazard('grapple_orb', 600, 180));
+          hazards.push(new Hazard('portal', 120, 360, { color: '#a855f7' }));
+          hazards.push(new Hazard('portal', 1080, 360, { color: '#ff0055' }));
+
+          if (lvl === 25) {
+            enemies.push(new Enemy('boss_drone', 600, 240));
+            enemies.push(new Enemy('shield', 260, 460));
+            enemies.push(new Enemy('shield', 940, 460, { facing: -1 }));
+          } else if (lvl === 30) {
+            // GRAND FINALE OF MISSION 1: OMEGA MECHA TITAN (15 HP)
+            enemies.push(new Enemy('boss_titan', 600, 240));
+            enemies.push(new Enemy('sniper', 200, 460));
+            enemies.push(new Enemy('sniper', 1000, 460));
+          } else {
+            const enemyCount = Math.min(5 + Math.floor((lvl - 20) * 0.4), 8);
+            const types = ['shield', 'sniper', 'grunt', 'sniper'];
+            for (let i = 0; i < enemyCount; i++) {
+              const tName = types[i % types.length];
+              enemies.push(new Enemy(tName, 260 + i * 110, 380 + (i % 2) * 100));
+            }
           }
         }
       }
-      // STAGE 2: CRYO-LABS & LASER VAULT (11-20)
-      else if (stage === 2) {
-        platforms.push({ x: 220, y: 490, w: 200, h: 20 });
-        platforms.push({ x: 780, y: 490, w: 200, h: 20 });
-        platforms.push({ x: 500, y: 340, w: 200, h: 20 });
-        hazards.push(new Hazard('portal', 140, 420, { color: '#00f0ff' }));
-        hazards.push(new Hazard('portal', 1060, 420, { color: '#ffaa00' }));
-        hazards.push(new Hazard('jump_pad', 500, 660));
-
-        if (lvl === 15) {
-          enemies.push(new Enemy('boss_drone', 600, 250));
-          enemies.push(new Enemy('sniper', 240, 450));
-          enemies.push(new Enemy('sniper', 960, 450));
-        } else if (lvl === 20) {
-          enemies.push(new Enemy('boss_shogun', 600, 280));
-          enemies.push(new Enemy('shield', 320, 450));
-          enemies.push(new Enemy('shield', 880, 450, { facing: -1 }));
-        } else {
-          const enemyCount = Math.min(4 + Math.floor((lvl - 10) * 0.5), 7);
-          const types = ['shield', 'sniper', 'grunt'];
-          for (let i = 0; i < enemyCount; i++) {
-            const tName = types[i % types.length];
-            enemies.push(new Enemy(tName, 320 + i * 110, 400 + (i % 2) * 100));
-          }
-        }
-      }
-      // STAGE 3: ORBITAL VOID CORE (21-30) - Low gravity & elite challenges
+      // =========================================================================
+      // MISSION 2: CYBER OUTSKIRTS & SECTOR 7 (LEVELS 31–60)
+      // Horizontal Side-Scrolling, Dynamic Moving Patrols & Epic Boss Encounters
+      // =========================================================================
       else {
-        platforms.push({ x: 180, y: 500, w: 180, h: 20 });
-        platforms.push({ x: 840, y: 500, w: 180, h: 20 });
-        platforms.push({ x: 500, y: 320, w: 200, h: 20 });
-        hazards.push(new Hazard('jump_pad', 300, 660));
-        hazards.push(new Hazard('jump_pad', 900, 660));
-        hazards.push(new Hazard('grapple_orb', 600, 180));
-        hazards.push(new Hazard('portal', 120, 360, { color: '#a855f7' }));
-        hazards.push(new Hazard('portal', 1080, 360, { color: '#ff0055' }));
+        // STAGE 4: NEON INDUSTRIAL DISTRICT (LEVELS 31–40, 2400px wide)
+        if (stage === 4) {
+          // Elevated factory rooftops and gantry walkways across 2400px
+          platforms.push({ x: 260, y: 500, w: 240, h: 20 });
+          platforms.push({ x: 620, y: 380, w: 220, h: 20 });
+          platforms.push({ x: 960, y: 490, w: 240, h: 20 });
+          platforms.push({ x: 1320, y: 370, w: 260, h: 20 });
+          platforms.push({ x: 1700, y: 490, w: 240, h: 20 });
+          platforms.push({ x: 2050, y: 380, w: 220, h: 20 });
 
-        if (lvl === 25) {
-          enemies.push(new Enemy('boss_drone', 600, 240));
-          enemies.push(new Enemy('shield', 260, 460));
-          enemies.push(new Enemy('shield', 940, 460, { facing: -1 }));
-        } else if (lvl === 30) {
-          // GRAND FINALE: OMEGA MECHA TITAN (15 HP)
-          enemies.push(new Enemy('boss_titan', 600, 240));
-          enemies.push(new Enemy('sniper', 200, 460));
-          enemies.push(new Enemy('sniper', 1000, 460));
-        } else {
-          const enemyCount = Math.min(5 + Math.floor((lvl - 20) * 0.4), 8);
-          const types = ['shield', 'sniper', 'grunt', 'sniper'];
-          for (let i = 0; i < enemyCount; i++) {
-            const tName = types[i % types.length];
-            enemies.push(new Enemy(tName, 260 + i * 110, 380 + (i % 2) * 100));
+          // Interactive hazards
+          hazards.push(new Hazard('jump_pad', 220, 660));
+          hazards.push(new Hazard('jump_pad', 920, 660));
+          hazards.push(new Hazard('jump_pad', 1650, 660));
+          hazards.push(new Hazard('barrel', 550, 630));
+          hazards.push(new Hazard('barrel', 1450, 630));
+          hazards.push(new Hazard('grapple_orb', 620, 220));
+          hazards.push(new Hazard('grapple_orb', 1320, 200));
+          hazards.push(new Hazard('grapple_orb', 2050, 220));
+          hazards.push(new Hazard('portal', 180, 440, { color: '#ffaa00' }));
+          hazards.push(new Hazard('portal', 2220, 440, { color: '#00f0ff' }));
+
+          if (lvl === 35) {
+            // BOSS 35: CYBER MANTIS (8 HP) - Fast leaping mech
+            enemies.push(new Enemy('boss_mantis', 1250, 320, { patrolMinX: 960, patrolMaxX: 1600 }));
+            enemies.push(new Enemy('sniper', 320, 460));
+            enemies.push(new Enemy('hover_drone', 1850, 360, { patrolMinX: 1650, patrolMaxX: 2150 }));
+          } else if (lvl === 40) {
+            // BOSS 40: PHANTOM STALKER (12 HP) - Phase-dashing elite assassin
+            enemies.push(new Enemy('boss_phantom', 1400, 330, { patrolMinX: 900, patrolMaxX: 1900 }));
+            enemies.push(new Enemy('heavy_mech', 650, 340, { moveType: 'patrol', patrolMinX: 550, patrolMaxX: 800 }));
+            enemies.push(new Enemy('heavy_mech', 1750, 450, { moveType: 'patrol', patrolMinX: 1600, patrolMaxX: 1900 }));
+            enemies.push(new Enemy('hover_drone', 1050, 260, { patrolMinX: 800, patrolMaxX: 1300 }));
+          } else {
+            // Procedural pacing wave of moving enemies (Patrols, Drones, Chasers, Snipers)
+            const count = Math.min(5 + Math.floor((lvl - 30) * 0.5), 9);
+            const step = Math.floor(1900 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 360 + i * step;
+              const ey = 360 + (i % 3) * 60;
+              if (i % 4 === 0) {
+                enemies.push(new Enemy('hover_drone', ex, ey - 40, { moveType: 'hover_drone', patrolMinX: ex - 120, patrolMaxX: ex + 120 }));
+              } else if (i % 4 === 1) {
+                enemies.push(new Enemy('chaser', ex, 630, { moveType: 'chaser', moveSpeed: 110 }));
+              } else if (i % 4 === 2) {
+                enemies.push(new Enemy('heavy_mech', ex, ey, { moveType: 'patrol', patrolMinX: ex - 90, patrolMaxX: ex + 90 }));
+              } else {
+                enemies.push(new Enemy('sniper', ex, ey));
+              }
+            }
+          }
+        }
+        // STAGE 5: UNDERGRID MAGLEV TRACKS (LEVELS 41–50, 2600px wide)
+        else if (stage === 5) {
+          // Double-decker maglev rails across 2600px
+          platforms.push({ x: 240, y: 510, w: 260, h: 20 });
+          platforms.push({ x: 600, y: 390, w: 260, h: 20 });
+          platforms.push({ x: 960, y: 500, w: 240, h: 20 });
+          platforms.push({ x: 1300, y: 360, w: 280, h: 20 });
+          platforms.push({ x: 1680, y: 500, w: 260, h: 20 });
+          platforms.push({ x: 2040, y: 380, w: 260, h: 20 });
+          platforms.push({ x: 2360, y: 490, w: 200, h: 20 });
+
+          // Maglev Hazards
+          hazards.push(new Hazard('jump_pad', 200, 660));
+          hazards.push(new Hazard('jump_pad', 900, 660));
+          hazards.push(new Hazard('jump_pad', 1600, 660));
+          hazards.push(new Hazard('jump_pad', 2300, 660));
+          hazards.push(new Hazard('grapple_orb', 600, 200));
+          hazards.push(new Hazard('grapple_orb', 1300, 180));
+          hazards.push(new Hazard('grapple_orb', 2040, 200));
+          hazards.push(new Hazard('portal', 160, 450, { color: '#38bdf8' }));
+          hazards.push(new Hazard('portal', 2480, 450, { color: '#ffaa00' }));
+
+          if (lvl === 45) {
+            // BOSS 45: DREAD DRONE GUNSHIP (14 HP) - Airborne bomber
+            enemies.push(new Enemy('boss_dread_drone', 1300, 240, { patrolMinX: 800, patrolMaxX: 1800 }));
+            enemies.push(new Enemy('heavy_mech', 620, 350, { moveType: 'patrol', patrolMinX: 500, patrolMaxX: 800 }));
+            enemies.push(new Enemy('heavy_mech', 2060, 340, { moveType: 'patrol', patrolMinX: 1950, patrolMaxX: 2250 }));
+            enemies.push(new Enemy('chaser', 1000, 630, { moveType: 'chaser', moveSpeed: 125 }));
+          } else if (lvl === 50) {
+            // BOSS 50: CYBER SHOGUN NEO (16 HP) - Dual blade shockwave master
+            enemies.push(new Enemy('boss_shogun_neo', 1500, 320, { patrolMinX: 1000, patrolMaxX: 2100 }));
+            enemies.push(new Enemy('sniper', 280, 470));
+            enemies.push(new Enemy('sniper', 2400, 450));
+            enemies.push(new Enemy('hover_drone', 980, 260, { patrolMinX: 800, patrolMaxX: 1200 }));
+            enemies.push(new Enemy('chaser', 1800, 630, { moveType: 'chaser', moveSpeed: 130 }));
+          } else {
+            const count = Math.min(6 + Math.floor((lvl - 40) * 0.5), 10);
+            const step = Math.floor(2100 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 320 + i * step;
+              const ey = 370 + (i % 3) * 60;
+              if (i % 3 === 0) {
+                enemies.push(new Enemy('chaser', ex, 630, { moveType: 'chaser', moveSpeed: 120 }));
+              } else if (i % 3 === 1) {
+                enemies.push(new Enemy('hover_drone', ex, ey - 50, { moveType: 'hover_drone', patrolMinX: ex - 130, patrolMaxX: ex + 130 }));
+              } else {
+                enemies.push(new Enemy('heavy_mech', ex, ey, { moveType: 'patrol', patrolMinX: ex - 80, patrolMaxX: ex + 80 }));
+              }
+            }
+          }
+        }
+        // STAGE 6: DREADNOUGHT VOID CITADEL (LEVELS 51–60, 2800px wide)
+        else {
+          // Zero-G high energy citadel conduits
+          platforms.push({ x: 220, y: 500, w: 260, h: 20 });
+          platforms.push({ x: 580, y: 380, w: 260, h: 20 });
+          platforms.push({ x: 940, y: 500, w: 260, h: 20 });
+          platforms.push({ x: 1300, y: 340, w: 320, h: 20 });
+          platforms.push({ x: 1720, y: 500, w: 260, h: 20 });
+          platforms.push({ x: 2080, y: 380, w: 260, h: 20 });
+          platforms.push({ x: 2440, y: 490, w: 260, h: 20 });
+
+          // Citadel Hazards
+          hazards.push(new Hazard('jump_pad', 200, 660));
+          hazards.push(new Hazard('jump_pad', 850, 660));
+          hazards.push(new Hazard('jump_pad', 1500, 660));
+          hazards.push(new Hazard('jump_pad', 2200, 660));
+          hazards.push(new Hazard('grapple_orb', 580, 180));
+          hazards.push(new Hazard('grapple_orb', 1300, 160));
+          hazards.push(new Hazard('grapple_orb', 2080, 180));
+          hazards.push(new Hazard('portal', 140, 440, { color: '#a855f7' }));
+          hazards.push(new Hazard('portal', 2680, 440, { color: '#ff0055' }));
+
+          if (lvl === 55) {
+            // BOSS 55: VOID DRAGON MECH (18 HP) - 5-way plasma laser serpent
+            enemies.push(new Enemy('boss_void_dragon', 1450, 240, { patrolMinX: 900, patrolMaxX: 2000 }));
+            enemies.push(new Enemy('chaser', 650, 630, { moveType: 'chaser', moveSpeed: 135 }));
+            enemies.push(new Enemy('chaser', 2250, 630, { moveType: 'chaser', moveSpeed: 135 }));
+            enemies.push(new Enemy('hover_drone', 1050, 320, { patrolMinX: 850, patrolMaxX: 1250 }));
+          } else if (lvl === 60) {
+            // GRAND FINALE LEVEL 60: CYBER DREADNOUGHT TITAN PRIME (24 HP)
+            enemies.push(new Enemy('boss_titan_prime', 1500, 280, { patrolMinX: 900, patrolMaxX: 2100 }));
+            enemies.push(new Enemy('hover_drone', 600, 240, { patrolMinX: 450, patrolMaxX: 800 }));
+            enemies.push(new Enemy('hover_drone', 2300, 240, { patrolMinX: 2100, patrolMaxX: 2500 }));
+            enemies.push(new Enemy('heavy_mech', 950, 460, { moveType: 'patrol', patrolMinX: 850, patrolMaxX: 1100 }));
+            enemies.push(new Enemy('heavy_mech', 1950, 460, { moveType: 'patrol', patrolMinX: 1800, patrolMaxX: 2100 }));
+          } else {
+            const count = Math.min(7 + Math.floor((lvl - 50) * 0.5), 11);
+            const step = Math.floor(2300 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 300 + i * step;
+              const ey = 360 + (i % 3) * 60;
+              if (i % 4 === 0) {
+                enemies.push(new Enemy('chaser', ex, 630, { moveType: 'chaser', moveSpeed: 135 }));
+              } else if (i % 4 === 1) {
+                enemies.push(new Enemy('hover_drone', ex, ey - 50, { moveType: 'hover_drone', patrolMinX: ex - 120, patrolMaxX: ex + 120 }));
+              } else if (i % 4 === 2) {
+                enemies.push(new Enemy('heavy_mech', ex, ey, { moveType: 'patrol', patrolMinX: ex - 80, patrolMaxX: ex + 80 }));
+              } else {
+                enemies.push(new Enemy('sniper', ex, ey));
+              }
+            }
           }
         }
       }
@@ -4269,15 +4689,25 @@
 
     function startCampaignLevel(lvl) {
       if (lvl < 1) lvl = 1;
-      if (lvl > 30) lvl = 30;
+      if (lvl > 60) lvl = 60;
       currentLevelIndex = lvl;
       gameMode = 'CAMPAIGN';
       gameState = 'PLAYING';
       setBannerVisibility(false);
       isPaused = false;
 
+      // Sync active mission & stage trackers
+      currentSelectedMission = lvl <= 30 ? 1 : 2;
+      currentSelectedStage = Math.ceil(lvl / 10);
+      currentSideMission = currentSelectedMission;
+      currentSideStage = currentSelectedStage;
+
       // Close all modals
       document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
+
+      // Center initial camera
+      cameraFocusX = VIRTUAL_WIDTH / 2;
+      cameraFocusY = VIRTUAL_HEIGHT / 2;
 
       airCombo = 0;
       maxAirComboThisRun = 0;
@@ -4316,9 +4746,9 @@
         lastLevelClearReward = Math.round(40 * currentLevelIndex * greed);
         progression.addShards(lastLevelClearReward);
 
-        // Advance level unlock
+        // Advance level unlock up to 60
         if (currentLevelIndex >= progression.data.highestLevelReached) {
-          progression.data.highestLevelReached = Math.min(30, currentLevelIndex + 1);
+          progression.data.highestLevelReached = Math.min(60, currentLevelIndex + 1);
           progression.save();
         }
 
@@ -4328,11 +4758,25 @@
           progression.save();
         }
 
-        if (currentLevelIndex === 30) {
+        if (currentLevelIndex === 60) {
+          // Grand Finale: All 60 levels conquered!
+          document.getElementById('allclear-header').textContent = 'ALL MISSIONS COMPLETE';
+          document.getElementById('allclear-title').textContent = 'CYBER SECTOR SECURED (60/60)';
+          document.getElementById('allclear-desc').textContent = 'You conquered all 60 handcrafted levels across Mission 1 and Mission 2, crushed every moving cyber legion and defeated Dreadnought Titan Prime!';
+          document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 60/60 (Mission 1 & 2)';
           document.getElementById('final-total-shards').textContent = progression.data.shards;
           modalAllClear.classList.remove('hidden');
+        } else if (currentLevelIndex === 30) {
+          // Mission 1 Complete
+          document.getElementById('victory-title').textContent = 'MISSION 1 COMPLETE (30/30)!';
+          document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
+          document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
+          document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+          document.getElementById('btn-claim-3x-shards').disabled = false;
+          modalVictory.classList.remove('hidden');
         } else {
-          document.getElementById('victory-title').textContent = `LEVEL ${currentLevelIndex} CLEARED`;
+          const missionNum = currentLevelIndex <= 30 ? 1 : 2;
+          document.getElementById('victory-title').textContent = `M${missionNum} · LEVEL ${currentLevelIndex} CLEARED`;
           document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
           document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
           document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
@@ -4341,7 +4785,7 @@
         }
 
         // Boss Level Rewarded Interstitial (+250 ⚡) vs Standard Interstitial every 3 non-boss levels
-        const isBoss = (currentLevelIndex === 5 || currentLevelIndex === 10 || currentLevelIndex === 15 || currentLevelIndex === 20 || currentLevelIndex === 25 || currentLevelIndex === 30);
+        const isBoss = (currentLevelIndex % 5 === 0);
         if (isBoss) {
           triggerRewardedInterstitialAd();
         } else {
@@ -4366,7 +4810,8 @@
     }
 
     function updateHUD() {
-      if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/30`;
+      if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/60`;
+      if (hudSectorLabel) hudSectorLabel.textContent = currentLevelIndex <= 30 ? 'MISSION 1' : 'MISSION 2 (SCROLL)';
       if (hudComboText) hudComboText.textContent = `x${airCombo}`;
       if (hudShardsText) hudShardsText.textContent = `${progression.data.shards} ⚡`;
       if (shopShardsDisplay) shopShardsDisplay.textContent = `${progression.data.shards} ⚡`;
@@ -4684,9 +5129,44 @@
       }
     };
 
-    // --- LEVEL SELECT SYSTEM WITH STAGE TABS ---
+    // --- LEVEL SELECT SYSTEM WITH MISSION 1 (1–30) & MISSION 2 (31–60) ---
     function renderLevelSelect(stage = currentSelectedStage) {
       currentSelectedStage = stage;
+      currentSelectedMission = stage <= 3 ? 1 : 2;
+
+      // Update Mission Tab styles
+      const tabM1 = document.getElementById('tab-mission-1');
+      const tabM2 = document.getElementById('tab-mission-2');
+      if (tabM1 && tabM2) {
+        if (currentSelectedMission === 1) {
+          tabM1.classList.add('active');
+          tabM2.classList.remove('active');
+        } else {
+          tabM2.classList.add('active');
+          tabM1.classList.remove('active');
+        }
+      }
+
+      // Re-populate stage tabs container based on active mission
+      const stageTabsContainer = document.getElementById('modal-stage-tabs-container');
+      if (stageTabsContainer) {
+        stageTabsContainer.innerHTML = '';
+        const stageList = currentSelectedMission === 1
+          ? [{ stage: 1, label: 'STAGE 1 (1–10)' }, { stage: 2, label: 'STAGE 2 (11–20)' }, { stage: 3, label: 'STAGE 3 (21–30)' }]
+          : [{ stage: 4, label: 'STAGE 4 (31–40)' }, { stage: 5, label: 'STAGE 5 (41–50)' }, { stage: 6, label: 'STAGE 6 (51–60)' }];
+
+        stageList.forEach(item => {
+          const btn = document.createElement('button');
+          btn.className = `stage-tab-btn ${item.stage === currentSelectedStage ? 'active' : ''}`;
+          btn.setAttribute('data-stage', item.stage);
+          btn.textContent = item.label;
+          btn.addEventListener('click', () => {
+            renderLevelSelect(item.stage);
+          });
+          stageTabsContainer.appendChild(btn);
+        });
+      }
+
       levelButtonsContainer.innerHTML = '';
 
       const start = (stage - 1) * 10 + 1;
@@ -4694,16 +5174,19 @@
 
       const descEl = document.getElementById('stage-desc-text');
       if (descEl) {
-        if (stage === 1) descEl.textContent = 'Stage 1: Neo-Tokyo Rooftops (Levels 1–10) // Jump Pads & Barrels';
-        else if (stage === 2) descEl.textContent = 'Stage 2: Cryo-Labs & Laser Vault (Levels 11–20) // Portals & Lasers';
-        else descEl.textContent = 'Stage 3: Orbital Void Core (Levels 21–30) // Low Gravity & Omega Mecha Titan';
+        if (stage === 1) descEl.textContent = 'Mission 1 · Stage 1: Neo-Tokyo Rooftops (Levels 1–10) // Jump Pads & Barrels';
+        else if (stage === 2) descEl.textContent = 'Mission 1 · Stage 2: Cryo-Labs & Laser Vault (Levels 11–20) // Portals & Lasers';
+        else if (stage === 3) descEl.textContent = 'Mission 1 · Stage 3: Orbital Void Core (Levels 21–30) // Low Gravity & Mecha Titan';
+        else if (stage === 4) descEl.textContent = 'Mission 2 · Stage 4: Neon Highway Outskirts (Levels 31–40) // Moving Patrols & Mantis Boss';
+        else if (stage === 5) descEl.textContent = 'Mission 2 · Stage 5: Reactor Core & Mag-Lev Hub (Levels 41–50) // Hover Drones & Void Dragon';
+        else descEl.textContent = 'Mission 2 · Stage 6: Dreadnought Prime Citadel (Levels 51–60) // Heavy Mechs & Titan Prime';
       }
 
       for (let i = start; i <= end; i++) {
         const btn = document.createElement('button');
         const isCurrent = i === currentLevelIndex;
         const isLocked = i > (progression.data.highestLevelReached || 1);
-        const isBoss = i === 5 || i === 10 || i === 15 || i === 20 || i === 25 || i === 30;
+        const isBoss = (i % 5 === 0);
 
         btn.className = `level-btn ${isBoss ? 'boss' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}`;
         btn.innerHTML = `
@@ -4721,13 +5204,12 @@
       }
     }
 
-    document.querySelectorAll('.stage-tab-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        document.querySelectorAll('.stage-tab-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        const st = parseInt(e.target.getAttribute('data-stage'), 10);
-        renderLevelSelect(st);
-      });
+    // Modal Mission Tab Click Handlers
+    document.getElementById('tab-mission-1')?.addEventListener('click', () => {
+      renderLevelSelect(1);
+    });
+    document.getElementById('tab-mission-2')?.addEventListener('click', () => {
+      renderLevelSelect(4);
     });
 
     // --- REWARDED AD BUTTON HOOKS ---
@@ -4900,10 +5382,11 @@
     // --- SIDE MENU LOGIC ---
     const sideMenuDrawer = document.getElementById('side-menu-drawer');
     const sideMenuOverlay = document.getElementById('side-menu-overlay');
-    let currentSideStage = 1;
 
     function renderSideLevels(stage = currentSideStage) {
       currentSideStage = stage;
+      currentSideMission = stage <= 3 ? 1 : 2;
+
       const container = document.getElementById('side-levels-grid');
       if (!container) return;
       container.innerHTML = '';
@@ -4913,20 +5396,49 @@
       if (resumeNumEl) resumeNumEl.textContent = highestUnlocked;
 
       const progressTextEl = document.getElementById('side-levels-progress-text');
-      if (progressTextEl) progressTextEl.textContent = `Highest: LVL ${highestUnlocked} / 30`;
+      if (progressTextEl) progressTextEl.textContent = `Highest: LVL ${highestUnlocked} / 60`;
 
-      // Update side stage button active state
-      document.querySelectorAll('.side-stage-btn').forEach(b => {
-        const s = parseInt(b.getAttribute('data-side-stage'), 10);
-        if (s === stage) b.classList.add('active');
-        else b.classList.remove('active');
-      });
+      // Update side mission tabs
+      const sideM1 = document.getElementById('side-m-btn-1');
+      const sideM2 = document.getElementById('side-m-btn-2');
+      if (sideM1 && sideM2) {
+        if (currentSideMission === 1) {
+          sideM1.classList.add('active');
+          sideM2.classList.remove('active');
+        } else {
+          sideM2.classList.add('active');
+          sideM1.classList.remove('active');
+        }
+      }
+
+      // Re-populate side stage tabs
+      const stageTabsContainer = document.getElementById('side-stage-tabs-container');
+      if (stageTabsContainer) {
+        stageTabsContainer.innerHTML = '';
+        const stageList = currentSideMission === 1
+          ? [{ stage: 1, label: 'STAGE 1 (1–10)' }, { stage: 2, label: 'STAGE 2 (11–20)' }, { stage: 3, label: 'STAGE 3 (21–30)' }]
+          : [{ stage: 4, label: 'STAGE 4 (31–40)' }, { stage: 5, label: 'STAGE 5 (41–50)' }, { stage: 6, label: 'STAGE 6 (51–60)' }];
+
+        stageList.forEach(item => {
+          const btn = document.createElement('button');
+          btn.className = `side-stage-btn ${item.stage === currentSideStage ? 'active' : ''}`;
+          btn.setAttribute('data-side-stage', item.stage);
+          btn.textContent = item.label;
+          btn.addEventListener('click', () => {
+            renderSideLevels(item.stage);
+          });
+          stageTabsContainer.appendChild(btn);
+        });
+      }
 
       const descEl = document.getElementById('side-stage-desc');
       if (descEl) {
-        if (stage === 1) descEl.textContent = 'Stage 1: Neo-Tokyo Rooftops (Levels 1–10) · Jump Pads & Barrels';
-        else if (stage === 2) descEl.textContent = 'Stage 2: Cryo-Labs & Laser Vault (Levels 11–20) · Portals & Lasers';
-        else descEl.textContent = 'Stage 3: Orbital Void Core (Levels 21–30) · Low Gravity & Mecha Titan';
+        if (stage === 1) descEl.textContent = 'Mission 1 · Stage 1: Neo-Tokyo Rooftops (Levels 1–10) · Jump Pads & Barrels';
+        else if (stage === 2) descEl.textContent = 'Mission 1 · Stage 2: Cryo-Labs & Laser Vault (Levels 11–20) · Portals & Lasers';
+        else if (stage === 3) descEl.textContent = 'Mission 1 · Stage 3: Orbital Void Core (Levels 21–30) · Low Gravity & Mecha Titan';
+        else if (stage === 4) descEl.textContent = 'Mission 2 · Stage 4: Neon Highway Outskirts (Levels 31–40) · Moving Cyber Patrols';
+        else if (stage === 5) descEl.textContent = 'Mission 2 · Stage 5: Reactor Core & Mag-Lev Hub (Levels 41–50) · Hover Drones & Void Dragon';
+        else descEl.textContent = 'Mission 2 · Stage 6: Dreadnought Prime Citadel (Levels 51–60) · Titan Prime & Heavy Mechs';
       }
 
       const start = (stage - 1) * 10 + 1;
@@ -4936,7 +5448,7 @@
         const btn = document.createElement('button');
         const isCurrent = i === currentLevelIndex;
         const isLocked = i > highestUnlocked;
-        const isBoss = i === 5 || i === 10 || i === 15 || i === 20 || i === 25 || i === 30;
+        const isBoss = (i % 5 === 0);
 
         btn.className = `side-level-btn ${isBoss ? 'boss' : ''} ${isCurrent ? 'current' : ''} ${isLocked ? 'locked' : ''}`;
         btn.innerHTML = `
@@ -4956,6 +5468,23 @@
         container.appendChild(btn);
       }
     }
+
+    // Side mission tabs listeners
+    document.getElementById('side-m-btn-1')?.addEventListener('click', () => {
+      renderSideLevels(1);
+    });
+    document.getElementById('side-m-btn-2')?.addEventListener('click', () => {
+      renderSideLevels(4);
+    });
+
+    document.getElementById('btn-side-resume-level')?.addEventListener('click', () => {
+      closeSideMenu();
+      if (modalTitle) modalTitle.classList.add('hidden');
+      if (modalPause) modalPause.classList.add('hidden');
+      if (modalGameOver) modalGameOver.classList.add('hidden');
+      const targetLvl = progression.data.highestLevelReached || 1;
+      startCampaignLevel(targetLvl);
+    });
 
     function openSideMenu() {
       updateSideMenuProfile();
@@ -5634,10 +6163,20 @@
       if (gameState === 'PLAYING' && player && !isPaused) {
         player.update(scaledDt);
 
+        // Smooth Dynamic Camera Tracking for Mission 2 Horizontal Side-Scrolling
+        if (currentWorldWidth > VIRTUAL_WIDTH) {
+          const halfV = VIRTUAL_WIDTH / 2;
+          const targetCamX = Math.max(halfV, Math.min(currentWorldWidth - halfV, player.x));
+          cameraFocusX += (targetCamX - cameraFocusX) * 0.14;
+        } else {
+          cameraFocusX = VIRTUAL_WIDTH / 2;
+        }
+        cameraFocusY = VIRTUAL_HEIGHT / 2;
+
         for (let i = projectiles.length - 1; i >= 0; i--) {
           const p = projectiles[i];
           p.update(scaledDt);
-          if (p.life <= 0 || p.x < -60 || p.x > VIRTUAL_WIDTH + 60 || p.y < -60 || p.y > VIRTUAL_HEIGHT + 60) {
+          if (p.life <= 0 || p.x < -60 || p.x > currentWorldWidth + 60 || p.y < -60 || p.y > VIRTUAL_HEIGHT + 60) {
             projectiles.splice(i, 1);
             continue;
           }
@@ -5732,33 +6271,36 @@
 
       // Stage-specific grid color
       let gridStroke = 'rgba(0, 240, 255, 0.05)';
-      if (currentLevelIndex > 20) gridStroke = 'rgba(255, 0, 85, 0.06)'; // Stage 3: Crimson Void
+      if (currentLevelIndex > 50) gridStroke = 'rgba(251, 191, 36, 0.07)'; // Stage 6: Citadel Gold/Crimson
+      else if (currentLevelIndex > 40) gridStroke = 'rgba(168, 85, 247, 0.06)'; // Stage 5: Reactor Purple
+      else if (currentLevelIndex > 30) gridStroke = 'rgba(16, 185, 129, 0.06)'; // Stage 4: Highway Green/Cyan
+      else if (currentLevelIndex > 20) gridStroke = 'rgba(255, 0, 85, 0.06)'; // Stage 3: Crimson Void
       else if (currentLevelIndex > 10) gridStroke = 'rgba(56, 189, 248, 0.06)'; // Stage 2: Cryo Vault
 
       ctx.strokeStyle = gridStroke;
       ctx.lineWidth = 1;
       const gridSize = 50;
-      for (let x = -300; x < VIRTUAL_WIDTH + 300; x += gridSize) {
+      for (let x = -300; x < currentWorldWidth + 300; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, -300); ctx.lineTo(x, VIRTUAL_HEIGHT + 300);
         ctx.stroke();
       }
       for (let y = -300; y < VIRTUAL_HEIGHT + 300; y += gridSize) {
         ctx.beginPath();
-        ctx.moveTo(-300, y); ctx.lineTo(VIRTUAL_WIDTH + 300, y);
+        ctx.moveTo(-300, y); ctx.lineTo(currentWorldWidth + 300, y);
         ctx.stroke();
       }
 
-      // Glowing cyber perimeter boundary line (no solid dark box cutout!)
+      // Glowing cyber perimeter boundary line
       ctx.save();
-      const borderColor = currentLevelIndex > 20 ? 'rgba(255, 0, 85, 0.45)' : (currentLevelIndex > 10 ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 240, 255, 0.4)');
+      const borderColor = currentLevelIndex > 50 ? 'rgba(251, 191, 36, 0.5)' : (currentLevelIndex > 40 ? 'rgba(168, 85, 247, 0.5)' : (currentLevelIndex > 30 ? 'rgba(16, 185, 129, 0.5)' : (currentLevelIndex > 20 ? 'rgba(255, 0, 85, 0.45)' : (currentLevelIndex > 10 ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 240, 255, 0.4)'))));
       ctx.strokeStyle = borderColor;
       ctx.lineWidth = 2;
       ctx.shadowColor = borderColor;
       ctx.shadowBlur = 8;
       ctx.beginPath();
       ctx.moveTo(14, 0); ctx.lineTo(14, VIRTUAL_HEIGHT);
-      ctx.moveTo(VIRTUAL_WIDTH - 14, 0); ctx.lineTo(VIRTUAL_WIDTH - 14, VIRTUAL_HEIGHT);
+      ctx.moveTo(currentWorldWidth - 14, 0); ctx.lineTo(currentWorldWidth - 14, VIRTUAL_HEIGHT);
       ctx.stroke();
       ctx.restore();
 
@@ -5794,6 +6336,35 @@
       for (const h of hazards) h.draw(ctx);
       for (const e of enemies) e.draw(ctx);
       for (const p of projectiles) p.draw(ctx);
+
+      // Off-screen enemy radar indicators for Mission 2 side-scrolling
+      if (currentWorldWidth > VIRTUAL_WIDTH && gameState === 'PLAYING') {
+        const viewLeft = cameraFocusX - VIRTUAL_WIDTH / 2;
+        const viewRight = cameraFocusX + VIRTUAL_WIDTH / 2;
+        for (const e of enemies) {
+          if (e.hp > 0) {
+            if (e.x < viewLeft + 35) {
+              ctx.save();
+              ctx.fillStyle = e.type.startsWith('boss') ? '#fbbf24' : '#ff0055';
+              ctx.shadowColor = ctx.fillStyle;
+              ctx.shadowBlur = 10;
+              ctx.font = '900 14px monospace';
+              ctx.textAlign = 'left';
+              ctx.fillText('◀ ⚠️ TARGET', viewLeft + 24, Math.max(90, Math.min(VIRTUAL_HEIGHT - 70, e.y)));
+              ctx.restore();
+            } else if (e.x > viewRight - 35) {
+              ctx.save();
+              ctx.fillStyle = e.type.startsWith('boss') ? '#fbbf24' : '#ff0055';
+              ctx.shadowColor = ctx.fillStyle;
+              ctx.shadowBlur = 10;
+              ctx.font = '900 14px monospace';
+              ctx.textAlign = 'right';
+              ctx.fillText('TARGET ⚠️ ▶', viewRight - 24, Math.max(90, Math.min(VIRTUAL_HEIGHT - 70, e.y)));
+              ctx.restore();
+            }
+          }
+        }
+      }
 
       if (player) {
         player.draw(ctx);
