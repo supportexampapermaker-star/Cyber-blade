@@ -1372,14 +1372,14 @@
     .splash-icon-img,
     .splash-icon-box {
       position: relative;
-      width: 112px;
-      height: 112px;
-      border-radius: 24px;
+      width: 96px;
+      height: 96px;
+      border-radius: 16px; /* rounded-2xl */
       background: radial-gradient(circle at 45% 35%, #0d1e3d 0%, #071024 60%, #030612 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 35px rgba(0, 240, 255, 0.55), inset 0 0 20px rgba(0, 240, 255, 0.25), 0 12px 36px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.55), 0 0 15px rgba(255, 0, 85, 0.35), inset 0 0 18px rgba(0, 240, 255, 0.25), 0 12px 32px rgba(0, 0, 0, 0.85);
       border: 2px solid rgba(0, 240, 255, 0.8);
       z-index: 2;
       animation: splashIconFloat 3.2s ease-in-out infinite alternate;
@@ -1388,19 +1388,19 @@
 
     .splash-katana-svg {
       display: block;
-      width: 80px;
-      height: 80px;
-      filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.65));
+      width: 72px;
+      height: 72px;
+      filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.75)) drop-shadow(0 0 14px rgba(255, 0, 85, 0.45));
       animation: splashKatanaShine 3s ease-in-out infinite alternate;
     }
 
     @keyframes splashKatanaShine {
       0% {
-        filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6));
+        filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6)) drop-shadow(0 0 10px rgba(255, 0, 85, 0.3));
         transform: scale(0.98);
       }
       100% {
-        filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.95)) drop-shadow(0 0 24px rgba(255, 0, 85, 0.45));
+        filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.95)) drop-shadow(0 0 24px rgba(255, 0, 85, 0.6));
         transform: scale(1.02);
       }
     }
@@ -2774,76 +2774,238 @@
 
     const progression = new ProgressionManager();
 
-    // --- ADMOB BRIDGE HOOKS (window.AndroidAds) ---
+    // --- GOOGLE ADMOB CONFIGURATION & ANDROID WEBVIEW BRIDGE ---
+    const ADMOB_CONFIG = {
+      APP_ID: "ca-app-pub-5448696131672998~4497188679",
+      REWARDED_ID: "ca-app-pub-5448696131672998/5728923023",
+      REWARDED_INTERSTITIAL_ID: "ca-app-pub-5448696131672998/9727877783",
+      INTERSTITIAL_ID: "ca-app-pub-5448696131672998/6906273320",
+      BANNER_ID: "ca-app-pub-5448696131672998/7945479093"
+    };
+
     let pendingRewardCallback = null;
 
-    window.triggerRewardedAd = function(rewardType, onRewarded) {
-      pendingRewardCallback = onRewarded;
-
-      // 1. Android Native WebApp Bridge check
-      if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
-        window.onAndroidAdRewarded = function(type) {
-          if (pendingRewardCallback) {
-            const cb = pendingRewardCallback;
-            pendingRewardCallback = null;
-            cb();
-          }
-        };
+    /**
+     * Smart Banner Ad Visibility (window.AndroidAds.setBannerVisible)
+     * Pass true on Main Menu, Armory, Level Select, and Game Over / Victory modals.
+     * Pass false during active canvas gameplay so the bottom banner never interferes with touch-drag slingshot aiming.
+     */
+    window.setBannerVisibility = function(visible) {
+      const isVisible = !!visible;
+      if (window.AndroidAds && typeof window.AndroidAds.setBannerVisible === 'function') {
         try {
-          window.AndroidAds.showRewardedAd(rewardType);
-          return;
+          window.AndroidAds.setBannerVisible(isVisible);
         } catch (e) {
-          console.warn('AndroidAds bridge error', e);
+          console.warn('AndroidAds.setBannerVisible error:', e);
+        }
+      }
+    };
+
+    /**
+     * Global AdMob Reward Callback (window.onAdMobRewardGranted)
+     * Directly invoked by Android WebView wrapper or simulated browser countdown:
+     * - 'shop_600' -> +600 ⚡ Cyber Shards in the Armory
+     * - 'triple_win' -> Triples (3X) current Level Clear Shards bonus on Victory screen
+     * - 'revive' -> Revives player on spot with Full Hearts + Active Shield + clears bullets
+     * - 'try_blade:<bladeId>' -> Equips locked high-tier/Mythic blade for 1 full level for free
+     * - 'boss_bonus' -> +250 ⚡ Boss Clear Bonus Shards
+     */
+    window.onAdMobRewardGranted = function(rewardType) {
+      if (!rewardType) return;
+      const type = String(rewardType).trim();
+
+      // 1. Armory +600 Cyber Shards
+      if (type === 'shop_600' || type === 'shop_chest') {
+        progression.addShards(600);
+        sound.playReward();
+        triggerHaptic([30, 40, 50]);
+        updateHUD();
+        renderShop();
+        renderArmorySideTab();
+        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 260, '🎬 +600 ⚡ CYBER SHARDS GRANTED!', '#00f0ff');
+      }
+
+      // 2. Victory Modal Triples (3X) Shards Bounty
+      else if (type === 'triple_win' || type === 'victory_3x') {
+        const bonus = (typeof lastLevelClearReward === 'number' && lastLevelClearReward > 0) ? lastLevelClearReward * 2 : 200;
+        progression.addShards(bonus);
+        const btn3x = document.getElementById('btn-claim-3x-shards');
+        if (btn3x) {
+          btn3x.disabled = true;
+          btn3x.textContent = '✅ 3X REWARD CLAIMED!';
+        }
+        const vicShards = document.getElementById('victory-shards');
+        if (vicShards && lastLevelClearReward) {
+          vicShards.textContent = `+${lastLevelClearReward * 3} ⚡ (3X CLAIMED!)`;
+        }
+        sound.playReward();
+        triggerHaptic([30, 40, 50]);
+        updateHUD();
+        spawnFloatingText(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, `+${bonus} ⚡ 3X BOUNTY CLAIMED!`, '#fbbf24');
+      }
+
+      // 3. Instant In-Place Revive with Full Hearts + Active Shield + Bullet Clear
+      else if (type === 'revive') {
+        if (modalGameOver) modalGameOver.classList.add('hidden');
+        if (player) {
+          player.hearts = player.maxHearts;
+          player.hasShield = true;
+          player.invulnerableTimer = 2.5;
+          player.vy = -260;
+        }
+        // Clear all hostile enemy bullets on screen
+        projectiles = projectiles.filter(p => p.friendly);
+        gameState = 'PLAYING';
+        setBannerVisibility(false);
+        sound.playReward();
+        triggerHaptic([40, 50, 60]);
+        updateHUD();
+        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, player ? player.y - 35 : 250, '⚡ REVIVED WITH FULL HP & SHIELD! ⚡', '#00f0ff');
+      }
+
+      // 4. Try Locked Blade for 1 Level for free
+      else if (type.startsWith('try_blade:') || type.startsWith('try_blade_')) {
+        let bladeId = type.startsWith('try_blade:') ? type.substring(10) : type.replace('try_blade_', '');
+        if (bladeId) {
+          progression.data.trialBlade = bladeId;
+          progression.save();
+          sound.playReward();
+          triggerHaptic([30, 40]);
+          updateHUD();
+          renderShop();
+          renderArmorySideTab();
+          spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 250, `🎬 ${bladeId.toUpperCase()} EQUIPPED FOR 1 LEVEL!`, '#c084fc');
         }
       }
 
-      // 2. High-Tech Simulated Browser Ad Overlay (1.5s countdown)
+      // 5. Boss Clear Rewarded Interstitial Bonus (+250 ⚡)
+      else if (type === 'boss_bonus') {
+        progression.addShards(250);
+        sound.playReward();
+        triggerHaptic([40, 50, 60]);
+        updateHUD();
+        renderShop();
+        spawnFloatingText(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, '👑 +250 ⚡ BOSS CLEAR BONUS!', '#fbbf24');
+      }
+
+      // Invoke optional registered listener
+      if (typeof pendingRewardCallback === 'function') {
+        const cb = pendingRewardCallback;
+        pendingRewardCallback = null;
+        try { cb(type); } catch (e) { console.warn(e); }
+      }
+    };
+
+    // Backward-compatible alias for Android WebView handlers calling onAndroidAdRewarded
+    window.onAndroidAdRewarded = function(rewardType) {
+      window.onAdMobRewardGranted(rewardType);
+    };
+
+    /**
+     * 1. Rewarded Ads Trigger (triggerRewardedAd)
+     * Calls window.AndroidAds.showRewardedAd(ADMOB_CONFIG.REWARDED_ID, rewardType) or 1.5s simulated browser timer
+     */
+    window.triggerRewardedAd = function(rewardType, onRewarded) {
+      pendingRewardCallback = onRewarded || null;
+
+      // Check native Android WebView bridge
+      if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
+        try {
+          window.AndroidAds.showRewardedAd(ADMOB_CONFIG.REWARDED_ID, rewardType);
+          return;
+        } catch (e) {
+          console.warn('AndroidAds.showRewardedAd error:', e);
+        }
+      }
+
+      // Desktop / Browser Simulated Ad (1.5s countdown)
       const modal = document.getElementById('modal-ad-reward');
       const titleEl = document.getElementById('ad-reward-title');
       const descEl = document.getElementById('ad-reward-desc');
       const countEl = document.getElementById('ad-reward-countdown');
 
       let rewardLabel = 'CYBER REWARD';
-      if (rewardType === 'shop_chest') rewardLabel = '+600 ⚡ AD CHEST';
-      if (rewardType === 'victory_3x') rewardLabel = '3X SHARDS BOUNTY';
-      if (rewardType === 'revive') rewardLabel = 'REVIVE + FULL HP/SHIELD';
-      if (rewardType.startsWith('try_blade')) rewardLabel = '1-LEVEL BLADE TRIAL';
+      if (rewardType === 'shop_600' || rewardType === 'shop_chest') rewardLabel = '+600 ⚡ AD CHEST';
+      else if (rewardType === 'triple_win' || rewardType === 'victory_3x') rewardLabel = '3X SHARDS BOUNTY';
+      else if (rewardType === 'revive') rewardLabel = 'REVIVE + FULL HP/SHIELD';
+      else if (rewardType.startsWith('try_blade')) rewardLabel = '1-LEVEL BLADE TRIAL';
 
-      titleEl.textContent = `STREAMING AD: ${rewardLabel}`;
-      descEl.textContent = 'Processing verified sponsor telemetry via Cyber Chrono Matrix...';
-      countEl.textContent = 'REWARD UNLOCK IN 1.5s...';
+      if (titleEl) titleEl.textContent = `STREAMING AD: ${rewardLabel}`;
+      if (descEl) descEl.textContent = 'Processing verified sponsor telemetry via Cyber Chrono Matrix...';
+      if (countEl) countEl.textContent = 'REWARD UNLOCK IN 1.5s...';
 
-      modal.classList.remove('hidden');
+      if (modal) modal.classList.remove('hidden');
       sound.playSlowMoEnter();
 
       let timeLeft = 15;
       const interval = setInterval(() => {
         timeLeft--;
         if (timeLeft > 0) {
-          countEl.textContent = `REWARD UNLOCK IN ${(timeLeft / 10).toFixed(1)}s...`;
+          if (countEl) countEl.textContent = `REWARD UNLOCK IN ${(timeLeft / 10).toFixed(1)}s...`;
         } else {
           clearInterval(interval);
-          modal.classList.add('hidden');
-          sound.playReward();
-          triggerHaptic([30, 40, 50]);
-          if (pendingRewardCallback) {
-            const cb = pendingRewardCallback;
-            pendingRewardCallback = null;
-            cb();
-          }
+          if (modal) modal.classList.add('hidden');
+          window.onAdMobRewardGranted(rewardType);
         }
       }, 100);
     };
 
+    /**
+     * 2. Rewarded Interstitial Ads Trigger (triggerRewardedInterstitialAd)
+     * Triggered automatically upon defeating Boss Levels (5, 10, 15, 20, 25, 30)
+     */
+    window.triggerRewardedInterstitialAd = function() {
+      if (window.AndroidAds && typeof window.AndroidAds.showRewardedInterstitialAd === 'function') {
+        try {
+          window.AndroidAds.showRewardedInterstitialAd(ADMOB_CONFIG.REWARDED_INTERSTITIAL_ID, 'boss_bonus');
+          return;
+        } catch (e) {
+          console.warn('AndroidAds.showRewardedInterstitialAd error:', e);
+        }
+      }
+
+      // Desktop / Browser Simulated Boss Rewarded Interstitial
+      const modal = document.getElementById('modal-ad-reward');
+      if (modal) {
+        const titleEl = document.getElementById('ad-reward-title');
+        const descEl = document.getElementById('ad-reward-desc');
+        const countEl = document.getElementById('ad-reward-countdown');
+        if (titleEl) titleEl.textContent = '👑 BOSS DEFEATED // REWARDED INTERSTITIAL';
+        if (descEl) descEl.textContent = 'Extracting Quantum Core Data (+250 ⚡ Boss Bonus)...';
+        if (countEl) countEl.textContent = 'BOSS BONUS IN 1.5s...';
+        modal.classList.remove('hidden');
+        sound.playSlowMoEnter();
+        let timeLeft = 15;
+        const interval = setInterval(() => {
+          timeLeft--;
+          if (timeLeft > 0) {
+            if (countEl) countEl.textContent = `BOSS BONUS IN ${(timeLeft / 10).toFixed(1)}s...`;
+          } else {
+            clearInterval(interval);
+            modal.classList.add('hidden');
+            window.onAdMobRewardGranted('boss_bonus');
+          }
+        }, 100);
+      } else {
+        window.onAdMobRewardGranted('boss_bonus');
+      }
+    };
+
+    /**
+     * 3. Standard Interstitial Ads Trigger (triggerInterstitialAd)
+     * Triggered automatically every 3 non-boss levels completed
+     */
     window.triggerInterstitialAd = function() {
       if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
         try {
-          window.AndroidAds.showInterstitialAd();
-        } catch (e) {}
-      } else {
-        // Soft browser toast
-        spawnFloatingText(VIRTUAL_WIDTH / 2, 200, '🎬 STAGE COMPLETE // AD BREAK', '#fbbf24');
+          window.AndroidAds.showInterstitialAd(ADMOB_CONFIG.INTERSTITIAL_ID);
+          return;
+        } catch (e) {
+          console.warn('AndroidAds.showInterstitialAd error:', e);
+        }
       }
+      // Soft desktop toast
+      spawnFloatingText(VIRTUAL_WIDTH / 2, 200, '🎬 STAGE COMPLETE // AD BREAK', '#fbbf24');
     };
 
     // --- GAME ENGINE CONSTANTS & STATE ---
@@ -3652,6 +3814,7 @@
         addScreenShake(20);
         spawnSparks(this.x, this.y, '#ff0055', 35);
         gameState = 'GAMEOVER';
+        setBannerVisibility(true);
         document.getElementById('gameover-cause').textContent = cause || t('diedByFire');
 
         if (gameMode === 'ENDLESS') {
@@ -4110,6 +4273,7 @@
       currentLevelIndex = lvl;
       gameMode = 'CAMPAIGN';
       gameState = 'PLAYING';
+      setBannerVisibility(false);
       isPaused = false;
 
       // Close all modals
@@ -4145,7 +4309,7 @@
       const activeEnemies = enemies.filter(e => e.hp > 0);
       if (activeEnemies.length === 0 && gameState === 'PLAYING') {
         gameState = 'VICTORY';
-        levelsClearedSinceAd++;
+        setBannerVisibility(true);
 
         // Calculate clear reward: 40 ⚡ × currentLevel × greed
         const greed = progression.getGreedMultiplier();
@@ -4176,9 +4340,16 @@
           modalVictory.classList.remove('hidden');
         }
 
-        // Soft interstitial ad every 3 completed levels
-        if (levelsClearedSinceAd % 3 === 0) {
-          triggerInterstitialAd();
+        // Boss Level Rewarded Interstitial (+250 ⚡) vs Standard Interstitial every 3 non-boss levels
+        const isBoss = (currentLevelIndex === 5 || currentLevelIndex === 10 || currentLevelIndex === 15 || currentLevelIndex === 20 || currentLevelIndex === 25 || currentLevelIndex === 30);
+        if (isBoss) {
+          triggerRewardedInterstitialAd();
+        } else {
+          progression.data.levelsClearedCount = (progression.data.levelsClearedCount || 0) + 1;
+          progression.save();
+          if (progression.data.levelsClearedCount % 3 === 0) {
+            triggerInterstitialAd();
+          }
         }
 
         sound.playReward();
@@ -4476,14 +4647,7 @@
     };
 
     window.tryBladeWithAd = function(id) {
-      triggerRewardedAd('try_blade_' + id, () => {
-        progression.data.trialBlade = id;
-        progression.save();
-        sound.playReward();
-        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 250, `🎬 ${id.toUpperCase()} UNLOCKED FOR 1 LEVEL!`, '#c084fc');
-        renderShop();
-        updateHUD();
-      });
+      triggerRewardedAd('try_blade:' + id);
     };
 
     window.buySuit = function(id, cost) {
@@ -4569,43 +4733,17 @@
     // --- REWARDED AD BUTTON HOOKS ---
     // 1. Armory Rewarded Ad Chest (+600 ⚡)
     document.getElementById('btnAdChest').addEventListener('click', () => {
-      triggerRewardedAd('shop_chest', () => {
-        progression.addShards(600);
-        sound.playReward();
-        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 260, '🎬 +600 ⚡ CHEST CLAIMED!', '#fbbf24');
-        renderShop();
-        updateHUD();
-      });
+      triggerRewardedAd('shop_600');
     });
 
     // 2. Victory Modal Claim 3X Shards
     document.getElementById('btn-claim-3x-shards').addEventListener('click', () => {
-      triggerRewardedAd('victory_3x', () => {
-        const bonus = lastLevelClearReward * 2;
-        progression.addShards(bonus);
-        document.getElementById('victory-shards').textContent = `+${lastLevelClearReward * 3} ⚡ (3X CLAIMED!)`;
-        document.getElementById('btn-claim-3x-shards').disabled = true;
-        document.getElementById('btn-claim-3x-shards').textContent = '✅ 3X REWARD CLAIMED!';
-        sound.playReward();
-        updateHUD();
-      });
+      triggerRewardedAd('triple_win');
     });
 
     // 3. Game Over Revive + Full HP & Shield
     document.getElementById('btn-ad-revive').addEventListener('click', () => {
-      triggerRewardedAd('revive', () => {
-        modalGameOver.classList.add('hidden');
-        gameState = 'PLAYING';
-        if (player) {
-          player.hearts = player.maxHearts;
-          player.hasShield = true;
-          player.invulnerableTimer = 1.8;
-          player.vy = -300;
-        }
-        sound.playReward();
-        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, player ? player.y - 30 : 250, '🎬 REVIVED WITH FULL HP & SHIELD!', '#34d399');
-        updateHUD();
-      });
+      triggerRewardedAd('revive');
     });
 
     // 4. Daily Gift with 24h Cooldown (+300 ⚡)
@@ -4727,8 +4865,10 @@
       isPaused = !isPaused;
       if (isPaused) {
         modalPause.classList.remove('hidden');
+        setBannerVisibility(true);
       } else {
         modalPause.classList.add('hidden');
+        if (gameState === 'PLAYING') setBannerVisibility(false);
       }
     }
 
@@ -5755,6 +5895,7 @@
     }
 
     // Startup initializations
+    setBannerVisibility(true);
     updateDailyGiftButtonUI();
     renderLanguageOptions();
     renderLevelSelect(1);
