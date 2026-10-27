@@ -1677,6 +1677,15 @@
           <span class="hud-value cyan" id="hud-level-text">LVL 1/30</span>
         </div>
 
+        <!-- Targets Remaining Objective Card -->
+        <div class="hud-card" id="hud-targets-card" title="All enemies must be destroyed to complete level">
+          <span class="hud-label" id="hud-targets-label" style="color: #ffaa00;">TARGETS</span>
+          <span class="hud-value" id="hud-targets-text" style="color: #ff0055; font-size: 13px; font-weight: 900; gap: 4px;">
+            <span style="font-size: 11px;">🎯</span>
+            <span id="hud-targets-count">0/0</span>
+          </span>
+        </div>
+
         <div class="hud-card" id="hud-score-card" style="display: none;">
           <span class="hud-label" id="hud-score-label">SCORE</span>
           <span class="hud-value gold" id="hud-score-text">0</span>
@@ -2222,6 +2231,9 @@
             </a>
             <a href="/graphics.html" target="_blank" class="btn-secondary" style="text-decoration: none; justify-content: center; padding: 7px; font-size: 10px; color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">
               🖼️ Play Store Graphic & Icon
+            </a>
+            <a href="/promo-video.html" target="_blank" class="btn-secondary" style="text-decoration: none; justify-content: center; padding: 7px; font-size: 10px; color: #ff0055; border-color: rgba(255, 0, 85, 0.4);">
+              🎬 Promo Video Studio & Scripts
             </a>
             <a href="/privacy.html" target="_blank" class="btn-secondary" style="text-decoration: none; justify-content: center; padding: 7px; font-size: 10px; color: var(--cyan); border-color: rgba(0, 240, 255, 0.3);">
               🔒 Privacy Policy
@@ -2794,9 +2806,35 @@
         osc.start(now);
         osc.stop(now + 0.6);
       }
+
+      playBomb() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(340, now);
+        osc.frequency.exponentialRampToValueAtTime(65, now + 0.28);
+        gain.gain.setValueAtTime(0.28, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.32);
+      }
     }
 
-    const sound = new SoundEngine();
+    const rawSound = new SoundEngine();
+    const sound = new Proxy(rawSound, {
+      get(target, prop) {
+        if (prop in target) {
+          const val = target[prop];
+          return typeof val === 'function' ? val.bind(target) : val;
+        }
+        return () => {}; // Never throw or hang the game if an audio method is unhandled
+      }
+    });
 
     function triggerHaptic(pattern) {
       if (typeof navigator !== 'undefined' && navigator.vibrate) {
@@ -4337,6 +4375,7 @@
         this.frozenTimer = 0;
         this.stunTimer = 0;
         this.shootTimer = 1.0 + Math.random() * 1.5;
+        this.isDead = false;
 
         // Dynamic Movement System
         this.moveType = opts.moveType || (type === 'patrol' || type === 'hover_drone' || type === 'chaser' || type === 'air_bomber_drone' ? type : (type.startsWith('boss') ? 'boss' : 'static'));
@@ -4371,6 +4410,7 @@
       }
 
       update(dt) {
+        if (this.isDead || this.hp <= 0) return;
         if (this.frozenTimer > 0) {
           this.frozenTimer -= dt;
           return;
@@ -4465,7 +4505,7 @@
       }
 
       fireProjectile() {
-        if (!player || player.hearts <= 0) return;
+        if (this.isDead || this.hp <= 0 || !player || player.hearts <= 0) return;
         const baseAngle = Math.atan2(player.y - this.y, player.x - this.x);
         
         sound.playLaserShot();
@@ -4589,13 +4629,21 @@
       }
 
       takeDamage(amount, vx, vy) {
+        if (this.isDead || this.hp <= 0) return;
         this.hp -= amount;
         if (this.hp <= 0) {
+          this.hp = 0;
           this.die();
         }
       }
 
       die() {
+        if (this.isDead) return;
+        this.isDead = true;
+        this.hp = 0;
+        this.shootTimer = 99999;
+        enemiesDefeatedInLevel++;
+
         const isBoss = this.type.startsWith('boss');
         const greed = progression.getGreedMultiplier();
         let shardReward = isBoss ? Math.round(90 * greed) : Math.round(5 * Math.max(1, airCombo) * greed);
@@ -4608,14 +4656,39 @@
         shardsEarnedThisRun += shardReward;
         updateHUD();
 
-        spawnFloatingText(this.x, this.y - 20, `+${shardReward} ⚡`, '#fbbf24');
-        spawnSparks(this.x, this.y, '#ff0055', isBoss ? 40 : 20);
+        // Satisfying audio-visual obliteration & debris
+        sound.playExplosion();
+        triggerHaptic(isBoss ? [60, 40, 60] : [40, 30]);
+        addScreenShake(isBoss ? 16 : 8);
+        spawnFloatingText(this.x, this.y - 25, isBoss ? '💥 BOSS DESTROYED! +90 ⚡' : '💥 DESTROYED!', isBoss ? '#ff0055' : '#10b981');
+        spawnSparks(this.x, this.y, isBoss ? '#ff0055' : '#00f0ff', isBoss ? 48 : 26);
 
-        // Check if level cleared
+        // Debris fragment particles
+        for (let k = 0; k < (isBoss ? 22 : 10); k++) {
+          const ang = Math.random() * Math.PI * 2;
+          const spd = 90 + Math.random() * 240;
+          particles.push({
+            x: this.x,
+            y: this.y,
+            vx: Math.cos(ang) * spd,
+            vy: Math.sin(ang) * spd,
+            radius: 2.5 + Math.random() * 3,
+            color: Math.random() > 0.4 ? '#ff0055' : '#00f0ff',
+            life: 0.6 + Math.random() * 0.4,
+            maxLife: 1.0,
+            type: 'spark'
+          });
+        }
+
+        updateHUD();
+
+        // Verify if stage is officially cleared
         checkVictoryCondition();
       }
 
       draw(c) {
+        if (this.isDead || this.hp <= 0) return;
+
         // Charging telegraph warning line before shooting
         if (this.shootTimer < 0.5 && this.frozenTimer <= 0 && this.stunTimer <= 0 && player && player.hearts > 0) {
           c.save();
@@ -5428,97 +5501,132 @@
       mission3FireballTimer = 2.0;
       airDroneStrikeTimer = 7.0;
       airStrikeAlertTimer = 0;
-      overdriveTimer = 0;
+      isVictorySequenceRunning = false;
+      isFinalKillZoom = false;
+      if (cinematicVignette) cinematicVignette.classList.remove('active');
 
       generateCampaignLevel(lvl);
+      totalEnemiesInLevel = enemies.length;
+      enemiesDefeatedInLevel = 0;
 
       // Check level 1 tutorial flag
       input.hasDraggedOnLvl1 = false;
+      const enemyCount = enemies.length;
       if (lvl === 1) {
-        tutorialHint.textContent = '👆 DRAG TO SLOW TIME & AIM -> RELEASE TO SLICE!';
+        tutorialHint.textContent = '👆 DESTROY THE ENEMY TO CLEAR LEVEL! (DRAG & AIM -> RELEASE)';
         tutorialHint.style.display = 'block';
       } else {
-        tutorialHint.textContent = t('defaultHint');
+        const isBossLvl = (lvl % 5 === 0);
+        tutorialHint.textContent = isBossLvl ? `⚠️ BOSS ALERT: DESTROY THE BOSS TO COMPLETE LEVEL!` : `🎯 OBJECTIVE: DESTROY ALL ${enemyCount} ENEMIES TO CLEAR LEVEL!`;
         tutorialHint.style.display = 'block';
-        setTimeout(() => { tutorialHint.style.display = 'none'; }, 3000);
+        setTimeout(() => { tutorialHint.style.display = 'none'; }, 3200);
       }
 
       updateHUD();
       sound.resume();
     }
 
+    let isVictorySequenceRunning = false;
+    let totalEnemiesInLevel = 0;
+    let enemiesDefeatedInLevel = 0;
+
     function checkVictoryCondition() {
-      const activeEnemies = enemies.filter(e => e.hp > 0);
-      if (activeEnemies.length === 0 && gameState === 'PLAYING') {
-        gameState = 'VICTORY';
-        setBannerVisibility(true);
+      if (gameState !== 'PLAYING' || isVictorySequenceRunning) return;
+      if (!enemies || enemies.length === 0) return;
+      if (totalEnemiesInLevel <= 0) return;
 
-        // Calculate clear reward: 40 ⚡ × currentLevel × greed
-        const greed = progression.getGreedMultiplier();
-        lastLevelClearReward = Math.round(40 * currentLevelIndex * greed);
-        progression.addShards(lastLevelClearReward);
+      // Strictly verify that every single enemy is completely destroyed (no survivors)
+      const activeEnemies = enemies.filter(e => !e.isDead && e.hp > 0);
+      if (activeEnemies.length === 0 && enemiesDefeatedInLevel >= totalEnemiesInLevel) {
+        isVictorySequenceRunning = true;
+        
+        // Satisfying Final Kill Slow-Mo Cinematic Flash
+        isFinalKillZoom = true;
+        if (cinematicVignette) cinematicVignette.classList.add('active');
+        sound.playSlowMoExit();
+        triggerHaptic([40, 60]);
+        addScreenShake(14);
+        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, player ? player.y - 45 : 300, '💥 ALL ENEMIES DESTROYED! LEVEL CLEAR!', '#10b981');
 
-        // Advance level unlock up to 90
-        if (currentLevelIndex >= progression.data.highestLevelReached) {
-          progression.data.highestLevelReached = Math.min(90, currentLevelIndex + 1);
-          progression.save();
-        }
-
-        // Clear trial blade after 1 level
-        if (progression.data.trialBlade) {
-          progression.data.trialBlade = null;
-          progression.save();
-        }
-
-        if (currentLevelIndex === 90) {
-          // Grand Finale: All 90 levels conquered!
-          document.getElementById('allclear-header').textContent = 'ALL 3 MISSIONS CONQUERED';
-          document.getElementById('allclear-title').textContent = 'CYBER SECTOR SECURED (90/90)';
-          document.getElementById('allclear-desc').textContent = 'You conquered all 90 handcrafted campaign levels across Missions 1, 2, and 3, survived raining fireballs, neutralized drone air attacks, and defeated the Grand Architect Omega God!';
-          document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 90/90 (Missions 1, 2 & 3)';
-          document.getElementById('final-total-shards').textContent = progression.data.shards;
-          modalAllClear.classList.remove('hidden');
-        } else if (currentLevelIndex === 60) {
-          // Mission 2 Complete
-          document.getElementById('victory-title').textContent = 'MISSION 2 COMPLETE (60/60)!';
-          document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
-          document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-          document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
-          document.getElementById('btn-claim-3x-shards').disabled = false;
-          modalVictory.classList.remove('hidden');
-        } else if (currentLevelIndex === 30) {
-          // Mission 1 Complete
-          document.getElementById('victory-title').textContent = 'MISSION 1 COMPLETE (30/30)!';
-          document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
-          document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-          document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
-          document.getElementById('btn-claim-3x-shards').disabled = false;
-          modalVictory.classList.remove('hidden');
-        } else {
-          const missionNum = currentLevelIndex <= 30 ? 1 : (currentLevelIndex <= 60 ? 2 : 3);
-          document.getElementById('victory-title').textContent = `M${missionNum} · LEVEL ${currentLevelIndex} CLEARED`;
-          document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
-          document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-          document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
-          document.getElementById('btn-claim-3x-shards').disabled = false;
-          modalVictory.classList.remove('hidden');
-        }
-
-        // Boss Level Rewarded Interstitial (+250 ⚡) vs Standard Interstitial every 3 non-boss levels
-        const isBoss = (currentLevelIndex % 5 === 0);
-        if (isBoss) {
-          triggerRewardedInterstitialAd();
-        } else {
-          progression.data.levelsClearedCount = (progression.data.levelsClearedCount || 0) + 1;
-          progression.save();
-          if (progression.data.levelsClearedCount % 3 === 0) {
-            triggerInterstitialAd();
-          }
-        }
-
-        sound.playReward();
-        triggerHaptic([30, 40]);
+        setTimeout(() => {
+          isFinalKillZoom = false;
+          if (cinematicVignette) cinematicVignette.classList.remove('active');
+          isVictorySequenceRunning = false;
+          executeLevelVictory();
+        }, 700);
       }
+    }
+
+    function executeLevelVictory() {
+      if (gameState !== 'PLAYING') return;
+      gameState = 'VICTORY';
+      setBannerVisibility(true);
+
+      // Calculate clear reward: 40 ⚡ × currentLevel × greed
+      const greed = progression.getGreedMultiplier();
+      lastLevelClearReward = Math.round(40 * currentLevelIndex * greed);
+      progression.addShards(lastLevelClearReward);
+
+      // Advance level unlock up to 90
+      if (currentLevelIndex >= progression.data.highestLevelReached) {
+        progression.data.highestLevelReached = Math.min(90, currentLevelIndex + 1);
+        progression.save();
+      }
+
+      // Clear trial blade after 1 level
+      if (progression.data.trialBlade) {
+        progression.data.trialBlade = null;
+        progression.save();
+      }
+
+      if (currentLevelIndex === 90) {
+        // Grand Finale: All 90 levels conquered!
+        document.getElementById('allclear-header').textContent = 'ALL 3 MISSIONS CONQUERED';
+        document.getElementById('allclear-title').textContent = 'CYBER SECTOR SECURED (90/90)';
+        document.getElementById('allclear-desc').textContent = 'You conquered all 90 handcrafted campaign levels across Missions 1, 2, and 3, neutralized every enemy across all sectors, and defeated the Grand Architect Omega God!';
+        document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 90/90 (Missions 1, 2 & 3)';
+        document.getElementById('final-total-shards').textContent = progression.data.shards;
+        modalAllClear.classList.remove('hidden');
+      } else if (currentLevelIndex === 60) {
+        // Mission 2 Complete
+        document.getElementById('victory-title').textContent = 'MISSION 2 COMPLETE (60/60)!';
+        document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
+        document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').disabled = false;
+        modalVictory.classList.remove('hidden');
+      } else if (currentLevelIndex === 30) {
+        // Mission 1 Complete
+        document.getElementById('victory-title').textContent = 'MISSION 1 COMPLETE (30/30)!';
+        document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
+        document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').disabled = false;
+        modalVictory.classList.remove('hidden');
+      } else {
+        const missionNum = currentLevelIndex <= 30 ? 1 : (currentLevelIndex <= 60 ? 2 : 3);
+        document.getElementById('victory-title').textContent = `M${missionNum} · LEVEL ${currentLevelIndex} CLEARED`;
+        document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
+        document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').disabled = false;
+        modalVictory.classList.remove('hidden');
+      }
+
+      // Boss Level Rewarded Interstitial (+250 ⚡) vs Standard Interstitial every 3 non-boss levels
+      const isBoss = (currentLevelIndex % 5 === 0);
+      if (isBoss) {
+        triggerRewardedInterstitialAd();
+      } else {
+        progression.data.levelsClearedCount = (progression.data.levelsClearedCount || 0) + 1;
+        progression.save();
+        if (progression.data.levelsClearedCount % 3 === 0) {
+          triggerInterstitialAd();
+        }
+      }
+
+      sound.playReward();
+      triggerHaptic([30, 40]);
     }
 
     function incrementAirCombo() {
@@ -5538,6 +5646,21 @@
       }
       if (hudComboText) hudComboText.textContent = `x${airCombo}`;
       if (hudShardsText) hudShardsText.textContent = `${progression.data.shards} ⚡`;
+      const hudTargetsCount = document.getElementById('hud-targets-count');
+      if (hudTargetsCount) {
+        if (enemies && enemies.length > 0) {
+          const total = enemies.length;
+          const alive = enemies.filter(e => !e.isDead && e.hp > 0).length;
+          hudTargetsCount.textContent = `${alive}/${total}`;
+          hudTargetsCount.style.color = alive === 0 ? '#10b981' : (alive === 1 ? '#fbbf24' : '#ff0055');
+          const hudTargetsCard = document.getElementById('hud-targets-card');
+          if (hudTargetsCard) {
+            hudTargetsCard.style.borderColor = alive === 0 ? '#10b981' : (alive === 1 ? 'rgba(251, 191, 36, 0.45)' : 'rgba(255, 0, 85, 0.4)');
+          }
+        } else {
+          hudTargetsCount.textContent = '0/0';
+        }
+      }
       if (shopShardsDisplay) shopShardsDisplay.textContent = `${progression.data.shards} ⚡`;
       const titleTotalShards = document.getElementById('title-total-shards');
       if (titleTotalShards) titleTotalShards.textContent = `⚡ ${progression.data.shards.toLocaleString()}`;
@@ -6974,7 +7097,7 @@
             // Deflected / Drone Projectile Hit on Enemy
             let hitEnemy = false;
             for (const e of enemies) {
-              if (e.hp > 0 && Math.hypot(p.x - e.x, p.y - e.y) < p.radius + e.radius) {
+              if (!e.isDead && e.hp > 0 && Math.hypot(p.x - e.x, p.y - e.y) < p.radius + e.radius) {
                 e.takeDamage(1, p.vx * 0.2, p.vy * 0.2);
                 spawnSparks(p.x, p.y, '#00f0ff', 18);
                 sound.playDeflect();
@@ -6989,8 +7112,18 @@
           }
         }
 
-        for (let i = 0; i < enemies.length; i++) enemies[i].update(scaledDt);
+        for (let i = 0; i < enemies.length; i++) {
+          if (!enemies[i].isDead && enemies[i].hp > 0) enemies[i].update(scaledDt);
+        }
         for (let i = 0; i < hazards.length; i++) hazards[i].update(scaledDt);
+
+        // Continuous check to guarantee level completes ONLY when all enemies are confirmed destroyed
+        if (gameState === 'PLAYING' && totalEnemiesInLevel > 0 && enemies && enemies.length > 0) {
+          const aliveHostiles = enemies.filter(e => !e.isDead && e.hp > 0).length;
+          if (aliveHostiles === 0 && enemiesDefeatedInLevel >= totalEnemiesInLevel) {
+            checkVictoryCondition();
+          }
+        }
 
         for (let i = fireTrails.length - 1; i >= 0; i--) {
           fireTrails[i].life -= scaledDt;
@@ -7239,7 +7372,9 @@
       }
 
       for (const h of hazards) h.draw(ctx);
-      for (const e of enemies) e.draw(ctx);
+      for (const e of enemies) {
+        if (!e.isDead && e.hp > 0) e.draw(ctx);
+      }
       for (const p of projectiles) p.draw(ctx);
 
       // Fireballs ("Aag ke Gole")
@@ -7293,29 +7428,30 @@
         ctx.restore();
       }
 
-      // Off-screen enemy radar indicators for Mission 2 side-scrolling
-      if (currentWorldWidth > VIRTUAL_WIDTH && gameState === 'PLAYING') {
+      // Off-screen enemy radar indicators for ALL missions (Missions 1, 2, and 3)
+      if (gameState === 'PLAYING') {
         const viewLeft = cameraFocusX - VIRTUAL_WIDTH / 2;
         const viewRight = cameraFocusX + VIRTUAL_WIDTH / 2;
         for (const e of enemies) {
-          if (e.hp > 0) {
+          if (!e.isDead && e.hp > 0) {
+            const dist = Math.round(Math.abs((player ? player.x : 0) - e.x));
             if (e.x < viewLeft + 35) {
               ctx.save();
               ctx.fillStyle = e.type.startsWith('boss') ? '#fbbf24' : '#ff0055';
               ctx.shadowColor = ctx.fillStyle;
               ctx.shadowBlur = 10;
-              ctx.font = '900 14px monospace';
+              ctx.font = '900 13px monospace';
               ctx.textAlign = 'left';
-              ctx.fillText('◀ ⚠️ TARGET', viewLeft + 24, Math.max(90, Math.min(VIRTUAL_HEIGHT - 70, e.y)));
+              ctx.fillText(`◀ ⚠️ TARGET (${dist}m)`, viewLeft + 24, Math.max(90, Math.min(VIRTUAL_HEIGHT - 70, e.y)));
               ctx.restore();
             } else if (e.x > viewRight - 35) {
               ctx.save();
               ctx.fillStyle = e.type.startsWith('boss') ? '#fbbf24' : '#ff0055';
               ctx.shadowColor = ctx.fillStyle;
               ctx.shadowBlur = 10;
-              ctx.font = '900 14px monospace';
+              ctx.font = '900 13px monospace';
               ctx.textAlign = 'right';
-              ctx.fillText('TARGET ⚠️ ▶', viewRight - 24, Math.max(90, Math.min(VIRTUAL_HEIGHT - 70, e.y)));
+              ctx.fillText(`TARGET (${dist}m) ⚠️ ▶`, viewRight - 24, Math.max(90, Math.min(VIRTUAL_HEIGHT - 70, e.y)));
               ctx.restore();
             }
           }
@@ -7354,7 +7490,7 @@
         }
 
         // ANIMATED LEVEL 1 ON-CANVAS HAND TUTORIAL
-        if (currentLevelIndex === 1 && !input.hasDraggedOnLvl1 && enemies.length > 0) {
+        if (currentLevelIndex === 1 && !input.hasDraggedOnLvl1 && enemies.length > 0 && !enemies[0].isDead && enemies[0].hp > 0) {
           ctx.save();
           const targetEnemy = enemies[0];
           const animT = (Date.now() % 2000) / 2000;
