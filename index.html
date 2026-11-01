@@ -1001,14 +1001,304 @@
       box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
     }
 
-    /* ADMOB SIMULATED OVERLAY */
+    /* GOOGLE ADMOB OFFICIAL TEST ADS & MODALS STYLING */
+    .admob-badge-yellow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fbbf24;
+      color: #000;
+      font-weight: 900;
+      font-size: 10.5px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      user-select: none;
+    }
+
     #modal-ad-reward .ad-box {
-      max-width: 420px;
-      text-align: center;
-      padding: 24px;
-      background: linear-gradient(180deg, #0d111a 0%, #05070c 100%);
+      max-width: 460px;
+      width: 92%;
+      text-align: left;
+      padding: 0;
+      background: #0b0f19;
       border: 2px solid #fbbf24;
-      box-shadow: 0 0 40px rgba(251, 191, 36, 0.35);
+      box-shadow: 0 0 50px rgba(251, 191, 36, 0.45);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .admob-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #111827;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .admob-top-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admob-top-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .admob-timer-pill {
+      font-size: 11px;
+      font-weight: 800;
+      color: #00f0ff;
+      background: rgba(0, 240, 255, 0.12);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      padding: 3px 8px;
+      border-radius: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .admob-close-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .admob-close-icon-btn:hover {
+      background: rgba(239, 68, 68, 0.25);
+      color: #ef4444;
+      border-color: #ef4444;
+    }
+
+    .admob-video-stage {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px;
+    }
+
+    .admob-video-anim-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+      animation: admob-grid-fly 12s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes admob-grid-fly {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(24px); }
+    }
+
+    .admob-video-hud {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .admob-video-center {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin: auto 0;
+    }
+
+    .admob-timeline-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .admob-timeline-track {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .admob-timeline-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f59e0b, #fbbf24, #10b981);
+      transition: width 0.1s linear;
+    }
+
+    .admob-timeline-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .admob-install-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #111827;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 10px;
+    }
+
+    .admob-app-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .admob-app-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #00f0ff, #3b82f6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 2px 8px rgba(0, 240, 255, 0.35);
+      flex-shrink: 0;
+    }
+
+    .admob-install-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.35);
+      letter-spacing: 0.05em;
+      transition: transform 0.1s ease;
+      white-space: nowrap;
+    }
+
+    .admob-install-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* GOOGLE ADMOB TEST BANNER (320x50 FIXED BOTTOM) */
+    #admob-test-banner {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 50px;
+      background: #181d27;
+      border: 1px solid #334155;
+      border-bottom: none;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.65);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      gap: 8px;
+      user-select: none;
+      pointer-events: auto;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    #admob-test-banner.hidden {
+      display: none !important;
+    }
+
+    .admob-banner-tag {
+      position: absolute;
+      top: -10px;
+      left: 8px;
+      background: #fbbf24;
+      color: #000;
+      font-size: 8.5px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    .admob-banner-icon {
+      width: 34px;
+      height: 34px;
+      background: #0f172a;
+      border: 1px solid #475569;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    .admob-banner-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .admob-banner-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admob-banner-sub {
+      font-size: 9px;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .admob-banner-btn {
+      background: #3b82f6;
+      color: #fff;
+      border: none;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
     }
 
     .ad-scanner-line {
@@ -1810,17 +2100,18 @@
       <div class="modal-box" style="max-width: 660px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
           <div>
-            <h2 class="modal-title" id="level-select-main-title" style="text-align: left; font-size: 18px;">CAMPAIGN MISSIONS (90 TOTAL)</h2>
+            <h2 class="modal-title" id="level-select-main-title" style="text-align: left; font-size: 18px;">CAMPAIGN MISSIONS (120 TOTAL)</h2>
             <div class="modal-subtitle" style="text-align: left;" id="stage-desc-text">Mission 1 · Stage 1: Neo-Tokyo Rooftops (Levels 1–10)</div>
           </div>
           <button class="btn-secondary" id="btn-close-level-select" style="padding: 6px 12px;">✕</button>
         </div>
 
-        <!-- Mission Selection Tabs (Mission 1, Mission 2, Mission 3) -->
+        <!-- Mission Selection Tabs (Mission 1, Mission 2, Mission 3, Mission 4) -->
         <div class="mission-tabs" id="modal-mission-tabs">
           <button class="mission-tab-btn active" data-mission="1" id="tab-mission-1">⚡ M1: MATRIX (1–30)</button>
           <button class="mission-tab-btn" data-mission="2" id="tab-mission-2">🚀 M2: OUTSKIRTS (31–60)</button>
           <button class="mission-tab-btn" data-mission="3" id="tab-mission-3">🔥 M3: INFERNO (61–90)</button>
+          <button class="mission-tab-btn" data-mission="4" id="tab-mission-4">🌌 M4: VOID (91–120)</button>
         </div>
 
         <!-- Stage Filter Tabs (Populated / Updated dynamically) -->
@@ -1896,9 +2187,9 @@
           </div>
         </div>
 
-        <!-- Prominent Claim 3X Shards (Rewarded Ad) Button -->
+        <!-- Prominent Claim 2X Shards (Rewarded Ad) Button -->
         <button class="btn-ad-reward" id="btn-claim-3x-shards" style="width: 100%; padding: 12px; font-size: 14px; margin-bottom: 6px;">
-          🎬 CLAIM 3X SHARDS (WATCH AD)
+          🎬 CLAIM 2X SHARDS (WATCH 10s AD)
         </button>
 
         <div style="display: flex; gap: 10px;">
@@ -1996,15 +2287,118 @@
       </div>
     </div>
 
-    <!-- ADMOB SIMULATED REWARD OVERLAY MODAL -->
-    <div class="modal-overlay hidden" id="modal-ad-reward">
+    <!-- GOOGLE ADMOB AUTHENTIC REWARDED VIDEO TEST AD MODAL -->
+    <div class="modal-overlay hidden" id="modal-ad-reward" style="z-index: 9999;">
       <div class="modal-box ad-box">
-        <div style="font-size: 11px; font-weight: 800; color: #fbbf24; letter-spacing: 0.15em;">ADMOB REWARD BRIDGE</div>
-        <h3 style="font-size: 18px; font-weight: 900; color: #fff; margin: 6px 0;" id="ad-reward-title">VERIFYING SPONSOR STREAM...</h3>
-        <p style="font-size: 11px; color: #94a3b8;" id="ad-reward-desc">Connecting to Google AdMob Rewarded Network.</p>
-        <div class="ad-scanner-line"></div>
-        <div style="font-size: 12px; font-weight: 800; color: var(--cyan);" id="ad-reward-countdown">REWARD UNLOCK IN 1.5s...</div>
+        <!-- Top Navigation Bar -->
+        <div class="admob-top-bar">
+          <div class="admob-top-left">
+            <span class="admob-badge-yellow">Test Ad</span>
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700;">Google AdMob · 1 of 1</span>
+          </div>
+          <div class="admob-top-right">
+            <span id="ad-reward-mute-btn" style="cursor: pointer; font-size: 14px;" title="Mute/Unmute">🔊</span>
+            <div class="admob-timer-pill" id="ad-reward-countdown">Reward in 10s...</div>
+            <button class="admob-close-icon-btn" id="btn-close-reward-ad" title="Close Ad">✕</button>
+          </div>
+        </div>
+
+        <!-- Video Simulation Screen -->
+        <div class="admob-video-stage">
+          <div class="admob-video-anim-grid"></div>
+          
+          <div class="admob-video-hud">
+            <div style="font-size: 10px; font-weight: 800; color: #fbbf24; background: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px;" id="ad-reward-type-tag">
+              SPONSORED REWARD STREAM
+            </div>
+            <div style="font-size: 10px; font-weight: 800; color: #34d399; background: rgba(0,0,0,0.6); padding: 2px 6px; border-radius: 4px;">
+              ● LIVE PREVIEW
+            </div>
+          </div>
+
+          <div class="admob-video-center">
+            <div style="font-size: 32px; filter: drop-shadow(0 0 12px #00f0ff); margin-bottom: 4px;" id="ad-video-icon">🤖</div>
+            <div style="font-size: 15px; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(0,240,255,0.7);" id="ad-reward-title">
+              CYBER BLADE: CHRONO STRIKE
+            </div>
+            <div style="font-size: 11px; color: #38bdf8; font-weight: 700; margin-top: 2px;" id="ad-reward-desc">
+              Harness Bullet-Time Matrix & Slash Through Rogue Mechas!
+            </div>
+          </div>
+
+          <div class="admob-timeline-wrapper">
+            <div class="admob-timeline-track">
+              <div class="admob-timeline-fill" id="ad-reward-progress-bar"></div>
+            </div>
+            <div class="admob-timeline-info">
+              <span id="ad-reward-elapsed">0:00</span>
+              <span id="ad-reward-total">0:10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Install Card -->
+        <div class="admob-install-card">
+          <div class="admob-app-info">
+            <div class="admob-app-icon">⚡</div>
+            <div style="min-width: 0;">
+              <div style="font-size: 12px; font-weight: 900; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                Cyber Chrono: Action RPG
+              </div>
+              <div style="font-size: 10px; color: #94a3b8; display: flex; align-items: center; gap: 4px;">
+                <span style="color: #fbbf24;">4.9 ★★★★★</span>
+                <span>· Free</span>
+              </div>
+            </div>
+          </div>
+          <button class="admob-install-btn" id="btn-ad-reward-install">INSTALL</button>
+        </div>
       </div>
+    </div>
+
+    <!-- GOOGLE ADMOB AUTHENTIC INTERSTITIAL TEST AD MODAL -->
+    <div class="modal-overlay hidden" id="modal-ad-interstitial" style="z-index: 9998;">
+      <div class="modal-box" style="max-width: 440px; width: 92%; padding: 0; background: #0b0f19; border: 2px solid #fbbf24; border-radius: 12px; overflow: hidden; box-shadow: 0 0 45px rgba(251, 191, 36, 0.4);">
+        <div class="admob-top-bar">
+          <div class="admob-top-left">
+            <span class="admob-badge-yellow">Test Ad</span>
+            <span style="font-size: 11px; color: #94a3b8; font-weight: 700;">Google AdMob Interstitial</span>
+          </div>
+          <div class="admob-top-right">
+            <div class="admob-timer-pill" id="ad-interstitial-countdown">Skip in 5s...</div>
+            <button class="admob-close-icon-btn" id="btn-close-interstitial-ad" style="opacity: 0.5;" title="Close Ad">✕</button>
+          </div>
+        </div>
+
+        <div style="padding: 20px 16px; text-align: center; background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);">
+          <div style="font-size: 42px; margin-bottom: 6px;">⚔️ 🤖 ⚡</div>
+          <div style="font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 4px;">INTERSTITIAL AD BREAK</div>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.4; margin: 0 0 14px 0;">
+            This is an authentic Google AdMob Fullscreen Interstitial Test Ad. Testing transitions between mission sectors.
+          </p>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-primary" id="btn-interstitial-install" style="flex: 1; padding: 10px; font-size: 12px; justify-content: center; background: linear-gradient(135deg, #3b82f6, #00f0ff); color: #000; font-weight: 900;">
+              LEARN MORE
+            </button>
+            <button class="btn-secondary" id="btn-interstitial-dismiss" style="flex: 1; padding: 10px; font-size: 12px; justify-content: center;">
+              SKIP AD (✕)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOOGLE ADMOB 320x50 FIXED TEST BANNER -->
+    <div id="admob-test-banner" class="hidden" role="banner" aria-label="Google AdMob Test Banner">
+      <div class="admob-banner-tag">Test Ad</div>
+      <div class="admob-banner-icon">
+        <span style="color: #fbbf24; font-size: 16px;">📢</span>
+      </div>
+      <div class="admob-banner-text">
+        <div class="admob-banner-title">Nice job! This is an AdMob Test Banner (320x50)</div>
+        <div class="admob-banner-sub">Google Sample Unit · 100% Fill Rate Verified</div>
+      </div>
+      <button class="admob-banner-btn" id="btn-test-banner-click">INSTALL</button>
     </div>
 
     <!-- LANGUAGE SELECTION MODAL -->
@@ -2055,6 +2449,10 @@
         <button class="side-tab-btn" data-side-tab="language" id="side-tab-language">
           <span style="font-size: 14px;">🌐</span>
           <span id="tab-label-lang">LANGUAGE</span>
+        </button>
+        <button class="side-tab-btn" data-side-tab="ads" id="side-tab-ads">
+          <span style="font-size: 14px;">📢</span>
+          <span id="tab-label-ads">ADS</span>
         </button>
         <button class="side-tab-btn" data-side-tab="update" id="side-tab-update">
           <span style="font-size: 14px;">🚀</span>
@@ -2149,8 +2547,8 @@
           <!-- Header and Progress Status -->
           <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 9px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <div>
-              <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">CAMPAIGN MISSIONS (90 TOTAL)</div>
-              <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="side-levels-progress-text">Highest: LVL 1 / 90</div>
+              <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">CAMPAIGN MISSIONS (120 TOTAL)</div>
+              <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="side-levels-progress-text">Highest: LVL 1 / 120</div>
             </div>
             <button class="btn-primary" id="btn-side-resume-level" style="padding: 6px 10px; font-size: 10.5px; white-space: nowrap;">
               ▶️ PLAY LVL <span id="side-resume-lvl-num">1</span>
@@ -2162,6 +2560,7 @@
             <button class="side-mission-btn active" data-side-mission="1" id="side-m-btn-1">⚡ M1 (1–30)</button>
             <button class="side-mission-btn" data-side-mission="2" id="side-m-btn-2">🚀 M2 (31–60)</button>
             <button class="side-mission-btn" data-side-mission="3" id="side-m-btn-3">🔥 M3 (61–90)</button>
+            <button class="side-mission-btn" data-side-mission="4" id="side-m-btn-4">🌌 M4 (91–120)</button>
           </div>
 
           <!-- Stage Selection Tabs -->
@@ -2210,19 +2609,19 @@
         <div class="side-pane" id="pane-update">
           <div style="background: linear-gradient(135deg, rgba(16, 24, 40, 0.9), rgba(10, 15, 30, 0.95)); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
             <div style="font-size: 13px; font-weight: 900; color: #fff;">CYBER BLADE: CHRONO STRIKE</div>
-            <div style="font-size: 11.5px; font-weight: 800; color: var(--cyan);">Version 3.5 (Pro Economy & AdMob Edition)</div>
+            <div style="font-size: 11.5px; font-weight: 800; color: var(--cyan);">Version 4.0 (Mission 4: Chrono-Void & Pro Economy)</div>
             <p style="font-size: 10.5px; color: #94a3b8; line-height: 1.35; margin: 0;">
-              Equipped with Google AdMob Rewarded Bridge, 90 Campaign Levels across 3 Missions, 8 Cyber Blades, Battle Suits, and Companion Drones.
+              Equipped with Google AdMob Rewarded Bridge, 120 Campaign Levels across 4 Missions, 8 Cyber Blades, Battle Suits, and Companion Drones.
             </p>
           </div>
 
-          <div style="font-size: 10px; font-weight: 800; color: #cbd5e1; letter-spacing: 0.05em;">CHANGELOG // v3.5 PRO</div>
+          <div style="font-size: 10px; font-weight: 800; color: #cbd5e1; letter-spacing: 0.05em;">CHANGELOG // v4.0 CHRONO-VOID</div>
           <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 8px 10px; font-size: 10px; color: #cbd5e1; display: flex; flex-direction: column; gap: 5px; max-height: 160px; overflow-y: auto;">
-            <div><strong style="color: var(--amber);">[v3.5] Economy & AdMob:</strong> 100 ⚡ starting shards, 3X Shard Rewarded Ad, Revive Ad, +600 ⚡ Ad Chest, 24h Daily Gift (+300 ⚡).</div>
-            <div><strong style="color: var(--cyan);">[v3.5] 90 Levels in 3 Missions:</strong> Mission 1 (Matrix 1-30), Mission 2 (Outskirts 31-60), Mission 3 (Inferno 61-90).</div>
-            <div><strong style="color: #c084fc);">[v3.5] 15 Armory Items:</strong> 8 Cyber Blades, 3 Battle Suits & Companion Drones, 4 Multi-Tier Core Upgrades (Lv.1-5).</div>
-            <div><strong style="color: #10b981);">[v3.5] Auto-Backup & Recovery:</strong> Persistent mobile storage backup that recovers automatically on reinstall.</div>
-            <div><strong style="color: #ff0055);">[v3.5] 3-Heart HP System:</strong> Default 3 Hearts (❤️❤️❤️), 4 Hearts with Golden Shogun, and Cyber Life Battery above all enemies.</div>
+            <div><strong style="color: #c084fc);">[v4.0] Mission 4: Chrono-Void (Levels 91-120):</strong> Quantum Glitch Matrix, Shadow Mimics, Time-Bomb Drones, Phase Brutes & 4 Epic Bosses!</div>
+            <div><strong style="color: var(--amber);">[v4.0] 2X Shards 10s Sponsor:</strong> Watch 10s AdMob sponsor stream to claim 2X Shards on level clear.</div>
+            <div><strong style="color: var(--cyan);">[v4.0] 120 Total Levels in 4 Missions:</strong> M1 Matrix (1-30), M2 Outskirts (31-60), M3 Inferno (61-90), M4 Chrono-Void (91-120).</div>
+            <div><strong style="color: #10b981);">[v4.0] Strict All-Enemy Clear:</strong> Every sector requires 100% enemy annihilation to achieve victory.</div>
+            <div><strong style="color: #ff0055);">[v4.0] 3-Heart HP System:</strong> Default 3 Hearts (❤️❤️❤️), 4 Hearts with Golden Shogun, and Cyber Life Battery above all enemies.</div>
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
@@ -2238,6 +2637,82 @@
             <a href="/privacy.html" target="_blank" class="btn-secondary" style="text-decoration: none; justify-content: center; padding: 7px; font-size: 10px; color: var(--cyan); border-color: rgba(0, 240, 255, 0.3);">
               🔒 Privacy Policy
             </a>
+          </div>
+        </div>
+
+        <!-- PANE 5: ADMOB ADS & TEST SUITE -->
+        <div class="side-pane" id="pane-ads">
+          <!-- Active Mode Card -->
+          <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(15, 23, 42, 0.95)); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">GOOGLE ADMOB TEST SUITE</div>
+                <div style="font-size: 10px; font-weight: 800; color: #fbbf24; margin-top: 2px;" id="admob-status-mode-text">
+                  🟢 TEST MODE ACTIVE (100% FILL GUARANTEED)
+                </div>
+              </div>
+              <span class="admob-badge-yellow" id="admob-mode-badge">TEST</span>
+            </div>
+
+            <div style="font-size: 9.5px; color: #cbd5e1; line-height: 1.35;" id="admob-mode-explainer">
+              Using official Google sample unit IDs. Eliminates "Error 3: No fill" during development and testing on mobile devices.
+            </div>
+
+            <button class="btn-primary" id="btn-toggle-admob-mode" style="padding: 8px 12px; font-size: 10.5px; justify-content: center; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 900;">
+              🔄 SWITCH TO PRODUCTION MODE
+            </button>
+          </div>
+
+          <!-- Native Bridge Diagnostic Card -->
+          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 5px;">
+            <div style="font-size: 10px; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">BRIDGE DIAGNOSTICS</div>
+            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
+              <span style="color: #94a3b8;">Android Native Bridge:</span>
+              <span style="font-weight: 800;" id="admob-bridge-status-text">Detecting...</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
+              <span style="color: #94a3b8;">Active Rewarded ID:</span>
+              <span style="color: #38bdf8; font-weight: 700; font-family: monospace; font-size: 9px;" id="admob-unit-rewarded">...</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
+              <span style="color: #94a3b8;">Active Interstitial ID:</span>
+              <span style="color: #38bdf8; font-weight: 700; font-family: monospace; font-size: 9px;" id="admob-unit-interstitial">...</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
+              <span style="color: #94a3b8;">Active Banner ID:</span>
+              <span style="color: #38bdf8; font-weight: 700; font-family: monospace; font-size: 9px;" id="admob-unit-banner">...</span>
+            </div>
+          </div>
+
+          <!-- 1-Click Interactive Test Buttons -->
+          <div style="font-size: 10.5px; font-weight: 800; color: var(--cyan); letter-spacing: 0.05em; margin-top: 4px;">
+            TEST AD PLACEMENTS (1-CLICK)
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <button class="btn-primary" id="btn-test-ad-rewarded-10s" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; background: linear-gradient(135deg, #00f0ff, #0088ff); color: #05070c; font-weight: 900;">
+              🎬 TEST 10s REWARDED AD (DOUBLE BOUNTY)
+            </button>
+            <button class="btn-primary" id="btn-test-ad-chest" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 900;">
+              🎁 TEST SHOP REWARD CHEST (+600 ⚡)
+            </button>
+            <button class="btn-secondary" id="btn-test-ad-interstitial" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; border-color: rgba(251, 191, 36, 0.4); color: #fbbf24; font-weight: 800;">
+              📺 TEST FULLSCREEN INTERSTITIAL AD (5s)
+            </button>
+            <button class="btn-secondary" id="btn-test-ad-banner" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; border-color: rgba(0, 240, 255, 0.4); color: var(--cyan); font-weight: 800;">
+              🏷️ TOGGLE 320x50 TEST BANNER ON/OFF
+            </button>
+            <button class="btn-secondary" id="btn-test-ad-boss" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; border-color: rgba(192, 132, 252, 0.4); color: #c084fc; font-weight: 800;">
+              👑 TEST BOSS REWARDED INTERSTITIAL (+250 ⚡)
+            </button>
+          </div>
+
+          <!-- Hindi & English Advisory Notes -->
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; font-size: 9.5px; color: #94a3b8; line-height: 1.4; display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-weight: 800; color: #fbbf24;">📢 ADMOB TEST ADS समाधान:</div>
+            <div>• <strong>समस्या:</strong> जब आप फोन पर ऐप चलाते हैं तो Live IDs पर Google "Error 3: No Fill" देता है, जिससे विज्ञापन लोड नहीं होते।</div>
+            <div>• <strong>समाधान:</strong> Test Mode हमेशा ऑन रखें। इसमें Google के ऑफिशियल Sample Unit IDs का उपयोग होता है, जिससे 100% विज्ञापन दिखाई देते हैं।</div>
+            <div>• <strong>Play Store रिलीज:</strong> फाइनल APK बनाने से पहले ऊपर दिए गए बटन से PRODUCTION MODE स्विच कर सकते हैं।</div>
           </div>
         </div>
 
@@ -3104,7 +3579,10 @@
           this.progression.save();
           if (typeof updateTitleScreenRecords === 'function') updateTitleScreenRecords();
           if (typeof updateHUD === 'function') updateHUD();
-          if (typeof renderLevelSelect === 'function') renderLevelSelect(Math.min(90, this.progression.data.highestLevelReached));
+          if (typeof renderLevelSelect === 'function') {
+            const st = Math.min(12, Math.ceil((this.progression.data.highestLevelReached || 1) / 10));
+            renderLevelSelect(st);
+          }
           if (typeof renderSideLevels === 'function') renderSideLevels(1);
 
           setTimeout(() => {
@@ -3120,7 +3598,10 @@
           this.progression.save();
           if (typeof updateTitleScreenRecords === 'function') updateTitleScreenRecords();
           if (typeof updateHUD === 'function') updateHUD();
-          if (typeof renderLevelSelect === 'function') renderLevelSelect(Math.min(90, this.progression.data.highestLevelReached));
+          if (typeof renderLevelSelect === 'function') {
+            const st = Math.min(12, Math.ceil((this.progression.data.highestLevelReached || 1) / 10));
+            renderLevelSelect(st);
+          }
           if (typeof renderSideLevels === 'function') renderSideLevels(1);
           showCyberToast('✅ Auto-Backup Restored! Level ' + this.progression.data.highestLevelReached + ' loaded.', '#10b981');
           if (typeof sound !== 'undefined') sound.playReward();
@@ -3135,7 +3616,7 @@
         try {
           const payload = {
             appName: 'CYBER BLADE: CHRONO STRIKE',
-            version: '3.5',
+            version: '4.0',
             exportDate: new Date().toISOString(),
             data: this.progression.data
           };
@@ -3175,7 +3656,10 @@
             this.saveSnapshot(this.progression.data);
             if (typeof updateTitleScreenRecords === 'function') updateTitleScreenRecords();
             if (typeof updateHUD === 'function') updateHUD();
-            if (typeof renderLevelSelect === 'function') renderLevelSelect(Math.min(90, this.progression.data.highestLevelReached));
+            if (typeof renderLevelSelect === 'function') {
+              const st = Math.min(12, Math.ceil((this.progression.data.highestLevelReached || 1) / 10));
+              renderLevelSelect(st);
+            }
             if (typeof renderSideLevels === 'function') renderSideLevels(1);
             showCyberToast('✅ File Backup Restored! Level ' + this.progression.data.highestLevelReached + ' & ' + this.progression.data.shards + ' ⚡ loaded.', '#10b981');
             if (typeof sound !== 'undefined') sound.playReward();
@@ -3192,14 +3676,46 @@
 
     // --- GOOGLE ADMOB CONFIGURATION & ANDROID WEBVIEW BRIDGE ---
     const ADMOB_CONFIG = {
-      APP_ID: "ca-app-pub-5448696131672998~4497188679",
-      REWARDED_ID: "ca-app-pub-5448696131672998/5728923023",
-      REWARDED_INTERSTITIAL_ID: "ca-app-pub-5448696131672998/9727877783",
-      INTERSTITIAL_ID: "ca-app-pub-5448696131672998/6906273320",
-      BANNER_ID: "ca-app-pub-5448696131672998/7945479093"
+      // Default to TEST_MODE = true so test ads always fill and display during testing & dev
+      TEST_MODE: localStorage.getItem('admob_test_mode') === null ? true : (localStorage.getItem('admob_test_mode') === 'true'),
+
+      // Official Google Sample / Test Ad Unit IDs for Android (100% Fill Rate Guaranteed by Google)
+      TEST_UNITS: {
+        APP_ID: "ca-app-pub-3940256099942544~3347511713",
+        BANNER: "ca-app-pub-3940256099942544/6300978111",
+        INTERSTITIAL: "ca-app-pub-3940256099942544/1033173712",
+        REWARDED: "ca-app-pub-3940256099942544/5224354917",
+        REWARDED_INTERSTITIAL: "ca-app-pub-3940256099942544/5354046379"
+      },
+
+      // Production Play Store Live Ad Unit IDs
+      PROD_UNITS: {
+        APP_ID: "ca-app-pub-5448696131672998~4497188679",
+        BANNER: "ca-app-pub-5448696131672998/7945479093",
+        INTERSTITIAL: "ca-app-pub-5448696131672998/6906273320",
+        REWARDED: "ca-app-pub-5448696131672998/5728923023",
+        REWARDED_INTERSTITIAL: "ca-app-pub-5448696131672998/9727877783"
+      },
+
+      getAppId() { return this.TEST_MODE ? this.TEST_UNITS.APP_ID : this.PROD_UNITS.APP_ID; },
+      getBannerId() { return this.TEST_MODE ? this.TEST_UNITS.BANNER : this.PROD_UNITS.BANNER; },
+      getInterstitialId() { return this.TEST_MODE ? this.TEST_UNITS.INTERSTITIAL : this.PROD_UNITS.INTERSTITIAL; },
+      getRewardedId() { return this.TEST_MODE ? this.TEST_UNITS.REWARDED : this.PROD_UNITS.REWARDED; },
+      getRewardedInterstitialId() { return this.TEST_MODE ? this.TEST_UNITS.REWARDED_INTERSTITIAL : this.PROD_UNITS.REWARDED_INTERSTITIAL; },
+
+      setTestMode(enabled) {
+        this.TEST_MODE = !!enabled;
+        localStorage.setItem('admob_test_mode', this.TEST_MODE ? 'true' : 'false');
+        if (window.AndroidAds && typeof window.AndroidAds.setTestMode === 'function') {
+          try { window.AndroidAds.setTestMode(this.TEST_MODE); } catch (e) {}
+        }
+        updateAdMobDiagnosticsUI();
+      }
     };
 
     let pendingRewardCallback = null;
+    let activeAdTimerInterval = null;
+    let activeInterstitialTimerInterval = null;
 
     /**
      * Smart Banner Ad Visibility (window.AndroidAds.setBannerVisible)
@@ -3208,8 +3724,17 @@
      */
     window.setBannerVisibility = function(visible) {
       const isVisible = !!visible;
+      const bannerEl = document.getElementById('admob-test-banner');
+      if (bannerEl) {
+        if (isVisible) bannerEl.classList.remove('hidden');
+        else bannerEl.classList.add('hidden');
+      }
+
       if (window.AndroidAds && typeof window.AndroidAds.setBannerVisible === 'function') {
         try {
+          if (typeof window.AndroidAds.setBannerId === 'function') {
+            window.AndroidAds.setBannerId(ADMOB_CONFIG.getBannerId());
+          }
           window.AndroidAds.setBannerVisible(isVisible);
         } catch (e) {
           console.warn('AndroidAds.setBannerVisible error:', e);
@@ -3221,7 +3746,7 @@
      * Global AdMob Reward Callback (window.onAdMobRewardGranted)
      * Directly invoked by Android WebView wrapper or simulated browser countdown:
      * - 'shop_600' -> +600 ⚡ Cyber Shards in the Armory
-     * - 'triple_win' -> Triples (3X) current Level Clear Shards bonus on Victory screen
+     * - 'double_win' / 'triple_win' -> Doubles (2X) current Level Clear Shards bonus on Victory screen
      * - 'revive' -> Revives player on spot with Full Hearts + Active Shield + clears bullets
      * - 'try_blade:<bladeId>' -> Equips locked high-tier/Mythic blade for 1 full level for free
      * - 'boss_bonus' -> +250 ⚡ Boss Clear Bonus Shards
@@ -3241,23 +3766,23 @@
         spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 260, '🎬 +600 ⚡ CYBER SHARDS GRANTED!', '#00f0ff');
       }
 
-      // 2. Victory Modal Triples (3X) Shards Bounty
-      else if (type === 'triple_win' || type === 'victory_3x') {
-        const bonus = (typeof lastLevelClearReward === 'number' && lastLevelClearReward > 0) ? lastLevelClearReward * 2 : 200;
+      // 2. Victory Modal Doubles (2X) Shards Bounty (10s Rewarded Ad)
+      else if (type === 'double_win' || type === 'triple_win' || type === 'victory_2x' || type === 'victory_3x') {
+        const bonus = (typeof lastLevelClearReward === 'number' && lastLevelClearReward > 0) ? lastLevelClearReward : 100;
         progression.addShards(bonus);
-        const btn3x = document.getElementById('btn-claim-3x-shards');
-        if (btn3x) {
-          btn3x.disabled = true;
-          btn3x.textContent = '✅ 3X REWARD CLAIMED!';
+        const btn2x = document.getElementById('btn-claim-3x-shards');
+        if (btn2x) {
+          btn2x.disabled = true;
+          btn2x.textContent = '✅ 2X REWARD CLAIMED!';
         }
         const vicShards = document.getElementById('victory-shards');
         if (vicShards && lastLevelClearReward) {
-          vicShards.textContent = `+${lastLevelClearReward * 3} ⚡ (3X CLAIMED!)`;
+          vicShards.textContent = `+${lastLevelClearReward * 2} ⚡ (2X CLAIMED!)`;
         }
         sound.playReward();
         triggerHaptic([30, 40, 50]);
         updateHUD();
-        spawnFloatingText(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, `+${bonus} ⚡ 3X BOUNTY CLAIMED!`, '#fbbf24');
+        spawnFloatingText(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, `+${bonus} ⚡ 2X BOUNTY CLAIMED!`, '#fbbf24');
       }
 
       // 3. Instant In-Place Revive with Full Hearts + Active Shield + Bullet Clear
@@ -3319,7 +3844,7 @@
 
     /**
      * 1. Rewarded Ads Trigger (triggerRewardedAd)
-     * Calls window.AndroidAds.showRewardedAd(ADMOB_CONFIG.REWARDED_ID, rewardType) or 1.5s simulated browser timer
+     * Calls window.AndroidAds.showRewardedAd(ADMOB_CONFIG.getRewardedId(), rewardType) or launches authentic in-app test video ad
      */
     window.triggerRewardedAd = function(rewardType, onRewarded) {
       pendingRewardCallback = onRewarded || null;
@@ -3327,84 +3852,125 @@
       // Check native Android WebView bridge
       if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
         try {
-          window.AndroidAds.showRewardedAd(ADMOB_CONFIG.REWARDED_ID, rewardType);
+          window.AndroidAds.showRewardedAd(ADMOB_CONFIG.getRewardedId(), rewardType);
           return;
         } catch (e) {
-          console.warn('AndroidAds.showRewardedAd error:', e);
+          console.warn('AndroidAds.showRewardedAd native error, falling back to in-app test ad:', e);
         }
       }
 
-      // Desktop / Browser Simulated Ad (1.5s countdown)
+      // Launch Authentic Google AdMob In-App Rewarded Video Test Ad
+      showInAppRewardedTestAd(rewardType);
+    };
+
+    function showInAppRewardedTestAd(rewardType) {
+      if (activeAdTimerInterval) {
+        clearInterval(activeAdTimerInterval);
+        activeAdTimerInterval = null;
+      }
+
       const modal = document.getElementById('modal-ad-reward');
       const titleEl = document.getElementById('ad-reward-title');
       const descEl = document.getElementById('ad-reward-desc');
       const countEl = document.getElementById('ad-reward-countdown');
+      const tagEl = document.getElementById('ad-reward-type-tag');
+      const progressFill = document.getElementById('ad-reward-progress-bar');
+      const elapsedEl = document.getElementById('ad-reward-elapsed');
+      const totalEl = document.getElementById('ad-reward-total');
+      const closeBtn = document.getElementById('btn-close-reward-ad');
 
-      let rewardLabel = 'CYBER REWARD';
-      if (rewardType === 'shop_600' || rewardType === 'shop_chest') rewardLabel = '+600 ⚡ AD CHEST';
-      else if (rewardType === 'triple_win' || rewardType === 'victory_3x') rewardLabel = '3X SHARDS BOUNTY';
-      else if (rewardType === 'revive') rewardLabel = 'REVIVE + FULL HP/SHIELD';
-      else if (rewardType.startsWith('try_blade')) rewardLabel = '1-LEVEL BLADE TRIAL';
+      const isDoubleWin = (rewardType === 'double_win' || rewardType === 'triple_win' || rewardType === 'victory_2x' || rewardType === 'victory_3x');
+      const durationSec = isDoubleWin ? 10 : 5; // 10s for double bounty, 5s for chest/revive
 
-      if (titleEl) titleEl.textContent = `STREAMING AD: ${rewardLabel}`;
-      if (descEl) descEl.textContent = 'Processing verified sponsor telemetry via Cyber Chrono Matrix...';
-      if (countEl) countEl.textContent = 'REWARD UNLOCK IN 1.5s...';
+      if (tagEl) {
+        tagEl.textContent = isDoubleWin ? 'SPONSORED 2X BOUNTY (10s)' : 'ADMOB REWARDED STREAM';
+      }
+      if (titleEl) {
+        titleEl.textContent = isDoubleWin ? 'CLAIM 2X LEVEL BOUNTY' : 'CYBER BLADE: CHRONO STRIKE';
+      }
+      if (descEl) {
+        descEl.textContent = isDoubleWin ? 'Watch verified 10-second sponsor ad to claim double shards!' : 'Processing verified sponsor telemetry via Cyber Chrono Matrix...';
+      }
+      if (totalEl) totalEl.textContent = `0:${durationSec < 10 ? '0' + durationSec : durationSec}`;
+      if (elapsedEl) elapsedEl.textContent = '0:00';
+      if (progressFill) progressFill.style.width = '0%';
+      if (countEl) countEl.textContent = `Reward in ${durationSec}s...`;
+
+      let rewardEarned = false;
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          if (!rewardEarned) {
+            const confirmed = confirm('Leave ad early? You will forfeit your reward!');
+            if (!confirmed) return;
+          }
+          if (activeAdTimerInterval) {
+            clearInterval(activeAdTimerInterval);
+            activeAdTimerInterval = null;
+          }
+          modal.classList.add('hidden');
+          if (rewardEarned) {
+            window.onAdMobRewardGranted(rewardType);
+          }
+        };
+      }
 
       if (modal) modal.classList.remove('hidden');
       sound.playSlowMoEnter();
 
-      let timeLeft = 15;
-      const interval = setInterval(() => {
-        timeLeft--;
-        if (timeLeft > 0) {
-          if (countEl) countEl.textContent = `REWARD UNLOCK IN ${(timeLeft / 10).toFixed(1)}s...`;
+      let currentSec = 0;
+      const stepMs = 100;
+      const totalSteps = durationSec * 10;
+      let stepsElapsed = 0;
+
+      activeAdTimerInterval = setInterval(() => {
+        stepsElapsed++;
+        const percent = Math.min(100, (stepsElapsed / totalSteps) * 100);
+        if (progressFill) progressFill.style.width = `${percent}%`;
+
+        const secElapsed = Math.floor(stepsElapsed / 10);
+        const secRemaining = Math.max(0, durationSec - secElapsed);
+        if (elapsedEl) elapsedEl.textContent = `0:${secElapsed < 10 ? '0' + secElapsed : secElapsed}`;
+
+        if (secRemaining > 0) {
+          if (countEl) countEl.textContent = `Reward in ${secRemaining}s...`;
         } else {
-          clearInterval(interval);
-          if (modal) modal.classList.add('hidden');
-          window.onAdMobRewardGranted(rewardType);
+          // Timer Complete: Grant Reward!
+          rewardEarned = true;
+          clearInterval(activeAdTimerInterval);
+          activeAdTimerInterval = null;
+
+          if (countEl) {
+            countEl.textContent = '✅ REWARD UNLOCKED!';
+            countEl.style.color = '#34d399';
+            countEl.style.borderColor = '#34d399';
+            countEl.style.background = 'rgba(52, 211, 153, 0.15)';
+          }
+
+          sound.playReward();
+          triggerHaptic([30, 40]);
+
+          setTimeout(() => {
+            if (modal) modal.classList.add('hidden');
+            window.onAdMobRewardGranted(rewardType);
+          }, 650);
         }
-      }, 100);
-    };
+      }, stepMs);
+    }
 
     /**
      * 2. Rewarded Interstitial Ads Trigger (triggerRewardedInterstitialAd)
-     * Triggered automatically upon defeating Boss Levels (5, 10, 15, 20, 25, 30)
+     * Triggered automatically upon defeating Boss Levels
      */
     window.triggerRewardedInterstitialAd = function() {
       if (window.AndroidAds && typeof window.AndroidAds.showRewardedInterstitialAd === 'function') {
         try {
-          window.AndroidAds.showRewardedInterstitialAd(ADMOB_CONFIG.REWARDED_INTERSTITIAL_ID, 'boss_bonus');
+          window.AndroidAds.showRewardedInterstitialAd(ADMOB_CONFIG.getRewardedInterstitialId(), 'boss_bonus');
           return;
         } catch (e) {
           console.warn('AndroidAds.showRewardedInterstitialAd error:', e);
         }
       }
-
-      // Desktop / Browser Simulated Boss Rewarded Interstitial
-      const modal = document.getElementById('modal-ad-reward');
-      if (modal) {
-        const titleEl = document.getElementById('ad-reward-title');
-        const descEl = document.getElementById('ad-reward-desc');
-        const countEl = document.getElementById('ad-reward-countdown');
-        if (titleEl) titleEl.textContent = '👑 BOSS DEFEATED // REWARDED INTERSTITIAL';
-        if (descEl) descEl.textContent = 'Extracting Quantum Core Data (+250 ⚡ Boss Bonus)...';
-        if (countEl) countEl.textContent = 'BOSS BONUS IN 1.5s...';
-        modal.classList.remove('hidden');
-        sound.playSlowMoEnter();
-        let timeLeft = 15;
-        const interval = setInterval(() => {
-          timeLeft--;
-          if (timeLeft > 0) {
-            if (countEl) countEl.textContent = `BOSS BONUS IN ${(timeLeft / 10).toFixed(1)}s...`;
-          } else {
-            clearInterval(interval);
-            modal.classList.add('hidden');
-            window.onAdMobRewardGranted('boss_bonus');
-          }
-        }, 100);
-      } else {
-        window.onAdMobRewardGranted('boss_bonus');
-      }
+      showInAppRewardedTestAd('boss_bonus');
     };
 
     /**
@@ -3414,15 +3980,105 @@
     window.triggerInterstitialAd = function() {
       if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
         try {
-          window.AndroidAds.showInterstitialAd(ADMOB_CONFIG.INTERSTITIAL_ID);
+          window.AndroidAds.showInterstitialAd(ADMOB_CONFIG.getInterstitialId());
           return;
         } catch (e) {
           console.warn('AndroidAds.showInterstitialAd error:', e);
         }
       }
-      // Soft desktop toast
-      spawnFloatingText(VIRTUAL_WIDTH / 2, 200, '🎬 STAGE COMPLETE // AD BREAK', '#fbbf24');
+      showInAppInterstitialTestAd();
     };
+
+    function showInAppInterstitialTestAd() {
+      if (activeInterstitialTimerInterval) {
+        clearInterval(activeInterstitialTimerInterval);
+        activeInterstitialTimerInterval = null;
+      }
+
+      const modal = document.getElementById('modal-ad-interstitial');
+      const countEl = document.getElementById('ad-interstitial-countdown');
+      const closeBtn = document.getElementById('btn-close-interstitial-ad');
+      const dismissBtn = document.getElementById('btn-interstitial-dismiss');
+
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      sound.playSlowMoEnter();
+
+      let secondsLeft = 5;
+      if (countEl) countEl.textContent = `Skip in ${secondsLeft}s...`;
+      if (closeBtn) closeBtn.style.opacity = '0.4';
+
+      const closeAd = () => {
+        if (activeInterstitialTimerInterval) {
+          clearInterval(activeInterstitialTimerInterval);
+          activeInterstitialTimerInterval = null;
+        }
+        modal.classList.add('hidden');
+        sound.playSlowMoExit();
+      };
+
+      if (dismissBtn) dismissBtn.onclick = closeAd;
+      if (closeBtn) closeBtn.onclick = closeAd;
+
+      activeInterstitialTimerInterval = setInterval(() => {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+          if (countEl) countEl.textContent = `Skip in ${secondsLeft}s...`;
+        } else {
+          clearInterval(activeInterstitialTimerInterval);
+          activeInterstitialTimerInterval = null;
+          if (countEl) {
+            countEl.textContent = '✕ CLOSE AD';
+            countEl.style.cursor = 'pointer';
+            countEl.onclick = closeAd;
+          }
+          if (closeBtn) closeBtn.style.opacity = '1.0';
+        }
+      }, 1000);
+    }
+
+    // Diagnostics UI Updater for AdMob Test Suite
+    function updateAdMobDiagnosticsUI() {
+      const modeText = document.getElementById('admob-status-mode-text');
+      const modeBadge = document.getElementById('admob-mode-badge');
+      const toggleBtn = document.getElementById('btn-toggle-admob-mode');
+      const bridgeText = document.getElementById('admob-bridge-status-text');
+      const unitRewarded = document.getElementById('admob-unit-rewarded');
+      const unitInterstitial = document.getElementById('admob-unit-interstitial');
+      const unitBanner = document.getElementById('admob-unit-banner');
+      const explainer = document.getElementById('admob-mode-explainer');
+
+      const isTest = ADMOB_CONFIG.TEST_MODE;
+      if (modeText) {
+        modeText.textContent = isTest ? '🟢 TEST MODE ACTIVE (100% FILL GUARANTEED)' : '🔴 PRODUCTION MODE ACTIVE (PLAY STORE LIVE)';
+        modeText.style.color = isTest ? '#fbbf24' : '#ef4444';
+      }
+      if (modeBadge) {
+        modeBadge.textContent = isTest ? 'TEST' : 'PROD';
+        modeBadge.style.background = isTest ? '#fbbf24' : '#ef4444';
+        modeBadge.style.color = isTest ? '#000' : '#fff';
+      }
+      if (toggleBtn) {
+        toggleBtn.textContent = isTest ? '🔄 SWITCH TO PRODUCTION MODE' : '🔄 SWITCH TO TEST MODE (RECOMMENDED)';
+        toggleBtn.style.background = isTest ? 'linear-gradient(135deg, #ef4444, #b91c1c)' : 'linear-gradient(135deg, #f59e0b, #d97706)';
+        toggleBtn.style.color = isTest ? '#fff' : '#000';
+      }
+      if (explainer) {
+        explainer.textContent = isTest
+          ? 'Using official Google sample unit IDs. Eliminates "Error 3: No fill" during development and testing on mobile devices.'
+          : '⚠️ Using live Play Store IDs. Note: Google will NOT serve ads on unregistered test devices to protect against invalid traffic!';
+      }
+
+      if (bridgeText) {
+        const hasBridge = window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function';
+        bridgeText.textContent = hasBridge ? '🟢 AndroidAds Bridge Detected' : '🟡 In-App Test Ad Engine Active';
+        bridgeText.style.color = hasBridge ? '#34d399' : '#fbbf24';
+      }
+
+      if (unitRewarded) unitRewarded.textContent = ADMOB_CONFIG.getRewardedId();
+      if (unitInterstitial) unitInterstitial.textContent = ADMOB_CONFIG.getInterstitialId();
+      if (unitBanner) unitBanner.textContent = ADMOB_CONFIG.getBannerId();
+    }
 
     // --- GAME ENGINE CONSTANTS & STATE ---
     let VIRTUAL_WIDTH = 1200;
@@ -3551,7 +4207,7 @@
         category: 'blades',
         name: '⚡ Thunder Raikiri',
         desc: 'Slicing an enemy arcs yellow chain-lightning to 2 nearby enemies within 260px for 2 damage.',
-        cost: 1200,
+        cost: 2400,
         color: '#fbbf24'
       },
       {
@@ -3559,7 +4215,7 @@
         category: 'blades',
         name: '🔥 Inferno Dragon Blade',
         desc: 'Leaves burning napalm fire zones along your dash path and detonates TNT barrels from 120px away.',
-        cost: 2500,
+        cost: 5000,
         color: '#ff5500'
       },
       {
@@ -3567,7 +4223,7 @@
         category: 'blades',
         name: '❄️ Frost Zero Katana',
         desc: 'Dashing within 140px freezes enemies solid for 3.5s; slicing frozen enemies grants +15 ⚡ bonus shards.',
-        cost: 4200,
+        cost: 8400,
         color: '#38bdf8'
       },
       {
@@ -3575,7 +4231,7 @@
         category: 'blades',
         name: '🩸 Crimson Vampire Scythe',
         desc: 'Lifesteal dark-red blade! Every 4th kill restores +1 ❤️ Heart to the player and unleashes a wide crimson slash wave.',
-        cost: 6800,
+        cost: 13600,
         color: '#ff0055'
       },
       {
@@ -3583,7 +4239,7 @@
         category: 'blades',
         name: '🌀 Void Gravity Scythe',
         desc: 'Pulls all enemies within 180px into a purple gravity vortex during a dash and deals 2x slash damage.',
-        cost: 10500,
+        cost: 21000,
         color: '#a855f7'
       },
       {
@@ -3591,7 +4247,7 @@
         category: 'blades',
         name: '☀️ Solar EMP Greatsword',
         desc: 'Every dash triggers a golden EMP pulse that vaporizes enemy bullets within 160px and stuns Shield & Turret enemies.',
-        cost: 16000,
+        cost: 32000,
         color: '#facc15'
       },
       {
@@ -3599,7 +4255,7 @@
         category: 'blades',
         name: '🌌 Omega Singularity Blade [MYTHIC]',
         desc: 'Fires twin dimensional energy waves forward on dash, deals 3x damage, auto-deflects nearby bullets, and boosts Shard drops by +50%!',
-        cost: 25000,
+        cost: 50000,
         color: '#e879f9',
         mythic: true
       },
@@ -3610,7 +4266,7 @@
         category: 'suits',
         name: '🤖 Laser Bit Companion Drone',
         desc: 'Spawns a floating cyber drone that orbits you and automatically fires laser bolts at the nearest enemy every 1.3s!',
-        cost: 3500,
+        cost: 7000,
         color: '#38bdf8'
       },
       {
@@ -3618,7 +4274,7 @@
         category: 'suits',
         name: '👻 Phantom Shadow Suit',
         desc: 'Grants Double Air-Dash: dash TWICE in mid-air before touching ground or hitting an enemy!',
-        cost: 8000,
+        cost: 16000,
         color: '#c084fc'
       },
       {
@@ -3626,7 +4282,7 @@
         category: 'suits',
         name: '👑 Golden Shogun Exo-Armor',
         desc: 'Increases starting Max Health to 4 Hearts (❤️❤️❤️❤️), blocks the 1st hit per level free, and grants a golden aura.',
-        cost: 15000,
+        cost: 30000,
         color: '#fbbf24'
       },
 
@@ -4369,40 +5025,52 @@
         this.y = y;
         this.startX = x;
         this.startY = y;
-        this.radius = type.startsWith('boss') ? (type === 'boss_omega_architect' ? 40 : 34) : (type === 'heavy_mech' ? 24 : (type === 'air_bomber_drone' ? 20 : 18));
+        this.radius = type.startsWith('boss') ? (type === 'boss_chronos_nexus' ? 44 : (type === 'boss_void_singularity' || type === 'boss_omega_architect' ? 40 : 34)) : (type === 'heavy_mech' || type === 'phase_brute' ? 24 : (type === 'air_bomber_drone' || type === 'time_bomb_drone' ? 20 : 18));
         this.facing = opts.facing || 1;
-        this.isShieldActive = (type === 'shield' || type === 'heavy_mech');
+        this.isShieldActive = (type === 'shield' || type === 'heavy_mech' || type === 'phase_brute');
         this.frozenTimer = 0;
         this.stunTimer = 0;
         this.shootTimer = 1.0 + Math.random() * 1.5;
         this.isDead = false;
 
+        // Mission 4 Mechanics Properties
+        this.fuseTimer = type === 'time_bomb_drone' ? (opts.fuseTimer || 4.2) : 0;
+        this.phaseTimer = type === 'phase_brute' ? (Math.random() * 2.5) : 0;
+        this.warpTimer = 0;
+
         // Dynamic Movement System
-        this.moveType = opts.moveType || (type === 'patrol' || type === 'hover_drone' || type === 'chaser' || type === 'air_bomber_drone' ? type : (type.startsWith('boss') ? 'boss' : 'static'));
-        this.moveSpeed = opts.moveSpeed || (type === 'chaser' ? 120 : (type === 'hover_drone' ? 85 : (type === 'air_bomber_drone' ? 95 : 75)));
+        this.moveType = opts.moveType || (type === 'patrol' || type === 'hover_drone' || type === 'chaser' || type === 'air_bomber_drone' || type === 'time_bomb_drone' || type === 'shadow_mimic' || type === 'phase_brute' ? type : (type.startsWith('boss') ? 'boss' : 'static'));
+        this.moveSpeed = opts.moveSpeed || (type === 'time_bomb_drone' ? 145 : (type === 'shadow_mimic' ? 135 : (type === 'chaser' ? 120 : (type === 'hover_drone' ? 85 : (type === 'air_bomber_drone' ? 95 : 75)))));
         this.patrolMinX = opts.patrolMinX !== undefined ? opts.patrolMinX : (x - 130);
         this.patrolMaxX = opts.patrolMaxX !== undefined ? opts.patrolMaxX : (x + 130);
         this.floatAngle = Math.random() * Math.PI * 2;
         this.walkAnimTimer = 0;
 
         // Health Points Assignment
-        if (type === 'boss_drone') this.hp = 6;
-        else if (type === 'boss_shogun') this.hp = 10;
-        else if (type === 'boss_titan') this.hp = 15;
-        else if (type === 'boss_mantis') this.hp = 8;
-        else if (type === 'boss_phantom') this.hp = 12;
-        else if (type === 'boss_dread_drone') this.hp = 14;
-        else if (type === 'boss_shogun_neo') this.hp = 16;
-        else if (type === 'boss_void_dragon') this.hp = 18;
+        if (type === 'boss_chronos_nexus') this.hp = 60;
+        else if (type === 'boss_void_singularity') this.hp = 50;
+        else if (type === 'boss_glitch_reaper') this.hp = 45;
+        else if (type === 'boss_chrono_sentinel') this.hp = 40;
+        else if (type === 'boss_omega_architect') this.hp = 45;
+        else if (type === 'boss_overlord_flame') this.hp = 36;
+        else if (type === 'boss_vortex_dragon') this.hp = 32;
+        else if (type === 'boss_skyfall_carrier') this.hp = 28;
+        else if (type === 'boss_solaris_shogun') this.hp = 25;
         else if (type === 'boss_titan_prime') this.hp = 24;
         else if (type === 'boss_pyro_drake') this.hp = 20;
-        else if (type === 'boss_solaris_shogun') this.hp = 25;
-        else if (type === 'boss_skyfall_carrier') this.hp = 28;
-        else if (type === 'boss_vortex_dragon') this.hp = 32;
-        else if (type === 'boss_overlord_flame') this.hp = 36;
-        else if (type === 'boss_omega_architect') this.hp = 45;
+        else if (type === 'boss_void_dragon') this.hp = 18;
+        else if (type === 'boss_shogun_neo') this.hp = 16;
+        else if (type === 'boss_titan') this.hp = 15;
+        else if (type === 'boss_dread_drone') this.hp = 14;
+        else if (type === 'boss_phantom') this.hp = 12;
+        else if (type === 'boss_shogun') this.hp = 10;
+        else if (type === 'boss_mantis') this.hp = 8;
+        else if (type === 'boss_drone') this.hp = 6;
+        else if (type === 'phase_brute') this.hp = 4;
+        else if (type === 'shadow_mimic') this.hp = 3;
         else if (type === 'heavy_mech') this.hp = 3;
         else if (type === 'air_bomber_drone') this.hp = 3;
+        else if (type === 'time_bomb_drone') this.hp = 2;
         else if (type === 'chaser') this.hp = 2;
         else this.hp = 1;
 
@@ -4423,7 +5091,49 @@
         this.walkAnimTimer += dt * 8;
 
         // 1. DYNAMIC ENEMY MOVEMENT
-        if (this.moveType === 'patrol') {
+        if (this.type === 'time_bomb_drone') {
+          this.floatAngle += dt * 3.5;
+          this.fuseTimer -= dt;
+          if (player && player.hearts > 0) {
+            const dx = player.x - this.x;
+            const dy = player.y - this.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist > 15) {
+              this.facing = dx > 0 ? 1 : -1;
+              this.x += (dx / dist) * this.moveSpeed * dt;
+              this.y += (dy / dist) * (this.moveSpeed * 0.75) * dt;
+            }
+            if (dist < 32 || this.fuseTimer <= 0) {
+              this.die();
+              sound.playBomb();
+              addScreenShake(14);
+              spawnSparks(this.x, this.y, '#ff0055', 30);
+              if (dist < 75) {
+                player.takeDamage('Detonated by Time-Bomb Drone!');
+              }
+              return;
+            }
+          }
+        } else if (this.type === 'shadow_mimic') {
+          // Glitch Shadow Ninja - mirrors player and maintains tactical combat radius
+          this.walkAnimTimer += dt * 10;
+          if (player && player.hearts > 0) {
+            const targetX = player.x + (this.x < player.x ? -160 : 160);
+            const diffX = targetX - this.x;
+            this.facing = player.x > this.x ? 1 : -1;
+            if (Math.abs(diffX) > 20) {
+              this.x += (diffX > 0 ? 1 : -1) * this.moveSpeed * dt;
+            }
+            if (this.x < 50) this.x = 50;
+            if (this.x > currentWorldWidth - 50) this.x = currentWorldWidth - 50;
+          }
+        } else if (this.type === 'phase_brute') {
+          this.phaseTimer = (this.phaseTimer + dt) % 3.4;
+          this.isShieldActive = this.phaseTimer > 1.8;
+          this.x += this.facing * this.moveSpeed * dt;
+          if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; this.facing = 1; }
+          else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; this.facing = -1; }
+        } else if (this.moveType === 'patrol') {
           this.x += this.facing * this.moveSpeed * dt;
           if (this.x <= this.patrolMinX) {
             this.x = this.patrolMinX;
@@ -4473,7 +5183,43 @@
           }
         } else if (this.type.startsWith('boss')) {
           this.floatAngle += dt * 2.0;
-          if (this.type === 'boss_mantis') {
+          if (this.type === 'boss_chrono_sentinel') {
+            this.y = this.startY + Math.sin(this.floatAngle) * 35;
+            this.warpTimer = (this.warpTimer || 0) + dt;
+            if (this.warpTimer >= 3.6) {
+              this.warpTimer = 0;
+              this.x = this.patrolMinX + Math.random() * (this.patrolMaxX - this.patrolMinX);
+              sound.playDash();
+              spawnSparks(this.x, this.y, '#00f0ff', 24);
+              spawnFloatingText(this.x, this.y - 30, '⚡ CHRONO SHIFT', '#00f0ff');
+            }
+          } else if (this.type === 'boss_glitch_reaper') {
+            this.y = this.startY + Math.sin(this.floatAngle) * 40;
+            if (player && player.hearts > 0) {
+              const dir = player.x > this.x ? 1 : -1;
+              this.facing = dir;
+              this.x += dir * 90 * dt;
+              if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; }
+              else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; }
+            }
+          } else if (this.type === 'boss_void_singularity') {
+            this.y = this.startY + Math.sin(this.floatAngle) * 25;
+            this.x += this.facing * 50 * dt;
+            if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; }
+            else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; }
+            // Gravitational Singularity Pull
+            if (player && player.hearts > 0) {
+              const pDist = Math.hypot(player.x - this.x, player.y - this.y);
+              if (pDist < 520 && pDist > 50) {
+                player.x += (this.x - player.x) * (0.015 * dt * 60);
+              }
+            }
+          } else if (this.type === 'boss_chronos_nexus') {
+            this.y = this.startY + Math.sin(this.floatAngle) * 32;
+            this.x += this.facing * 60 * dt;
+            if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; }
+            else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; }
+          } else if (this.type === 'boss_mantis') {
             this.x += this.facing * 110 * dt;
             if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; this.facing = 1; }
             else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; this.facing = -1; }
@@ -4500,7 +5246,7 @@
         this.shootTimer -= dt;
         if (this.shootTimer <= 0 && player && player.hearts > 0) {
           this.fireProjectile();
-          this.shootTimer = this.type.startsWith('boss') ? 1.35 : (this.type === 'heavy_mech' || this.type === 'air_bomber_drone' ? 2.0 : 2.5);
+          this.shootTimer = this.type.startsWith('boss') ? 1.35 : (this.type === 'heavy_mech' || this.type === 'air_bomber_drone' || this.type === 'phase_brute' ? 2.0 : 2.5);
         }
       }
 
@@ -4540,7 +5286,32 @@
           });
         };
 
-        if (this.type === 'sniper') {
+        if (this.type === 'shadow_mimic') {
+          createBullet(baseAngle - 0.1, 460, 4.5, '#c084fc');
+          createBullet(baseAngle + 0.1, 460, 4.5, '#00f0ff');
+        } else if (this.type === 'phase_brute') {
+          createBullet(baseAngle, 400, 7.5, '#a855f7');
+        } else if (this.type === 'boss_chrono_sentinel') {
+          createBullet(baseAngle, 450, 7.5, '#00f0ff');
+          createBullet(baseAngle + Math.PI * 0.5, 450, 7.5, '#c084fc');
+          createBullet(baseAngle + Math.PI, 450, 7.5, '#00f0ff');
+          createBullet(baseAngle - Math.PI * 0.5, 450, 7.5, '#c084fc');
+        } else if (this.type === 'boss_glitch_reaper') {
+          createBullet(baseAngle - 0.22, 440, 7, '#ff0055');
+          createBullet(baseAngle, 470, 8.5, '#a855f7');
+          createBullet(baseAngle + 0.22, 440, 7, '#ff0055');
+        } else if (this.type === 'boss_void_singularity') {
+          for (let k = 0; k < 6; k++) {
+            createBullet(baseAngle + k * (Math.PI / 3), 390, 6.5, '#8b5cf6');
+          }
+          spawnFireball(this.x, this.y, Math.cos(baseAngle) * 350, Math.sin(baseAngle) * 350, 660);
+        } else if (this.type === 'boss_chronos_nexus') {
+          // Ultimate Grand Apex God Barrage
+          for (let k = -3; k <= 3; k++) {
+            createBullet(baseAngle + k * 0.18, 450, 7.5, k % 2 === 0 ? '#fbbf24' : '#00f0ff');
+          }
+          spawnFireball(this.x, this.y, Math.cos(baseAngle) * 360, Math.sin(baseAngle) * 360, 660);
+        } else if (this.type === 'sniper') {
           createBullet(baseAngle, 540, 4.5, '#ff0055');
         } else if (this.type === 'heavy_mech') {
           createBullet(baseAngle - 0.12, 380, 6, '#38bdf8');
@@ -4630,7 +5401,28 @@
 
       takeDamage(amount, vx, vy) {
         if (this.isDead || this.hp <= 0) return;
+
+        // Phase Brute quantum phase barrier block
+        if (this.type === 'phase_brute' && this.isShieldActive && this.frozenTimer <= 0 && this.stunTimer <= 0) {
+          sound.playDeflect();
+          triggerHaptic([30]);
+          spawnSparks(this.x, this.y, '#c084fc', 16);
+          spawnFloatingText(this.x, this.y - 25, '🛡️ PHASE BARRIER BLOCKED!', '#c084fc');
+          addScreenShake(4);
+          return;
+        }
+
         this.hp -= amount;
+
+        // Shadow Mimic reactive quantum teleport on damage
+        if (this.type === 'shadow_mimic' && this.hp > 0) {
+          const warpDir = Math.random() > 0.5 ? 1 : -1;
+          this.x = Math.max(80, Math.min(currentWorldWidth - 80, this.x + warpDir * 150));
+          sound.playDash();
+          spawnSparks(this.x, this.y, '#c084fc', 20);
+          spawnFloatingText(this.x, this.y - 25, '⚡ GLITCH WARP', '#c084fc');
+        }
+
         if (this.hp <= 0) {
           this.hp = 0;
           this.die();
@@ -4733,7 +5525,19 @@
         let bodyColor = '#1e1b4b';
         let strokeColor = '#a855f7';
         if (this.type.startsWith('boss')) {
-          if (this.type === 'boss_omega_architect') {
+          if (this.type === 'boss_chronos_nexus') {
+            bodyColor = '#0f172a';
+            strokeColor = '#fbbf24';
+          } else if (this.type === 'boss_void_singularity') {
+            bodyColor = '#2e1065';
+            strokeColor = '#a855f7';
+          } else if (this.type === 'boss_glitch_reaper') {
+            bodyColor = '#4c0519';
+            strokeColor = '#f43f5e';
+          } else if (this.type === 'boss_chrono_sentinel') {
+            bodyColor = '#083344';
+            strokeColor = '#06b6d4';
+          } else if (this.type === 'boss_omega_architect') {
             bodyColor = '#022c22';
             strokeColor = '#34d399';
           } else if (this.type === 'boss_vortex_dragon' || this.type === 'boss_skyfall_carrier') {
@@ -4746,6 +5550,15 @@
             bodyColor = '#831843';
             strokeColor = '#f43f5e';
           }
+        } else if (this.type === 'phase_brute') {
+          bodyColor = '#3b0764';
+          strokeColor = '#c084fc';
+        } else if (this.type === 'shadow_mimic') {
+          bodyColor = '#030712';
+          strokeColor = '#a855f7';
+        } else if (this.type === 'time_bomb_drone') {
+          bodyColor = '#450a0a';
+          strokeColor = '#ff0055';
         } else if (this.type === 'air_bomber_drone') {
           bodyColor = '#431407';
           strokeColor = '#ff5500';
@@ -4765,14 +5578,14 @@
         c.lineWidth = 2.5;
 
         // Animated movement indicators (hover thruster or walker feet or drone wings)
-        if (this.type === 'air_bomber_drone') {
+        if (this.type === 'air_bomber_drone' || this.type === 'time_bomb_drone') {
           c.save();
           // Drone wing turbines
-          c.fillStyle = '#ff5500';
+          c.fillStyle = this.type === 'time_bomb_drone' ? '#ff0055' : '#ff5500';
           c.fillRect(-this.radius - 8, -4, 6, 8);
           c.fillRect(this.radius + 2, -4, 6, 8);
-          // Blinking red beacon light
-          const blink = Math.sin(Date.now() * 0.01) > 0;
+          // Blinking beacon light
+          const blink = Math.sin(Date.now() * (this.type === 'time_bomb_drone' ? 0.02 : 0.01)) > 0;
           c.fillStyle = blink ? '#ff0055' : '#7f1d1d';
           c.beginPath();
           c.arc(0, -this.radius, 3, 0, Math.PI * 2);
@@ -4786,7 +5599,7 @@
           c.ellipse(0, this.radius + 4, this.radius * 0.8, 3, 0, 0, Math.PI * 2);
           c.stroke();
           c.restore();
-        } else if (this.moveType === 'patrol' || this.moveType === 'chaser') {
+        } else if (this.moveType === 'patrol' || this.moveType === 'chaser' || this.type === 'shadow_mimic' || this.type === 'phase_brute') {
           // Dynamic walking legs animation
           c.save();
           c.strokeStyle = strokeColor;
@@ -4801,26 +5614,60 @@
           c.restore();
         }
 
+        // Shadow Mimic chromatic glitch aura
+        if (this.type === 'shadow_mimic') {
+          c.save();
+          c.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+          c.lineWidth = 1.5;
+          c.beginPath();
+          c.arc(-2, 0, this.radius + 2, 0, Math.PI * 2);
+          c.stroke();
+          c.restore();
+        }
+
         c.beginPath();
         c.arc(0, 0, this.radius, 0, Math.PI * 2);
         c.fill();
         c.stroke();
 
         // Eye / Visor
-        c.fillStyle = '#ff0055';
+        c.fillStyle = this.type === 'shadow_mimic' ? '#00f0ff' : '#ff0055';
         c.fillRect(this.facing === 1 ? 2 : -8, -3, 6, 4);
+
+        // Time-Bomb Drone ticking digital fuse display
+        if (this.type === 'time_bomb_drone') {
+          c.save();
+          c.font = '900 10px monospace';
+          c.fillStyle = '#ff0055';
+          c.textAlign = 'center';
+          c.shadowColor = '#ff0055';
+          c.shadowBlur = 6;
+          c.fillText(`⏳ ${Math.max(0, this.fuseTimer).toFixed(1)}s`, 0, -this.radius - 22);
+          c.restore();
+        }
 
         // Heavy mech or Shield unit frontal barrier
         if (this.isShieldActive) {
           c.save();
-          c.strokeStyle = '#00f0ff';
-          c.lineWidth = 3;
-          c.shadowColor = '#00f0ff';
-          c.shadowBlur = 8;
-          c.beginPath();
-          const shieldAngle = this.facing === 1 ? 0 : Math.PI;
-          c.arc(0, 0, this.radius + 6, shieldAngle - 1.0, shieldAngle + 1.0);
-          c.stroke();
+          if (this.type === 'phase_brute') {
+            // Full 360-degree quantum phase shield
+            c.strokeStyle = '#c084fc';
+            c.lineWidth = 3;
+            c.shadowColor = '#c084fc';
+            c.shadowBlur = 10;
+            c.beginPath();
+            c.arc(0, 0, this.radius + 7, 0, Math.PI * 2);
+            c.stroke();
+          } else {
+            c.strokeStyle = '#00f0ff';
+            c.lineWidth = 3;
+            c.shadowColor = '#00f0ff';
+            c.shadowBlur = 8;
+            c.beginPath();
+            const shieldAngle = this.facing === 1 ? 0 : Math.PI;
+            c.arc(0, 0, this.radius + 6, shieldAngle - 1.0, shieldAngle + 1.0);
+            c.stroke();
+          }
           c.restore();
         }
 
@@ -4979,12 +5826,15 @@
       hazards = [];
 
       // Determine Mission & Stage
-      const isMission3 = lvl > 60;
+      const isMission4 = lvl > 90;
+      const isMission3 = lvl > 60 && lvl <= 90;
       const isMission2 = lvl > 30 && lvl <= 60;
-      let stage = Math.ceil(lvl / 10); // Stages 1 to 9
+      let stage = Math.ceil(lvl / 10); // Stages 1 to 12
 
-      // Set World Width for Side-Scrolling (Mission 2 & 3)
-      if (isMission3) {
+      // Set World Width for Side-Scrolling (Missions 2, 3, and 4)
+      if (isMission4) {
+        currentWorldWidth = (stage === 12) ? 3200 : ((stage === 11) ? 3000 : 2800);
+      } else if (isMission3) {
         currentWorldWidth = (stage === 9) ? 3000 : ((stage === 8) ? 2800 : 2600);
       } else if (isMission2) {
         currentWorldWidth = (stage === 6) ? 2800 : ((stage === 5) ? 2600 : 2400);
@@ -5279,7 +6129,7 @@
       // MISSION 3: INFERNO SKYFORGE & OMEGA WARZONE (LEVELS 61–90)
       // Side-Scrolling, Raining Fireballs ("Aag ke Gole") & Drone Air Attacks
       // =========================================================================
-      else {
+      else if (lvl <= 90) {
         // STAGE 7: VOLCANIC FOUNDRY & MAGMA HIGHWAY (LEVELS 61–70, 2600px wide)
         if (stage === 7) {
           platforms.push({ x: 260, y: 500, w: 260, h: 20 });
@@ -5463,11 +6313,202 @@
           }
         }
       }
+      // =========================================================================
+      // MISSION 4: CHRONO-VOID QUANTUM GLITCH MATRIX (LEVELS 91–120)
+      // High Difficulty, Shadow Mimics, Time-Bomb Drones, Phase Brutes & 4 Bosses
+      // =========================================================================
+      else {
+        // STAGE 10: QUANTUM GLITCH MATRIX (LEVELS 91–100, 2800px wide)
+        if (stage === 10) {
+          platforms.push({ x: 240, y: 500, w: 260, h: 20 });
+          platforms.push({ x: 620, y: 370, w: 260, h: 20 });
+          platforms.push({ x: 1000, y: 490, w: 260, h: 20 });
+          platforms.push({ x: 1380, y: 350, w: 300, h: 20 });
+          platforms.push({ x: 1780, y: 490, w: 260, h: 20 });
+          platforms.push({ x: 2160, y: 370, w: 260, h: 20 });
+          platforms.push({ x: 2500, y: 480, w: 240, h: 20 });
+
+          hazards.push(new Hazard('jump_pad', 200, 660));
+          hazards.push(new Hazard('jump_pad', 950, 660));
+          hazards.push(new Hazard('jump_pad', 1700, 660));
+          hazards.push(new Hazard('jump_pad', 2400, 660));
+          hazards.push(new Hazard('grapple_orb', 620, 170));
+          hazards.push(new Hazard('grapple_orb', 1380, 150));
+          hazards.push(new Hazard('grapple_orb', 2160, 170));
+          hazards.push(new Hazard('portal', 140, 440, { color: '#c084fc' }));
+          hazards.push(new Hazard('portal', 2680, 440, { color: '#00f0ff' }));
+
+          if (lvl === 91) {
+            // Level 91: Mission 4 Intro - 3 enemies: 1 Shadow Mimic, 1 Time-Bomb Drone, 1 Grunt
+            enemies.push(new Enemy('shadow_mimic', 850, 620, { moveSpeed: 110 }));
+            enemies.push(new Enemy('time_bomb_drone', 1500, 260, { fuseTimer: 4.8, moveSpeed: 120 }));
+            enemies.push(new Enemy('grunt', 2100, 620, { moveType: 'patrol', patrolMinX: 2000, patrolMaxX: 2200 }));
+          } else if (lvl === 92) {
+            enemies.push(new Enemy('shadow_mimic', 700, 620, { moveSpeed: 115 }));
+            enemies.push(new Enemy('time_bomb_drone', 1300, 240, { fuseTimer: 4.6, moveSpeed: 130 }));
+            enemies.push(new Enemy('shadow_mimic', 1900, 620, { moveSpeed: 115 }));
+            enemies.push(new Enemy('heavy_mech', 2400, 450, { moveType: 'patrol', patrolMinX: 2300, patrolMaxX: 2500 }));
+          } else if (lvl === 93) {
+            enemies.push(new Enemy('phase_brute', 650, 620, { patrolMinX: 550, patrolMaxX: 750 }));
+            enemies.push(new Enemy('shadow_mimic', 1200, 620, { moveSpeed: 120 }));
+            enemies.push(new Enemy('time_bomb_drone', 1700, 220, { fuseTimer: 4.4, moveSpeed: 135 }));
+            enemies.push(new Enemy('shadow_mimic', 2200, 620, { moveSpeed: 120 }));
+          } else if (lvl === 94) {
+            enemies.push(new Enemy('phase_brute', 600, 620, { patrolMinX: 500, patrolMaxX: 700 }));
+            enemies.push(new Enemy('time_bomb_drone', 1100, 240, { fuseTimer: 4.2, moveSpeed: 140 }));
+            enemies.push(new Enemy('shadow_mimic', 1600, 620, { moveSpeed: 125 }));
+            enemies.push(new Enemy('phase_brute', 2050, 620, { patrolMinX: 1950, patrolMaxX: 2150 }));
+            enemies.push(new Enemy('chaser', 2500, 630, { moveType: 'chaser', moveSpeed: 135 }));
+          } else if (lvl === 95) {
+            // BOSS 95: CHRONO SENTINEL (40 HP)
+            enemies.push(new Enemy('boss_chrono_sentinel', 1400, 270, { patrolMinX: 850, patrolMaxX: 2000 }));
+            enemies.push(new Enemy('shadow_mimic', 650, 620, { moveSpeed: 120 }));
+            enemies.push(new Enemy('shadow_mimic', 2250, 620, { moveSpeed: 120 }));
+            enemies.push(new Enemy('time_bomb_drone', 1400, 180, { fuseTimer: 4.5, moveSpeed: 130 }));
+          } else if (lvl === 100) {
+            // Level 100: Quantum Gatekeeper Squad
+            enemies.push(new Enemy('phase_brute', 700, 620, { patrolMinX: 600, patrolMaxX: 800 }));
+            enemies.push(new Enemy('phase_brute', 2100, 620, { patrolMinX: 2000, patrolMaxX: 2200 }));
+            enemies.push(new Enemy('shadow_mimic', 1100, 620, { moveSpeed: 130 }));
+            enemies.push(new Enemy('shadow_mimic', 1700, 620, { moveSpeed: 130 }));
+            enemies.push(new Enemy('time_bomb_drone', 900, 240, { fuseTimer: 4.0, moveSpeed: 140 }));
+            enemies.push(new Enemy('time_bomb_drone', 1900, 240, { fuseTimer: 4.0, moveSpeed: 140 }));
+          } else {
+            const count = Math.min(5 + Math.floor((lvl - 90) * 0.6), 8);
+            const step = Math.floor(2200 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 300 + i * step;
+              const ey = 360 + (i % 3) * 60;
+              if (i % 3 === 0) {
+                enemies.push(new Enemy('shadow_mimic', ex, 620, { moveSpeed: 125 }));
+              } else if (i % 3 === 1) {
+                enemies.push(new Enemy('time_bomb_drone', ex, 200 + (i % 2) * 40, { fuseTimer: 4.2, moveSpeed: 140 }));
+              } else {
+                enemies.push(new Enemy('phase_brute', ex, ey, { patrolMinX: ex - 90, patrolMaxX: ex + 90 }));
+              }
+            }
+          }
+        }
+        // STAGE 11: SINGULARITY GRAVITY HORIZON (LEVELS 101–110, 3000px wide)
+        else if (stage === 11) {
+          platforms.push({ x: 220, y: 490, w: 280, h: 20 });
+          platforms.push({ x: 580, y: 350, w: 280, h: 20 });
+          platforms.push({ x: 960, y: 480, w: 280, h: 20 });
+          platforms.push({ x: 1350, y: 330, w: 340, h: 20 });
+          platforms.push({ x: 1800, y: 480, w: 280, h: 20 });
+          platforms.push({ x: 2200, y: 350, w: 280, h: 20 });
+          platforms.push({ x: 2600, y: 480, w: 280, h: 20 });
+
+          hazards.push(new Hazard('jump_pad', 220, 660));
+          hazards.push(new Hazard('jump_pad', 850, 660));
+          hazards.push(new Hazard('jump_pad', 1500, 660));
+          hazards.push(new Hazard('jump_pad', 2200, 660));
+          hazards.push(new Hazard('jump_pad', 2750, 660));
+          hazards.push(new Hazard('grapple_orb', 580, 160));
+          hazards.push(new Hazard('grapple_orb', 1350, 140));
+          hazards.push(new Hazard('grapple_orb', 2200, 160));
+          hazards.push(new Hazard('portal', 140, 440, { color: '#ff0055' }));
+          hazards.push(new Hazard('portal', 2860, 440, { color: '#fbbf24' }));
+
+          if (lvl === 105) {
+            // BOSS 105: GLITCH REAPER (45 HP)
+            enemies.push(new Enemy('boss_glitch_reaper', 1500, 260, { patrolMinX: 900, patrolMaxX: 2100 }));
+            enemies.push(new Enemy('shadow_mimic', 650, 620, { moveSpeed: 135 }));
+            enemies.push(new Enemy('shadow_mimic', 2350, 620, { moveSpeed: 135 }));
+            enemies.push(new Enemy('time_bomb_drone', 1100, 200, { fuseTimer: 4.0, moveSpeed: 145 }));
+            enemies.push(new Enemy('time_bomb_drone', 1900, 200, { fuseTimer: 4.0, moveSpeed: 145 }));
+            enemies.push(new Enemy('phase_brute', 1500, 620, { patrolMinX: 1350, patrolMaxX: 1650 }));
+          } else if (lvl === 110) {
+            // Level 110: Apex Singularity Vanguard
+            enemies.push(new Enemy('phase_brute', 650, 620, { patrolMinX: 550, patrolMaxX: 750 }));
+            enemies.push(new Enemy('phase_brute', 2350, 620, { patrolMinX: 2250, patrolMaxX: 2450 }));
+            enemies.push(new Enemy('shadow_mimic', 1050, 620, { moveSpeed: 140 }));
+            enemies.push(new Enemy('shadow_mimic', 1950, 620, { moveSpeed: 140 }));
+            enemies.push(new Enemy('time_bomb_drone', 800, 220, { fuseTimer: 3.8, moveSpeed: 150 }));
+            enemies.push(new Enemy('time_bomb_drone', 2200, 220, { fuseTimer: 3.8, moveSpeed: 150 }));
+            enemies.push(new Enemy('heavy_mech', 1500, 450, { moveType: 'patrol', patrolMinX: 1350, patrolMaxX: 1650 }));
+          } else {
+            const count = Math.min(6 + Math.floor((lvl - 100) * 0.5), 9);
+            const step = Math.floor(2350 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 280 + i * step;
+              const ey = 350 + (i % 3) * 60;
+              if (i % 4 === 0) {
+                enemies.push(new Enemy('shadow_mimic', ex, 620, { moveSpeed: 130 }));
+              } else if (i % 4 === 1) {
+                enemies.push(new Enemy('time_bomb_drone', ex, 180 + (i % 2) * 40, { fuseTimer: 4.0, moveSpeed: 145 }));
+              } else if (i % 4 === 2) {
+                enemies.push(new Enemy('phase_brute', ex, ey, { patrolMinX: ex - 90, patrolMaxX: ex + 90 }));
+              } else {
+                enemies.push(new Enemy('chaser', ex, 630, { moveType: 'chaser', moveSpeed: 140 }));
+              }
+            }
+          }
+        }
+        // STAGE 12: THE CHRONO-VOID APEX & GRAND NEXUS (LEVELS 111–120, 3200px wide)
+        else {
+          platforms.push({ x: 220, y: 500, w: 280, h: 20 });
+          platforms.push({ x: 580, y: 360, w: 280, h: 20 });
+          platforms.push({ x: 960, y: 480, w: 280, h: 20 });
+          platforms.push({ x: 1350, y: 320, w: 360, h: 20 });
+          platforms.push({ x: 1840, y: 480, w: 280, h: 20 });
+          platforms.push({ x: 2220, y: 360, w: 280, h: 20 });
+          platforms.push({ x: 2620, y: 480, w: 280, h: 20 });
+
+          hazards.push(new Hazard('jump_pad', 200, 660));
+          hazards.push(new Hazard('jump_pad', 900, 660));
+          hazards.push(new Hazard('jump_pad', 1600, 660));
+          hazards.push(new Hazard('jump_pad', 2300, 660));
+          hazards.push(new Hazard('jump_pad', 2900, 660));
+          hazards.push(new Hazard('grapple_orb', 580, 160));
+          hazards.push(new Hazard('grapple_orb', 1350, 130));
+          hazards.push(new Hazard('grapple_orb', 2220, 160));
+          hazards.push(new Hazard('portal', 140, 440, { color: '#00f0ff' }));
+          hazards.push(new Hazard('portal', 3050, 440, { color: '#fbbf24' }));
+
+          if (lvl === 115) {
+            // BOSS 115: VOID SINGULARITY (50 HP)
+            enemies.push(new Enemy('boss_void_singularity', 1600, 250, { patrolMinX: 950, patrolMaxX: 2250 }));
+            enemies.push(new Enemy('shadow_mimic', 750, 620, { moveSpeed: 140 }));
+            enemies.push(new Enemy('shadow_mimic', 2450, 620, { moveSpeed: 140 }));
+            enemies.push(new Enemy('time_bomb_drone', 1200, 180, { fuseTimer: 3.8, moveSpeed: 150 }));
+            enemies.push(new Enemy('time_bomb_drone', 2000, 180, { fuseTimer: 3.8, moveSpeed: 150 }));
+            enemies.push(new Enemy('phase_brute', 1050, 450, { patrolMinX: 950, patrolMaxX: 1150 }));
+            enemies.push(new Enemy('phase_brute', 2150, 450, { patrolMinX: 2050, patrolMaxX: 2250 }));
+          } else if (lvl === 120) {
+            // ULTIMATE GRAND FINALE LEVEL 120: THE QUANTUM NEXUS GOD / GRAND MASTER CHRONOS (60 HP)
+            enemies.push(new Enemy('boss_chronos_nexus', 1600, 260, { patrolMinX: 900, patrolMaxX: 2300 }));
+            enemies.push(new Enemy('shadow_mimic', 650, 620, { moveSpeed: 140 }));
+            enemies.push(new Enemy('shadow_mimic', 2550, 620, { moveSpeed: 140 }));
+            enemies.push(new Enemy('time_bomb_drone', 1100, 180, { fuseTimer: 3.6, moveSpeed: 155 }));
+            enemies.push(new Enemy('time_bomb_drone', 2100, 180, { fuseTimer: 3.6, moveSpeed: 155 }));
+            enemies.push(new Enemy('phase_brute', 950, 460, { patrolMinX: 850, patrolMaxX: 1050 }));
+            enemies.push(new Enemy('phase_brute', 2250, 460, { patrolMinX: 2150, patrolMaxX: 2350 }));
+            enemies.push(new Enemy('heavy_mech', 1600, 460, { moveType: 'patrol', patrolMinX: 1450, patrolMaxX: 1750 }));
+          } else {
+            const count = Math.min(7 + Math.floor((lvl - 110) * 0.5), 11);
+            const step = Math.floor(2500 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 280 + i * step;
+              const ey = 350 + (i % 3) * 60;
+              if (i % 4 === 0) {
+                enemies.push(new Enemy('shadow_mimic', ex, 620, { moveSpeed: 135 }));
+              } else if (i % 4 === 1) {
+                enemies.push(new Enemy('time_bomb_drone', ex, 180 + (i % 2) * 40, { fuseTimer: 3.8, moveSpeed: 150 }));
+              } else if (i % 4 === 2) {
+                enemies.push(new Enemy('phase_brute', ex, ey, { patrolMinX: ex - 90, patrolMaxX: ex + 90 }));
+              } else {
+                enemies.push(new Enemy('chaser', ex, 630, { moveType: 'chaser', moveSpeed: 145 }));
+              }
+            }
+          }
+        }
+      }
     }
 
     function startCampaignLevel(lvl) {
       if (lvl < 1) lvl = 1;
-      if (lvl > 90) lvl = 90;
+      if (lvl > 120) lvl = 120;
       currentLevelIndex = lvl;
       gameMode = 'CAMPAIGN';
       gameState = 'PLAYING';
@@ -5477,7 +6518,8 @@
       // Sync active mission & stage trackers
       if (lvl <= 30) currentSelectedMission = 1;
       else if (lvl <= 60) currentSelectedMission = 2;
-      else currentSelectedMission = 3;
+      else if (lvl <= 90) currentSelectedMission = 3;
+      else currentSelectedMission = 4;
 
       currentSelectedStage = Math.ceil(lvl / 10);
       currentSideMission = currentSelectedMission;
@@ -5535,26 +6577,37 @@
       if (!enemies || enemies.length === 0) return;
       if (totalEnemiesInLevel <= 0) return;
 
-      // Strictly verify that every single enemy is completely destroyed (no survivors)
-      const activeEnemies = enemies.filter(e => !e.isDead && e.hp > 0);
-      if (activeEnemies.length === 0 && enemiesDefeatedInLevel >= totalEnemiesInLevel) {
-        isVictorySequenceRunning = true;
-        
-        // Satisfying Final Kill Slow-Mo Cinematic Flash
-        isFinalKillZoom = true;
-        if (cinematicVignette) cinematicVignette.classList.add('active');
-        sound.playSlowMoExit();
-        triggerHaptic([40, 60]);
-        addScreenShake(14);
-        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, player ? player.y - 45 : 300, '💥 ALL ENEMIES DESTROYED! LEVEL CLEAR!', '#10b981');
-
-        setTimeout(() => {
-          isFinalKillZoom = false;
-          if (cinematicVignette) cinematicVignette.classList.remove('active');
-          isVictorySequenceRunning = false;
-          executeLevelVictory();
-        }, 700);
+      // STRICT REQUIREMENT: User can ONLY win when EVERY enemy in the level is dead
+      const aliveEnemies = enemies.filter(e => !e.isDead || e.hp > 0);
+      if (aliveEnemies.length > 0) {
+        // At least 1 enemy is still alive: Victory cannot trigger
+        return;
       }
+
+      if (enemiesDefeatedInLevel < totalEnemiesInLevel) {
+        return;
+      }
+
+      // Final confirmation: every enemy in the array must be completely dead
+      const allDead = enemies.every(e => e.isDead && e.hp <= 0);
+      if (!allDead) return;
+
+      isVictorySequenceRunning = true;
+      
+      // Satisfying Final Kill Slow-Mo Cinematic Flash
+      isFinalKillZoom = true;
+      if (cinematicVignette) cinematicVignette.classList.add('active');
+      sound.playSlowMoExit();
+      triggerHaptic([40, 60]);
+      addScreenShake(14);
+      spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, player ? player.y - 45 : 300, '💥 ALL ENEMIES DESTROYED! LEVEL CLEAR!', '#10b981');
+
+      setTimeout(() => {
+        isFinalKillZoom = false;
+        if (cinematicVignette) cinematicVignette.classList.remove('active');
+        isVictorySequenceRunning = false;
+        executeLevelVictory();
+      }, 950);
     }
 
     function executeLevelVictory() {
@@ -5567,9 +6620,9 @@
       lastLevelClearReward = Math.round(40 * currentLevelIndex * greed);
       progression.addShards(lastLevelClearReward);
 
-      // Advance level unlock up to 90
+      // Advance level unlock up to 120
       if (currentLevelIndex >= progression.data.highestLevelReached) {
-        progression.data.highestLevelReached = Math.min(90, currentLevelIndex + 1);
+        progression.data.highestLevelReached = Math.min(120, currentLevelIndex + 1);
         progression.save();
       }
 
@@ -5579,20 +6632,28 @@
         progression.save();
       }
 
-      if (currentLevelIndex === 90) {
-        // Grand Finale: All 90 levels conquered!
-        document.getElementById('allclear-header').textContent = 'ALL 3 MISSIONS CONQUERED';
-        document.getElementById('allclear-title').textContent = 'CYBER SECTOR SECURED (90/90)';
-        document.getElementById('allclear-desc').textContent = 'You conquered all 90 handcrafted campaign levels across Missions 1, 2, and 3, neutralized every enemy across all sectors, and defeated the Grand Architect Omega God!';
-        document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 90/90 (Missions 1, 2 & 3)';
+      if (currentLevelIndex === 120) {
+        // Grand Finale: All 120 levels conquered!
+        document.getElementById('allclear-header').textContent = 'ALL 4 MISSIONS CONQUERED';
+        document.getElementById('allclear-title').textContent = 'COSMIC MATRIX RESTORED (120/120)';
+        document.getElementById('allclear-desc').textContent = 'You conquered all 120 handcrafted campaign levels across Missions 1, 2, 3, and 4, neutralized every single enemy across all sectors, and defeated the Quantum Nexus God!';
+        document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 120/120 (Missions 1, 2, 3 & 4)';
         document.getElementById('final-total-shards').textContent = progression.data.shards;
         modalAllClear.classList.remove('hidden');
+      } else if (currentLevelIndex === 90) {
+        // Mission 3 Complete
+        document.getElementById('victory-title').textContent = 'MISSION 3 COMPLETE (90/90)!';
+        document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
+        document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
+        document.getElementById('btn-claim-3x-shards').disabled = false;
+        modalVictory.classList.remove('hidden');
       } else if (currentLevelIndex === 60) {
         // Mission 2 Complete
         document.getElementById('victory-title').textContent = 'MISSION 2 COMPLETE (60/60)!';
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       } else if (currentLevelIndex === 30) {
@@ -5600,15 +6661,15 @@
         document.getElementById('victory-title').textContent = 'MISSION 1 COMPLETE (30/30)!';
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       } else {
-        const missionNum = currentLevelIndex <= 30 ? 1 : (currentLevelIndex <= 60 ? 2 : 3);
+        const missionNum = currentLevelIndex <= 30 ? 1 : (currentLevelIndex <= 60 ? 2 : (currentLevelIndex <= 90 ? 3 : 4));
         document.getElementById('victory-title').textContent = `M${missionNum} · LEVEL ${currentLevelIndex} CLEARED`;
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 3X SHARDS (+${lastLevelClearReward * 2} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       }
@@ -5638,11 +6699,12 @@
     }
 
     function updateHUD() {
-      if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/90`;
+      if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/120`;
       if (hudSectorLabel) {
         if (currentLevelIndex <= 30) hudSectorLabel.textContent = 'MISSION 1';
         else if (currentLevelIndex <= 60) hudSectorLabel.textContent = 'MISSION 2 (SCROLL)';
-        else hudSectorLabel.textContent = 'MISSION 3 (INFERNO)';
+        else if (currentLevelIndex <= 90) hudSectorLabel.textContent = 'MISSION 3 (INFERNO)';
+        else hudSectorLabel.textContent = 'MISSION 4 (CHRONO-VOID)';
       }
       if (hudComboText) hudComboText.textContent = `x${airCombo}`;
       if (hudShardsText) hudShardsText.textContent = `${progression.data.shards} ⚡`;
@@ -5650,7 +6712,7 @@
       if (hudTargetsCount) {
         if (enemies && enemies.length > 0) {
           const total = enemies.length;
-          const alive = enemies.filter(e => !e.isDead && e.hp > 0).length;
+          const alive = enemies.filter(e => !e.isDead || e.hp > 0).length;
           hudTargetsCount.textContent = `${alive}/${total}`;
           hudTargetsCount.style.color = alive === 0 ? '#10b981' : (alive === 1 ? '#fbbf24' : '#ff0055');
           const hudTargetsCard = document.getElementById('hud-targets-card');
@@ -5784,7 +6846,7 @@
           if (item.id === 'shard_greed') currentLvl = progression.data.shardGreedLevel || 0;
 
           const isMax = currentLvl >= 5;
-          const nextCost = Math.round(600 * Math.pow(2, currentLvl)); // 600, 1200, 2400, 4800, 9600 ⚡
+          const nextCost = Math.round(1200 * Math.pow(2, currentLvl)); // 1200, 2400, 4800, 9600, 19200 ⚡
 
           // 5-segment progress bar
           let segsHtml = '';
@@ -5976,20 +7038,23 @@
       }
     };
 
-    // --- LEVEL SELECT SYSTEM WITH MISSION 1 (1–30) & MISSION 2 (31–60) ---
+    // --- LEVEL SELECT SYSTEM WITH MISSIONS 1–4 (LEVELS 1–120) ---
     function renderLevelSelect(stage = currentSelectedStage) {
       currentSelectedStage = stage;
       if (stage <= 3) currentSelectedMission = 1;
       else if (stage <= 6) currentSelectedMission = 2;
-      else currentSelectedMission = 3;
+      else if (stage <= 9) currentSelectedMission = 3;
+      else currentSelectedMission = 4;
 
       // Update Mission Tab styles
       const tabM1 = document.getElementById('tab-mission-1');
       const tabM2 = document.getElementById('tab-mission-2');
       const tabM3 = document.getElementById('tab-mission-3');
+      const tabM4 = document.getElementById('tab-mission-4');
       if (tabM1) tabM1.classList.toggle('active', currentSelectedMission === 1);
       if (tabM2) tabM2.classList.toggle('active', currentSelectedMission === 2);
       if (tabM3) tabM3.classList.toggle('active', currentSelectedMission === 3);
+      if (tabM4) tabM4.classList.toggle('active', currentSelectedMission === 4);
 
       // Re-populate stage tabs container based on active mission
       const stageTabsContainer = document.getElementById('modal-stage-tabs-container');
@@ -6000,8 +7065,10 @@
           stageList = [{ stage: 1, label: 'STAGE 1 (1–10)' }, { stage: 2, label: 'STAGE 2 (11–20)' }, { stage: 3, label: 'STAGE 3 (21–30)' }];
         } else if (currentSelectedMission === 2) {
           stageList = [{ stage: 4, label: 'STAGE 4 (31–40)' }, { stage: 5, label: 'STAGE 5 (41–50)' }, { stage: 6, label: 'STAGE 6 (51–60)' }];
-        } else {
+        } else if (currentSelectedMission === 3) {
           stageList = [{ stage: 7, label: 'STAGE 7 (61–70)' }, { stage: 8, label: 'STAGE 8 (71–80)' }, { stage: 9, label: 'STAGE 9 (81–90)' }];
+        } else {
+          stageList = [{ stage: 10, label: 'STAGE 10 (91–100)' }, { stage: 11, label: 'STAGE 11 (101–110)' }, { stage: 12, label: 'STAGE 12 (111–120)' }];
         }
 
         stageList.forEach(item => {
@@ -6031,7 +7098,10 @@
         else if (stage === 6) descEl.textContent = 'Mission 2 · Stage 6: Dreadnought Prime Citadel (Levels 51–60) // Heavy Mechs & Titan Prime';
         else if (stage === 7) descEl.textContent = 'Mission 3 · Stage 7: Volcanic Foundry (Levels 61–70) // Raining Fireballs & Drone Air Attacks';
         else if (stage === 8) descEl.textContent = 'Mission 3 · Stage 8: Skyforge Drone Hive (Levels 71–80) // Aerial Drone Strikes & Carrier Boss';
-        else descEl.textContent = 'Mission 3 · Stage 9: Apocalyptic Cyber Core (Levels 81–90) // Mega Fireballs & Grand Architect Omega';
+        else if (stage === 9) descEl.textContent = 'Mission 3 · Stage 9: Apocalyptic Cyber Core (Levels 81–90) // Mega Fireballs & Grand Architect Omega';
+        else if (stage === 10) descEl.textContent = 'Mission 4 · Stage 10: Quantum Glitch Matrix (Levels 91–100) // Shadow Mimics & Chrono Sentinel';
+        else if (stage === 11) descEl.textContent = 'Mission 4 · Stage 11: Singularity Gravity Rift (Levels 101–110) // Phase Brutes & Glitch Reaper';
+        else descEl.textContent = 'Mission 4 · Stage 12: The Chrono-Void Apex (Levels 111–120) // Time-Bomb Drones, Void Singularity & Grand Nexus God';
       }
 
       for (let i = start; i <= end; i++) {
@@ -6066,6 +7136,9 @@
     document.getElementById('tab-mission-3')?.addEventListener('click', () => {
       renderLevelSelect(7);
     });
+    document.getElementById('tab-mission-4')?.addEventListener('click', () => {
+      renderLevelSelect(10);
+    });
 
     // --- REWARDED AD BUTTON HOOKS ---
     // 1. Armory Rewarded Ad Chest (+600 ⚡)
@@ -6073,9 +7146,9 @@
       triggerRewardedAd('shop_600');
     });
 
-    // 2. Victory Modal Claim 3X Shards
-    document.getElementById('btn-claim-3x-shards').addEventListener('click', () => {
-      triggerRewardedAd('triple_win');
+    // 2. Victory Modal Claim 2X Shards (10-second Rewarded Ad)
+    document.getElementById('btn-claim-3x-shards')?.addEventListener('click', () => {
+      triggerRewardedAd('double_win');
     });
 
     // 3. Game Over Revive + Full HP & Shield
@@ -6242,7 +7315,8 @@
       currentSideStage = stage;
       if (stage <= 3) currentSideMission = 1;
       else if (stage <= 6) currentSideMission = 2;
-      else currentSideMission = 3;
+      else if (stage <= 9) currentSideMission = 3;
+      else currentSideMission = 4;
 
       const container = document.getElementById('side-levels-grid');
       if (!container) return;
@@ -6253,15 +7327,17 @@
       if (resumeNumEl) resumeNumEl.textContent = highestUnlocked;
 
       const progressTextEl = document.getElementById('side-levels-progress-text');
-      if (progressTextEl) progressTextEl.textContent = `Highest: LVL ${highestUnlocked} / 90`;
+      if (progressTextEl) progressTextEl.textContent = `Highest: LVL ${highestUnlocked} / 120`;
 
       // Update side mission tabs
       const sideM1 = document.getElementById('side-m-btn-1');
       const sideM2 = document.getElementById('side-m-btn-2');
       const sideM3 = document.getElementById('side-m-btn-3');
+      const sideM4 = document.getElementById('side-m-btn-4');
       if (sideM1) sideM1.classList.toggle('active', currentSideMission === 1);
       if (sideM2) sideM2.classList.toggle('active', currentSideMission === 2);
       if (sideM3) sideM3.classList.toggle('active', currentSideMission === 3);
+      if (sideM4) sideM4.classList.toggle('active', currentSideMission === 4);
 
       // Re-populate side stage tabs
       const stageTabsContainer = document.getElementById('side-stage-tabs-container');
@@ -6272,8 +7348,10 @@
           stageList = [{ stage: 1, label: 'STAGE 1 (1–10)' }, { stage: 2, label: 'STAGE 2 (11–20)' }, { stage: 3, label: 'STAGE 3 (21–30)' }];
         } else if (currentSideMission === 2) {
           stageList = [{ stage: 4, label: 'STAGE 4 (31–40)' }, { stage: 5, label: 'STAGE 5 (41–50)' }, { stage: 6, label: 'STAGE 6 (51–60)' }];
-        } else {
+        } else if (currentSideMission === 3) {
           stageList = [{ stage: 7, label: 'STAGE 7 (61–70)' }, { stage: 8, label: 'STAGE 8 (71–80)' }, { stage: 9, label: 'STAGE 9 (81–90)' }];
+        } else {
+          stageList = [{ stage: 10, label: 'STAGE 10 (91–100)' }, { stage: 11, label: 'STAGE 11 (101–110)' }, { stage: 12, label: 'STAGE 12 (111–120)' }];
         }
 
         stageList.forEach(item => {
@@ -6298,7 +7376,10 @@
         else if (stage === 6) descEl.textContent = 'Mission 2 · Stage 6: Dreadnought Prime Citadel (Levels 51–60) · Titan Prime & Heavy Mechs';
         else if (stage === 7) descEl.textContent = 'Mission 3 · Stage 7: Volcanic Foundry (Levels 61–70) · Raining Fireballs & Drone Air Attacks';
         else if (stage === 8) descEl.textContent = 'Mission 3 · Stage 8: Skyforge Drone Hive (Levels 71–80) · Aerial Drone Strikes & Carrier Boss';
-        else descEl.textContent = 'Mission 3 · Stage 9: Apocalyptic Cyber Core (Levels 81–90) · Mega Fireballs & Grand Architect Omega';
+        else if (stage === 9) descEl.textContent = 'Mission 3 · Stage 9: Apocalyptic Cyber Core (Levels 81–90) · Mega Fireballs & Grand Architect Omega';
+        else if (stage === 10) descEl.textContent = 'Mission 4 · Stage 10: Quantum Glitch Matrix (Levels 91–100) · Shadow Mimics & Chrono Sentinel';
+        else if (stage === 11) descEl.textContent = 'Mission 4 · Stage 11: Singularity Gravity Rift (Levels 101–110) · Phase Brutes & Glitch Reaper';
+        else descEl.textContent = 'Mission 4 · Stage 12: Chrono-Void Nexus (Levels 111–120) · Time-Bomb Drones, Void Singularity & Grand Nexus God';
       }
 
       const start = (stage - 1) * 10 + 1;
@@ -6339,6 +7420,9 @@
     document.getElementById('side-m-btn-3')?.addEventListener('click', () => {
       renderSideLevels(7);
     });
+    document.getElementById('side-m-btn-4')?.addEventListener('click', () => {
+      renderSideLevels(10);
+    });
 
     document.getElementById('btn-side-resume-level')?.addEventListener('click', () => {
       closeSideMenu();
@@ -6353,6 +7437,7 @@
       updateSideMenuProfile();
       renderSideWeapons();
       renderSideLevels(currentSideStage || 1);
+      updateAdMobDiagnosticsUI();
       sideMenuDrawer.classList.add('active');
       sideMenuOverlay.classList.add('active');
     }
@@ -6438,6 +7523,8 @@
         if (pane) pane.classList.add('active');
         if (target === 'levels') {
           renderSideLevels(currentSideStage || 1);
+        } else if (target === 'ads') {
+          updateAdMobDiagnosticsUI();
         }
       });
     });
@@ -6470,14 +7557,91 @@
         if (tabLevels) tabLevels.classList.add('active');
         const paneLevels = document.getElementById('pane-levels');
         if (paneLevels) paneLevels.classList.add('active');
-        const st = Math.min(3, Math.max(1, Math.ceil((progression.data.highestLevelReached || 1) / 10)));
+        const st = Math.min(12, Math.max(1, Math.ceil((progression.data.highestLevelReached || 1) / 10)));
         renderSideLevels(st);
       });
     }
 
+    // --- ADMOB TEST SUITE EVENT LISTENERS ---
+    function initAdMobTestSuiteControls() {
+      // 1. Mode Switcher (TEST MODE <-> PROD MODE)
+      document.getElementById('btn-toggle-admob-mode')?.addEventListener('click', () => {
+        sound.playDeflect();
+        triggerHaptic([20]);
+        ADMOB_CONFIG.setTestMode(!ADMOB_CONFIG.TEST_MODE);
+        spawnFloatingText(
+          VIRTUAL_WIDTH / 2, 220,
+          ADMOB_CONFIG.TEST_MODE ? '🟢 ADMOB: TEST MODE (100% FILL)' : '🔴 ADMOB: PROD MODE (LIVE IDS)',
+          ADMOB_CONFIG.TEST_MODE ? '#fbbf24' : '#ef4444'
+        );
+      });
+
+      // 2. 1-Click Test Rewarded Ad (10s Sponsor / 2X Bounty)
+      document.getElementById('btn-test-ad-rewarded-10s')?.addEventListener('click', () => {
+        sound.resume();
+        triggerRewardedAd('double_win');
+      });
+
+      // 3. 1-Click Test Shop Ad Chest (+600 Shards)
+      document.getElementById('btn-test-ad-chest')?.addEventListener('click', () => {
+        sound.resume();
+        triggerRewardedAd('shop_600');
+      });
+
+      // 4. 1-Click Test Interstitial Ad (5s Fullscreen)
+      document.getElementById('btn-test-ad-interstitial')?.addEventListener('click', () => {
+        sound.resume();
+        triggerInterstitialAd();
+      });
+
+      // 5. 1-Click Toggle Test Banner (320x50)
+      document.getElementById('btn-test-ad-banner')?.addEventListener('click', () => {
+        sound.resume();
+        const banner = document.getElementById('admob-test-banner');
+        const isHidden = !banner || banner.classList.contains('hidden');
+        setBannerVisibility(isHidden);
+        sound.playDeflect();
+        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, isHidden ? '📢 320x50 BANNER: SHOWN' : '📢 320x50 BANNER: HIDDEN', '#00f0ff');
+      });
+
+      // 6. 1-Click Test Boss Bonus (+250 Shards)
+      document.getElementById('btn-test-ad-boss')?.addEventListener('click', () => {
+        sound.resume();
+        triggerRewardedInterstitialAd();
+      });
+
+      // 7. Banner Click Reaction
+      document.getElementById('btn-test-banner-click')?.addEventListener('click', () => {
+        sound.playReward();
+        triggerHaptic([20, 30]);
+        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, '📢 TEST AD BANNER CLICKED', '#fbbf24');
+      });
+
+      // 8. In-App Video & Interstitial Install Click Reaction
+      document.getElementById('btn-ad-reward-install')?.addEventListener('click', () => {
+        sound.playReward();
+        triggerHaptic([20, 30]);
+        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, '🚀 TEST AD: SIMULATING APP INSTALL', '#10b981');
+      });
+
+      document.getElementById('btn-interstitial-install')?.addEventListener('click', () => {
+        sound.playReward();
+        triggerHaptic([20, 30]);
+        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, '🚀 TEST AD: SIMULATING APP INSTALL', '#10b981');
+      });
+
+      // 9. Sound mute toggle inside Rewarded Video Ad
+      document.getElementById('ad-reward-mute-btn')?.addEventListener('click', (e) => {
+        const isMuted = sound.toggleMute();
+        e.currentTarget.textContent = isMuted ? '🔇' : '🔊';
+      });
+
+      updateAdMobDiagnosticsUI();
+    }
+
     function updateSideMenuProfile() {
       document.getElementById('profile-shards-display').textContent = `${progression.data.shards} ⚡ SHARDS`;
-      document.getElementById('profile-stat-campaign').textContent = `LVL ${progression.data.highestLevelReached || 1} / 30`;
+      document.getElementById('profile-stat-campaign').textContent = `LVL ${progression.data.highestLevelReached || 1} / 120`;
       document.getElementById('profile-stat-blades').textContent = `${progression.data.unlockedBlades.length} / 8`;
       document.getElementById('profile-stat-equipped-blade').textContent = progression.getEffectiveBlade().toUpperCase();
       document.getElementById('profile-stat-suit').textContent = progression.data.equippedSuit.toUpperCase();
@@ -6732,7 +7896,8 @@
       document.querySelectorAll('.side-pane').forEach(p => p.classList.remove('active'));
       document.getElementById('side-tab-levels')?.classList.add('active');
       document.getElementById('pane-levels')?.classList.add('active');
-      renderSideLevels(Math.min(90, progression.data.highestLevelReached));
+      const st = Math.min(12, Math.ceil((progression.data.highestLevelReached || 1) / 10));
+      renderSideLevels(st);
     });
 
     // Mobile Phone Orientation Assistant buttons
@@ -7119,7 +8284,7 @@
 
         // Continuous check to guarantee level completes ONLY when all enemies are confirmed destroyed
         if (gameState === 'PLAYING' && totalEnemiesInLevel > 0 && enemies && enemies.length > 0) {
-          const aliveHostiles = enemies.filter(e => !e.isDead && e.hp > 0).length;
+          const aliveHostiles = enemies.filter(e => !e.isDead || e.hp > 0).length;
           if (aliveHostiles === 0 && enemiesDefeatedInLevel >= totalEnemiesInLevel) {
             checkVictoryCondition();
           }
@@ -7130,8 +8295,8 @@
           if (fireTrails[i].life <= 0) fireTrails.splice(i, 1);
         }
 
-        // Mission 3 Inferno Environmental Fireballs & Tactical Drone Air Attacks
-        if (currentLevelIndex > 60 && gameState === 'PLAYING') {
+        // Mission 3 Inferno Environmental Fireballs & Tactical Drone Air Attacks (Levels 61-90)
+        if (currentLevelIndex > 60 && currentLevelIndex <= 90 && gameState === 'PLAYING') {
           const isIntroMission3 = currentLevelIndex <= 65;
 
           // Fireball Rain Spawner ("Aag ke Gole") - Peaceful on 61-63, gentle on 64-65, full on 66+
@@ -7166,6 +8331,19 @@
                 }
               }, 1200);
             }
+          }
+        }
+
+        // Mission 4 Chrono-Void Glitch Anomaly Bursts (Levels 91-120)
+        if (currentLevelIndex > 90 && gameState === 'PLAYING') {
+          if (!window.chronoAnomalyTimer) window.chronoAnomalyTimer = 5.0;
+          window.chronoAnomalyTimer -= scaledDt;
+          if (window.chronoAnomalyTimer <= 0) {
+            window.chronoAnomalyTimer = 6.0 + Math.random() * 3.5;
+            addScreenShake(4);
+            const anomalyX = player.x + (Math.random() - 0.5) * 350;
+            const clampedX = Math.max(80, Math.min(currentWorldWidth - 80, anomalyX));
+            spawnSparks(clampedX, 450 + Math.random() * 150, '#c084fc', 20);
           }
         }
         if (airStrikeAlertTimer > 0) {
@@ -7304,9 +8482,12 @@
       ctx.scale(cameraZoom, cameraZoom);
       ctx.translate(-cameraFocusX, -cameraFocusY);
 
-      // Stage-specific grid color (Stages 1-9 across Missions 1, 2, 3)
+      // Stage-specific grid color (Stages 1-12 across Missions 1, 2, 3, 4)
       let gridStroke = 'rgba(0, 240, 255, 0.05)';
-      if (currentLevelIndex > 80) gridStroke = 'rgba(239, 68, 68, 0.09)'; // Stage 9: Apocalyptic Cyber Core (Crimson)
+      if (currentLevelIndex > 110) gridStroke = 'rgba(168, 85, 247, 0.12)'; // Stage 12: Chrono-Void Apex (Neon Violet)
+      else if (currentLevelIndex > 100) gridStroke = 'rgba(6, 182, 212, 0.11)'; // Stage 11: Singularity Rift (Quantum Cyan)
+      else if (currentLevelIndex > 90) gridStroke = 'rgba(192, 132, 252, 0.1)'; // Stage 10: Glitch Matrix (Chrono Purple)
+      else if (currentLevelIndex > 80) gridStroke = 'rgba(239, 68, 68, 0.09)'; // Stage 9: Apocalyptic Cyber Core (Crimson)
       else if (currentLevelIndex > 70) gridStroke = 'rgba(249, 115, 22, 0.08)'; // Stage 8: Skyforge Hive (Molten Amber)
       else if (currentLevelIndex > 60) gridStroke = 'rgba(245, 158, 11, 0.07)'; // Stage 7: Volcanic Foundry (Fiery Gold)
       else if (currentLevelIndex > 50) gridStroke = 'rgba(251, 191, 36, 0.07)'; // Stage 6: Citadel Gold/Crimson
@@ -7331,7 +8512,7 @@
 
       // Glowing cyber perimeter boundary line
       ctx.save();
-      const borderColor = currentLevelIndex > 80 ? 'rgba(239, 68, 68, 0.65)' : (currentLevelIndex > 70 ? 'rgba(249, 115, 22, 0.6)' : (currentLevelIndex > 60 ? 'rgba(245, 158, 11, 0.55)' : (currentLevelIndex > 50 ? 'rgba(251, 191, 36, 0.5)' : (currentLevelIndex > 40 ? 'rgba(168, 85, 247, 0.5)' : (currentLevelIndex > 30 ? 'rgba(16, 185, 129, 0.5)' : (currentLevelIndex > 20 ? 'rgba(255, 0, 85, 0.45)' : (currentLevelIndex > 10 ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 240, 255, 0.4)')))))));
+      const borderColor = currentLevelIndex > 110 ? 'rgba(168, 85, 247, 0.8)' : (currentLevelIndex > 100 ? 'rgba(6, 182, 212, 0.75)' : (currentLevelIndex > 90 ? 'rgba(192, 132, 252, 0.7)' : (currentLevelIndex > 80 ? 'rgba(239, 68, 68, 0.65)' : (currentLevelIndex > 70 ? 'rgba(249, 115, 22, 0.6)' : (currentLevelIndex > 60 ? 'rgba(245, 158, 11, 0.55)' : (currentLevelIndex > 50 ? 'rgba(251, 191, 36, 0.5)' : (currentLevelIndex > 40 ? 'rgba(168, 85, 247, 0.5)' : (currentLevelIndex > 30 ? 'rgba(16, 185, 129, 0.5)' : (currentLevelIndex > 20 ? 'rgba(255, 0, 85, 0.45)' : (currentLevelIndex > 10 ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 240, 255, 0.4)'))))))))));
       ctx.strokeStyle = borderColor;
       ctx.lineWidth = 2;
       ctx.shadowColor = borderColor;
@@ -7350,7 +8531,7 @@
         ctx.fillRect(p.x, p.y, p.w, p.h);
         ctx.strokeRect(p.x, p.y, p.w, p.h);
 
-        ctx.strokeStyle = currentLevelIndex > 60 ? '#f97316' : (currentLevelIndex > 20 ? '#ff0055' : (currentLevelIndex > 10 ? '#38bdf8' : '#00f0ff'));
+        ctx.strokeStyle = currentLevelIndex > 90 ? '#c084fc' : (currentLevelIndex > 60 ? '#f97316' : (currentLevelIndex > 20 ? '#ff0055' : (currentLevelIndex > 10 ? '#38bdf8' : '#00f0ff')));
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
@@ -7558,6 +8739,7 @@
     }
 
     // Startup initializations
+    initAdMobTestSuiteControls();
     setBannerVisibility(true);
     updateDailyGiftButtonUI();
     renderLanguageOptions();
