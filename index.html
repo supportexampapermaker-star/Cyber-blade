@@ -49,14 +49,15 @@
     #game-container {
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100dvh;
-      max-height: 100vh;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       background: radial-gradient(circle at center, #0f172a 0%, #05070c 100%);
       overflow: hidden;
+      margin: 0;
       padding: 0;
     }
 
@@ -1211,26 +1212,9 @@
 
     /* GOOGLE ADMOB TEST BANNER (320x50 FIXED BOTTOM) */
     #admob-test-banner {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 320px;
-      height: 50px;
-      background: #181d27;
-      border: 1px solid #334155;
-      border-bottom: none;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.65);
-      z-index: 9000;
-      display: flex;
-      align-items: center;
-      padding: 0 8px;
-      gap: 8px;
-      user-select: none;
-      pointer-events: auto;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
 
     #admob-test-banner.hidden {
@@ -2100,18 +2084,19 @@
       <div class="modal-box" style="max-width: 660px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
           <div>
-            <h2 class="modal-title" id="level-select-main-title" style="text-align: left; font-size: 18px;">CAMPAIGN MISSIONS (120 TOTAL)</h2>
+            <h2 class="modal-title" id="level-select-main-title" style="text-align: left; font-size: 18px;">CAMPAIGN MISSIONS (150 TOTAL)</h2>
             <div class="modal-subtitle" style="text-align: left;" id="stage-desc-text">Mission 1 · Stage 1: Neo-Tokyo Rooftops (Levels 1–10)</div>
           </div>
           <button class="btn-secondary" id="btn-close-level-select" style="padding: 6px 12px;">✕</button>
         </div>
 
-        <!-- Mission Selection Tabs (Mission 1, Mission 2, Mission 3, Mission 4) -->
+        <!-- Mission Selection Tabs (Missions 1 to 5) -->
         <div class="mission-tabs" id="modal-mission-tabs">
           <button class="mission-tab-btn active" data-mission="1" id="tab-mission-1">⚡ M1: MATRIX (1–30)</button>
           <button class="mission-tab-btn" data-mission="2" id="tab-mission-2">🚀 M2: OUTSKIRTS (31–60)</button>
           <button class="mission-tab-btn" data-mission="3" id="tab-mission-3">🔥 M3: INFERNO (61–90)</button>
           <button class="mission-tab-btn" data-mission="4" id="tab-mission-4">🌌 M4: VOID (91–120)</button>
+          <button class="mission-tab-btn" data-mission="5" id="tab-mission-5">⚡ M5: HYPER (121–150)</button>
         </div>
 
         <!-- Stage Filter Tabs (Populated / Updated dynamically) -->
@@ -2140,9 +2125,9 @@
             <div class="modal-subtitle" id="shop-modal-sub" style="text-align: left;">Blades, Combat Suits, and Core Tech Upgrades.</div>
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
-            <!-- Rewarded Ad Chest (+600 ⚡) -->
-            <button class="btn-ad-reward" id="btnAdChest" title="Watch a quick Ad to receive 600 Cyber Shards">
-              🎬 +600 ⚡ AD CHEST
+            <!-- Free Cyber Shards Chest (+600 ⚡) -->
+            <button class="btn-ad-reward" id="btnAdChest" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800;" title="Claim 600 Free Cyber Shards">
+              🎁 +600 ⚡ FREE CHEST
             </button>
             <div class="hud-card" style="margin: 0;">
               <span class="hud-label" id="shop-shards-label">AVAILABLE SHARDS</span>
@@ -2187,9 +2172,9 @@
           </div>
         </div>
 
-        <!-- Prominent Claim 2X Shards (Rewarded Ad) Button -->
-        <button class="btn-ad-reward" id="btn-claim-3x-shards" style="width: 100%; padding: 12px; font-size: 14px; margin-bottom: 6px;">
-          🎬 CLAIM 2X SHARDS (WATCH 10s AD)
+        <!-- Prominent Claim 2X Shards Button -->
+        <button class="btn-ad-reward" id="btn-claim-3x-shards" style="width: 100%; padding: 12px; font-size: 14px; margin-bottom: 6px; background: linear-gradient(135deg, #fbbf24, #d97706); color: #000; font-weight: 900;">
+          ⚡ CLAIM 2X SHARDS BONUS
         </button>
 
         <div style="display: flex; gap: 10px;">
@@ -2206,9 +2191,9 @@
         <h2 class="modal-title" style="color: #ff0055;" id="gameover-title">NEURAL LINK SEVERED</h2>
         <p class="modal-subtitle" id="gameover-cause">You were terminated by hostile fire.</p>
 
-        <!-- Revive with Full HP & Shield Button (Rewarded Ad) -->
-        <button class="btn-ad-reward" id="btn-ad-revive" style="width: 100%; padding: 12px; font-size: 13.5px; margin: 10px 0 4px 0;">
-          🎬 REVIVE + FULL HP & SHIELD (WATCH AD)
+        <!-- Revive with Full HP & Shield Button -->
+        <button class="btn-ad-reward" id="btn-ad-revive" style="width: 100%; padding: 12px; font-size: 13.5px; margin: 10px 0 4px 0; background: linear-gradient(135deg, #00f0ff, #0088ff); color: #000; font-weight: 900;">
+          ⚡ REVIVE + FULL HP & SHIELD
         </button>
 
         <div id="gameover-endless-summary" style="display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0;">
@@ -2450,10 +2435,6 @@
           <span style="font-size: 14px;">🌐</span>
           <span id="tab-label-lang">LANGUAGE</span>
         </button>
-        <button class="side-tab-btn" data-side-tab="ads" id="side-tab-ads">
-          <span style="font-size: 14px;">📢</span>
-          <span id="tab-label-ads">ADS</span>
-        </button>
         <button class="side-tab-btn" data-side-tab="update" id="side-tab-update">
           <span style="font-size: 14px;">🚀</span>
           <span id="tab-label-update">UPDATE</span>
@@ -2547,8 +2528,8 @@
           <!-- Header and Progress Status -->
           <div style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 9px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <div>
-              <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">CAMPAIGN MISSIONS (120 TOTAL)</div>
-              <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="side-levels-progress-text">Highest: LVL 1 / 120</div>
+              <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">CAMPAIGN MISSIONS (150 TOTAL)</div>
+              <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="side-levels-progress-text">Highest: LVL 1 / 150</div>
             </div>
             <button class="btn-primary" id="btn-side-resume-level" style="padding: 6px 10px; font-size: 10.5px; white-space: nowrap;">
               ▶️ PLAY LVL <span id="side-resume-lvl-num">1</span>
@@ -2561,6 +2542,7 @@
             <button class="side-mission-btn" data-side-mission="2" id="side-m-btn-2">🚀 M2 (31–60)</button>
             <button class="side-mission-btn" data-side-mission="3" id="side-m-btn-3">🔥 M3 (61–90)</button>
             <button class="side-mission-btn" data-side-mission="4" id="side-m-btn-4">🌌 M4 (91–120)</button>
+            <button class="side-mission-btn" data-side-mission="5" id="side-m-btn-5">⚡ M5 (121–150)</button>
           </div>
 
           <!-- Stage Selection Tabs -->
@@ -2637,82 +2619,6 @@
             <a href="/privacy.html" target="_blank" class="btn-secondary" style="text-decoration: none; justify-content: center; padding: 7px; font-size: 10px; color: var(--cyan); border-color: rgba(0, 240, 255, 0.3);">
               🔒 Privacy Policy
             </a>
-          </div>
-        </div>
-
-        <!-- PANE 5: ADMOB ADS & TEST SUITE -->
-        <div class="side-pane" id="pane-ads">
-          <!-- Active Mode Card -->
-          <div style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(15, 23, 42, 0.95)); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 8px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-size: 11.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em;">GOOGLE ADMOB TEST SUITE</div>
-                <div style="font-size: 10px; font-weight: 800; color: #fbbf24; margin-top: 2px;" id="admob-status-mode-text">
-                  🟢 TEST MODE ACTIVE (100% FILL GUARANTEED)
-                </div>
-              </div>
-              <span class="admob-badge-yellow" id="admob-mode-badge">TEST</span>
-            </div>
-
-            <div style="font-size: 9.5px; color: #cbd5e1; line-height: 1.35;" id="admob-mode-explainer">
-              Using official Google sample unit IDs. Eliminates "Error 3: No fill" during development and testing on mobile devices.
-            </div>
-
-            <button class="btn-primary" id="btn-toggle-admob-mode" style="padding: 8px 12px; font-size: 10.5px; justify-content: center; background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; font-weight: 900;">
-              🔄 SWITCH TO PRODUCTION MODE
-            </button>
-          </div>
-
-          <!-- Native Bridge Diagnostic Card -->
-          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 5px;">
-            <div style="font-size: 10px; font-weight: 800; color: #94a3b8; letter-spacing: 0.05em;">BRIDGE DIAGNOSTICS</div>
-            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
-              <span style="color: #94a3b8;">Android Native Bridge:</span>
-              <span style="font-weight: 800;" id="admob-bridge-status-text">Detecting...</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
-              <span style="color: #94a3b8;">Active Rewarded ID:</span>
-              <span style="color: #38bdf8; font-weight: 700; font-family: monospace; font-size: 9px;" id="admob-unit-rewarded">...</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
-              <span style="color: #94a3b8;">Active Interstitial ID:</span>
-              <span style="color: #38bdf8; font-weight: 700; font-family: monospace; font-size: 9px;" id="admob-unit-interstitial">...</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; font-size: 10.5px;">
-              <span style="color: #94a3b8;">Active Banner ID:</span>
-              <span style="color: #38bdf8; font-weight: 700; font-family: monospace; font-size: 9px;" id="admob-unit-banner">...</span>
-            </div>
-          </div>
-
-          <!-- 1-Click Interactive Test Buttons -->
-          <div style="font-size: 10.5px; font-weight: 800; color: var(--cyan); letter-spacing: 0.05em; margin-top: 4px;">
-            TEST AD PLACEMENTS (1-CLICK)
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 6px;">
-            <button class="btn-primary" id="btn-test-ad-rewarded-10s" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; background: linear-gradient(135deg, #00f0ff, #0088ff); color: #05070c; font-weight: 900;">
-              🎬 TEST 10s REWARDED AD (DOUBLE BOUNTY)
-            </button>
-            <button class="btn-primary" id="btn-test-ad-chest" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 900;">
-              🎁 TEST SHOP REWARD CHEST (+600 ⚡)
-            </button>
-            <button class="btn-secondary" id="btn-test-ad-interstitial" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; border-color: rgba(251, 191, 36, 0.4); color: #fbbf24; font-weight: 800;">
-              📺 TEST FULLSCREEN INTERSTITIAL AD (5s)
-            </button>
-            <button class="btn-secondary" id="btn-test-ad-banner" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; border-color: rgba(0, 240, 255, 0.4); color: var(--cyan); font-weight: 800;">
-              🏷️ TOGGLE 320x50 TEST BANNER ON/OFF
-            </button>
-            <button class="btn-secondary" id="btn-test-ad-boss" style="padding: 9px 12px; font-size: 10.5px; justify-content: center; border-color: rgba(192, 132, 252, 0.4); color: #c084fc; font-weight: 800;">
-              👑 TEST BOSS REWARDED INTERSTITIAL (+250 ⚡)
-            </button>
-          </div>
-
-          <!-- Hindi & English Advisory Notes -->
-          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; font-size: 9.5px; color: #94a3b8; line-height: 1.4; display: flex; flex-direction: column; gap: 4px;">
-            <div style="font-weight: 800; color: #fbbf24;">📢 ADMOB TEST ADS समाधान:</div>
-            <div>• <strong>समस्या:</strong> जब आप फोन पर ऐप चलाते हैं तो Live IDs पर Google "Error 3: No Fill" देता है, जिससे विज्ञापन लोड नहीं होते।</div>
-            <div>• <strong>समाधान:</strong> Test Mode हमेशा ऑन रखें। इसमें Google के ऑफिशियल Sample Unit IDs का उपयोग होता है, जिससे 100% विज्ञापन दिखाई देते हैं।</div>
-            <div>• <strong>Play Store रिलीज:</strong> फाइनल APK बनाने से पहले ऊपर दिए गए बटन से PRODUCTION MODE स्विच कर सकते हैं।</div>
           </div>
         </div>
 
@@ -3319,10 +3225,10 @@
 
     // --- SPEED MODES SPECIFICATION ---
     const SPEED_MODES = [
-      { label: '🎯 0.8x', mult: 0.8, dash: 1100 },
-      { label: '⚡ 1.0x', mult: 1.0, dash: 1280 },
-      { label: '🚀 1.2x', mult: 1.2, dash: 1480 },
-      { label: '🔥 1.5x', mult: 1.5, dash: 1700 }
+      { label: '🎯 0.8x', mult: 0.8, dash: 800 },
+      { label: '⚡ 1.0x', mult: 1.0, dash: 940 },
+      { label: '🚀 1.2x', mult: 1.2, dash: 1080 },
+      { label: '🔥 1.5x', mult: 1.5, dash: 1280 }
     ];
     let currentSpeedIndex = 2; // Default 1.2x Turbo
 
@@ -3723,22 +3629,10 @@
      * Pass false during active canvas gameplay so the bottom banner never interferes with touch-drag slingshot aiming.
      */
     window.setBannerVisibility = function(visible) {
-      const isVisible = !!visible;
       const bannerEl = document.getElementById('admob-test-banner');
-      if (bannerEl) {
-        if (isVisible) bannerEl.classList.remove('hidden');
-        else bannerEl.classList.add('hidden');
-      }
-
+      if (bannerEl) bannerEl.classList.add('hidden');
       if (window.AndroidAds && typeof window.AndroidAds.setBannerVisible === 'function') {
-        try {
-          if (typeof window.AndroidAds.setBannerId === 'function') {
-            window.AndroidAds.setBannerId(ADMOB_CONFIG.getBannerId());
-          }
-          window.AndroidAds.setBannerVisible(isVisible);
-        } catch (e) {
-          console.warn('AndroidAds.setBannerVisible error:', e);
-        }
+        try { window.AndroidAds.setBannerVisible(false); } catch (e) {}
       }
     };
 
@@ -3844,240 +3738,44 @@
 
     /**
      * 1. Rewarded Ads Trigger (triggerRewardedAd)
-     * Calls window.AndroidAds.showRewardedAd(ADMOB_CONFIG.getRewardedId(), rewardType) or launches authentic in-app test video ad
+    /**
+     * 1. Direct Rewarded Callback (triggerRewardedAd)
+     * Directly grants reward instantly without displaying any ads per user instructions.
      */
     window.triggerRewardedAd = function(rewardType, onRewarded) {
-      pendingRewardCallback = onRewarded || null;
-
-      // Check native Android WebView bridge
-      if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
-        try {
-          window.AndroidAds.showRewardedAd(ADMOB_CONFIG.getRewardedId(), rewardType);
-          return;
-        } catch (e) {
-          console.warn('AndroidAds.showRewardedAd native error, falling back to in-app test ad:', e);
-        }
+      window.onAdMobRewardGranted(rewardType);
+      if (typeof onRewarded === 'function') {
+        try { onRewarded(rewardType); } catch (e) { console.warn(e); }
       }
-
-      // Launch Authentic Google AdMob In-App Rewarded Video Test Ad
-      showInAppRewardedTestAd(rewardType);
     };
 
     function showInAppRewardedTestAd(rewardType) {
-      if (activeAdTimerInterval) {
-        clearInterval(activeAdTimerInterval);
-        activeAdTimerInterval = null;
-      }
-
-      const modal = document.getElementById('modal-ad-reward');
-      const titleEl = document.getElementById('ad-reward-title');
-      const descEl = document.getElementById('ad-reward-desc');
-      const countEl = document.getElementById('ad-reward-countdown');
-      const tagEl = document.getElementById('ad-reward-type-tag');
-      const progressFill = document.getElementById('ad-reward-progress-bar');
-      const elapsedEl = document.getElementById('ad-reward-elapsed');
-      const totalEl = document.getElementById('ad-reward-total');
-      const closeBtn = document.getElementById('btn-close-reward-ad');
-
-      const isDoubleWin = (rewardType === 'double_win' || rewardType === 'triple_win' || rewardType === 'victory_2x' || rewardType === 'victory_3x');
-      const durationSec = isDoubleWin ? 10 : 5; // 10s for double bounty, 5s for chest/revive
-
-      if (tagEl) {
-        tagEl.textContent = isDoubleWin ? 'SPONSORED 2X BOUNTY (10s)' : 'ADMOB REWARDED STREAM';
-      }
-      if (titleEl) {
-        titleEl.textContent = isDoubleWin ? 'CLAIM 2X LEVEL BOUNTY' : 'CYBER BLADE: CHRONO STRIKE';
-      }
-      if (descEl) {
-        descEl.textContent = isDoubleWin ? 'Watch verified 10-second sponsor ad to claim double shards!' : 'Processing verified sponsor telemetry via Cyber Chrono Matrix...';
-      }
-      if (totalEl) totalEl.textContent = `0:${durationSec < 10 ? '0' + durationSec : durationSec}`;
-      if (elapsedEl) elapsedEl.textContent = '0:00';
-      if (progressFill) progressFill.style.width = '0%';
-      if (countEl) countEl.textContent = `Reward in ${durationSec}s...`;
-
-      let rewardEarned = false;
-      if (closeBtn) {
-        closeBtn.onclick = () => {
-          if (!rewardEarned) {
-            const confirmed = confirm('Leave ad early? You will forfeit your reward!');
-            if (!confirmed) return;
-          }
-          if (activeAdTimerInterval) {
-            clearInterval(activeAdTimerInterval);
-            activeAdTimerInterval = null;
-          }
-          modal.classList.add('hidden');
-          if (rewardEarned) {
-            window.onAdMobRewardGranted(rewardType);
-          }
-        };
-      }
-
-      if (modal) modal.classList.remove('hidden');
-      sound.playSlowMoEnter();
-
-      let currentSec = 0;
-      const stepMs = 100;
-      const totalSteps = durationSec * 10;
-      let stepsElapsed = 0;
-
-      activeAdTimerInterval = setInterval(() => {
-        stepsElapsed++;
-        const percent = Math.min(100, (stepsElapsed / totalSteps) * 100);
-        if (progressFill) progressFill.style.width = `${percent}%`;
-
-        const secElapsed = Math.floor(stepsElapsed / 10);
-        const secRemaining = Math.max(0, durationSec - secElapsed);
-        if (elapsedEl) elapsedEl.textContent = `0:${secElapsed < 10 ? '0' + secElapsed : secElapsed}`;
-
-        if (secRemaining > 0) {
-          if (countEl) countEl.textContent = `Reward in ${secRemaining}s...`;
-        } else {
-          // Timer Complete: Grant Reward!
-          rewardEarned = true;
-          clearInterval(activeAdTimerInterval);
-          activeAdTimerInterval = null;
-
-          if (countEl) {
-            countEl.textContent = '✅ REWARD UNLOCKED!';
-            countEl.style.color = '#34d399';
-            countEl.style.borderColor = '#34d399';
-            countEl.style.background = 'rgba(52, 211, 153, 0.15)';
-          }
-
-          sound.playReward();
-          triggerHaptic([30, 40]);
-
-          setTimeout(() => {
-            if (modal) modal.classList.add('hidden');
-            window.onAdMobRewardGranted(rewardType);
-          }, 650);
-        }
-      }, stepMs);
+      window.onAdMobRewardGranted(rewardType);
     }
 
     /**
-     * 2. Rewarded Interstitial Ads Trigger (triggerRewardedInterstitialAd)
-     * Triggered automatically upon defeating Boss Levels
+     * 2. Direct Boss Bonus (triggerRewardedInterstitialAd)
+     * Directly grants boss clear bonus shards without displaying any interstitial ads.
      */
     window.triggerRewardedInterstitialAd = function() {
-      if (window.AndroidAds && typeof window.AndroidAds.showRewardedInterstitialAd === 'function') {
-        try {
-          window.AndroidAds.showRewardedInterstitialAd(ADMOB_CONFIG.getRewardedInterstitialId(), 'boss_bonus');
-          return;
-        } catch (e) {
-          console.warn('AndroidAds.showRewardedInterstitialAd error:', e);
-        }
-      }
-      showInAppRewardedTestAd('boss_bonus');
+      window.onAdMobRewardGranted('boss_bonus');
     };
 
     /**
-     * 3. Standard Interstitial Ads Trigger (triggerInterstitialAd)
-     * Triggered automatically every 3 non-boss levels completed
+     * 3. Standard Interstitial Ads (triggerInterstitialAd)
+     * Disabled completely: zero ads shown.
      */
     window.triggerInterstitialAd = function() {
-      if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
-        try {
-          window.AndroidAds.showInterstitialAd(ADMOB_CONFIG.getInterstitialId());
-          return;
-        } catch (e) {
-          console.warn('AndroidAds.showInterstitialAd error:', e);
-        }
-      }
-      showInAppInterstitialTestAd();
+      return;
     };
 
     function showInAppInterstitialTestAd() {
-      if (activeInterstitialTimerInterval) {
-        clearInterval(activeInterstitialTimerInterval);
-        activeInterstitialTimerInterval = null;
-      }
-
-      const modal = document.getElementById('modal-ad-interstitial');
-      const countEl = document.getElementById('ad-interstitial-countdown');
-      const closeBtn = document.getElementById('btn-close-interstitial-ad');
-      const dismissBtn = document.getElementById('btn-interstitial-dismiss');
-
-      if (!modal) return;
-      modal.classList.remove('hidden');
-      sound.playSlowMoEnter();
-
-      let secondsLeft = 5;
-      if (countEl) countEl.textContent = `Skip in ${secondsLeft}s...`;
-      if (closeBtn) closeBtn.style.opacity = '0.4';
-
-      const closeAd = () => {
-        if (activeInterstitialTimerInterval) {
-          clearInterval(activeInterstitialTimerInterval);
-          activeInterstitialTimerInterval = null;
-        }
-        modal.classList.add('hidden');
-        sound.playSlowMoExit();
-      };
-
-      if (dismissBtn) dismissBtn.onclick = closeAd;
-      if (closeBtn) closeBtn.onclick = closeAd;
-
-      activeInterstitialTimerInterval = setInterval(() => {
-        secondsLeft--;
-        if (secondsLeft > 0) {
-          if (countEl) countEl.textContent = `Skip in ${secondsLeft}s...`;
-        } else {
-          clearInterval(activeInterstitialTimerInterval);
-          activeInterstitialTimerInterval = null;
-          if (countEl) {
-            countEl.textContent = '✕ CLOSE AD';
-            countEl.style.cursor = 'pointer';
-            countEl.onclick = closeAd;
-          }
-          if (closeBtn) closeBtn.style.opacity = '1.0';
-        }
-      }, 1000);
+      return;
     }
 
-    // Diagnostics UI Updater for AdMob Test Suite
+    // Diagnostics UI Updater (clean no-op as Ads pane is removed)
     function updateAdMobDiagnosticsUI() {
-      const modeText = document.getElementById('admob-status-mode-text');
-      const modeBadge = document.getElementById('admob-mode-badge');
-      const toggleBtn = document.getElementById('btn-toggle-admob-mode');
-      const bridgeText = document.getElementById('admob-bridge-status-text');
-      const unitRewarded = document.getElementById('admob-unit-rewarded');
-      const unitInterstitial = document.getElementById('admob-unit-interstitial');
-      const unitBanner = document.getElementById('admob-unit-banner');
-      const explainer = document.getElementById('admob-mode-explainer');
-
-      const isTest = ADMOB_CONFIG.TEST_MODE;
-      if (modeText) {
-        modeText.textContent = isTest ? '🟢 TEST MODE ACTIVE (100% FILL GUARANTEED)' : '🔴 PRODUCTION MODE ACTIVE (PLAY STORE LIVE)';
-        modeText.style.color = isTest ? '#fbbf24' : '#ef4444';
-      }
-      if (modeBadge) {
-        modeBadge.textContent = isTest ? 'TEST' : 'PROD';
-        modeBadge.style.background = isTest ? '#fbbf24' : '#ef4444';
-        modeBadge.style.color = isTest ? '#000' : '#fff';
-      }
-      if (toggleBtn) {
-        toggleBtn.textContent = isTest ? '🔄 SWITCH TO PRODUCTION MODE' : '🔄 SWITCH TO TEST MODE (RECOMMENDED)';
-        toggleBtn.style.background = isTest ? 'linear-gradient(135deg, #ef4444, #b91c1c)' : 'linear-gradient(135deg, #f59e0b, #d97706)';
-        toggleBtn.style.color = isTest ? '#fff' : '#000';
-      }
-      if (explainer) {
-        explainer.textContent = isTest
-          ? 'Using official Google sample unit IDs. Eliminates "Error 3: No fill" during development and testing on mobile devices.'
-          : '⚠️ Using live Play Store IDs. Note: Google will NOT serve ads on unregistered test devices to protect against invalid traffic!';
-      }
-
-      if (bridgeText) {
-        const hasBridge = window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function';
-        bridgeText.textContent = hasBridge ? '🟢 AndroidAds Bridge Detected' : '🟡 In-App Test Ad Engine Active';
-        bridgeText.style.color = hasBridge ? '#34d399' : '#fbbf24';
-      }
-
-      if (unitRewarded) unitRewarded.textContent = ADMOB_CONFIG.getRewardedId();
-      if (unitInterstitial) unitInterstitial.textContent = ADMOB_CONFIG.getInterstitialId();
-      if (unitBanner) unitBanner.textContent = ADMOB_CONFIG.getBannerId();
+      // Ads pane removed per user instructions
     }
 
     // --- GAME ENGINE CONSTANTS & STATE ---
@@ -4092,6 +3790,8 @@
     let mission3FireballTimer = 2.0;
     let airDroneStrikeTimer = 7.0;
     let airStrikeAlertTimer = 0;
+    let mission5ScrollX = 0; // Mission 5 forward autoscroll distance
+    let mission5FireballTimer = 2.0; // Mission 5 rolling fireball spawn timer
     let isFullScreenAdapt = true; // Auto-fits phone screen width without black bars or cutouts
     window.portraitDismissed = false;
 
@@ -4330,7 +4030,7 @@
         this.isGrounded = false;
         this.isDashing = false;
         this.dashTimer = 0;
-        this.dashDuration = 0.12;
+        this.dashDuration = 0.15;
         this.dashSpeed = SPEED_MODES[currentSpeedIndex].dash;
         this.canDash = true;
 
@@ -4416,6 +4116,14 @@
           this.x += this.vx * dt;
           this.y += this.vy * dt;
 
+          // STRICT REQUIREMENT: User cannot go below the surface (surface at 660)
+          if (this.y >= 660 - this.radius) {
+            this.y = 660 - this.radius;
+            if (this.vy > 0) this.vy = 0;
+            this.isGrounded = true;
+            this.canDash = true;
+          }
+
           const blade = progression.getEffectiveBlade();
           let trailColor = '#00f0ff';
           if (blade === 'thunder') trailColor = '#fbbf24';
@@ -4450,17 +4158,46 @@
 
           if (this.dashTimer <= 0) {
             this.isDashing = false;
-            this.vx *= 0.25;
-            this.vy *= 0.25;
+            this.vx *= 0.65;
+            this.vy *= 0.65;
           }
         } else {
-          // Normal Gravity
-          const stageGravity = currentLevelIndex >= 21 ? 420 : 800; // Low-gravity in Stage 3!
+          // Normal Gravity & Flexible Movement
+          const stageGravity = currentLevelIndex >= 21 ? 380 : 620; // Agile stage gravity with comfortable air-time
           this.vy += stageGravity * dt;
+
+          // Keyboard movement (ArrowLeft/ArrowRight or A/D keys for nimble running)
+          if (window.activeKeys) {
+            if (window.activeKeys['ArrowRight'] || window.activeKeys['KeyD']) {
+              this.vx = Math.min(this.vx + 1300 * dt, 340);
+              this.facing = 1;
+            } else if (window.activeKeys['ArrowLeft'] || window.activeKeys['KeyA']) {
+              this.vx = Math.max(this.vx - 1300 * dt, -340);
+              this.facing = -1;
+            }
+
+            // Natural intentional jump with W or ArrowUp (comfortably reaches elevated platforms)
+            if ((window.activeKeys['ArrowUp'] || window.activeKeys['KeyW']) && this.isGrounded) {
+              this.vy = -470;
+              this.isGrounded = false;
+              sound.playSlash();
+              triggerHaptic([15]);
+            }
+          }
+
           this.x += this.vx * dt;
           this.y += this.vy * dt;
 
-          this.vx *= Math.pow(0.85, dt * 60);
+          // STRICT REQUIREMENT: User cannot go below the surface (surface at 660)
+          if (this.y >= 660 - this.radius) {
+            this.y = 660 - this.radius;
+            if (this.vy > 0) this.vy = 0;
+            this.isGrounded = true;
+            this.canDash = true;
+          }
+
+          // Natural air/ground friction: smooth deceleration without scraping
+          this.vx *= Math.pow(this.isGrounded ? 0.88 : 0.94, dt * 60);
           this.checkPlatformCollisions();
           this.checkEnemyContact();
         }
@@ -4486,8 +4223,14 @@
           this.y = this.radius;
           this.vy = 0;
         }
-        if (this.y > VIRTUAL_HEIGHT + 40) {
-          this.takeDamage('Fell into the abyss');
+
+        // STRICT REQUIREMENT: User cannot go below the surface (surface at 660); strictly stays on top of surface!
+        if (this.y >= 660 - this.radius) {
+          this.y = 660 - this.radius;
+          this.vy = 0;
+          this.isGrounded = true;
+          this.canDash = true;
+          this.airDashesLeft = this.hasDoubleDash ? 2 : 1;
         }
       }
 
@@ -4540,14 +4283,27 @@
 
       checkPlatformCollisions() {
         this.isGrounded = false;
+
+        // Base ground surface collision at y = 660 (player strictly stays on top of surface)
+        if (this.y >= 660 - this.radius) {
+          this.y = 660 - this.radius;
+          if (this.vy > 0) this.vy = 0;
+          this.isGrounded = true;
+          this.canDash = true;
+          this.airDashesLeft = this.hasDoubleDash ? 2 : 1;
+        }
+
+        // Elevated platforms (support player from above without blocking side dashing)
         for (const p of platforms) {
-          if (
-            this.x + this.radius > p.x &&
-            this.x - this.radius < p.x + p.w &&
-            this.y + this.radius >= p.y &&
-            this.y - this.radius < p.y + p.h
-          ) {
-            if (this.vy > 0 && this.y + this.radius - this.vy * 0.05 <= p.y + 12) {
+          // Strictly ignore base ground platform at y >= 660 to prevent false side-wall collision
+          if (p.y >= 660) continue;
+
+          // Check if player is horizontally within platform range
+          if (this.x + this.radius * 0.7 > p.x && this.x - this.radius * 0.7 < p.x + p.w) {
+            // Landing on top of platform while descending
+            const footY = this.y + this.radius;
+            const prevFootY = footY - this.vy * 0.05;
+            if (this.vy > 0 && prevFootY <= p.y + 4 && footY >= p.y && footY <= p.y + (p.h || 20) + 4) {
               this.y = p.y - this.radius;
               this.vy = 0;
               this.isGrounded = true;
@@ -4557,17 +4313,6 @@
                 airCombo = 0;
                 updateHUD();
               }
-            } else if (this.vy < 0 && this.y - this.radius >= p.y + p.h - 12) {
-              this.y = p.y + p.h + this.radius;
-              this.vy = 0;
-            } else if (this.vx > 0) {
-              this.x = p.x - this.radius;
-              this.vx = 0;
-              this.canDash = true;
-            } else if (this.vx < 0) {
-              this.x = p.x + p.w + this.radius;
-              this.vx = 0;
-              this.canDash = true;
             }
           }
         }
@@ -4756,10 +4501,17 @@
           const h = hazards[i];
           const dist = Math.hypot(this.x - h.x, this.y - h.y);
 
-          if (h.type === 'jump_pad') {
-            if (this.x + this.radius > h.x - h.w / 2 && this.x - this.radius < h.x + h.w / 2 &&
-                this.y + this.radius >= h.y - h.h && this.y - this.radius <= h.y + h.h) {
-              this.vy = -680;
+          if (h.type === 'jump_pad' && (!h.cooldown || h.cooldown <= 0)) {
+            const padHalfW = (h.w || 60) / 2;
+            const padTopY = h.y - (h.h || 16) / 2;
+            const playerFootY = this.y + this.radius;
+            // Only trigger if player intentionally lands onto the pad from above
+            if (this.x + this.radius * 0.6 > h.x - padHalfW &&
+                this.x - this.radius * 0.6 < h.x + padHalfW &&
+                playerFootY >= padTopY - 6 && playerFootY <= padTopY + 16 &&
+                this.vy >= 0) {
+              h.cooldown = 0.5;
+              this.vy = -500;
               this.energy = this.maxEnergy;
               this.canDash = true;
               this.airDashesLeft = this.hasDoubleDash ? 2 : 1;
@@ -4920,8 +4672,9 @@
           c.restore();
         }
 
+        const walkBob = (this.isGrounded && Math.abs(this.vx) > 20) ? Math.sin(Date.now() * 0.016) * 2.2 : 0;
         c.save();
-        c.translate(this.x, this.y);
+        c.translate(this.x, this.y + walkBob);
 
         // Golden Shogun Aura
         if (progression.data.equippedSuit === 'golden_shogun') {
@@ -5017,6 +4770,22 @@
       });
     }
 
+    // Surface Rolling Fireballs for Mission 5 ("Surface pr rolling hote hue aag ke gole")
+    function spawnRollingFireball(x, vx = -280, radius = 22) {
+      fireballs.push({
+        x: x,
+        y: 660 - radius,
+        vx: vx,
+        vy: 0,
+        radius: radius,
+        targetGroundY: 660,
+        isRolling: true,
+        rotationAngle: 0,
+        rollSpeed: vx / radius,
+        life: 16.0
+      });
+    }
+
     // --- ENEMY CLASS (Dynamic Movement, Mission 2 & 3 Bosses, Drone Air Attacks & Life Battery) ---
     class Enemy {
       constructor(type, x, y, opts = {}) {
@@ -5025,34 +4794,35 @@
         this.y = y;
         this.startX = x;
         this.startY = y;
-        this.radius = type.startsWith('boss') ? (type === 'boss_chronos_nexus' ? 44 : (type === 'boss_void_singularity' || type === 'boss_omega_architect' ? 40 : 34)) : (type === 'heavy_mech' || type === 'phase_brute' ? 24 : (type === 'air_bomber_drone' || type === 'time_bomb_drone' ? 20 : 18));
+        this.radius = type.startsWith('boss') ? (type === 'boss_singularity_overlord' ? 48 : (type === 'boss_chronos_nexus' || type === 'boss_tempest_god' ? 44 : (type === 'boss_hyperion_dread' || type === 'boss_chrono_crusher' ? 42 : (type === 'boss_void_singularity' || type === 'boss_omega_architect' || type === 'boss_velocity_phantom' ? 40 : 35)))) : (type === 'overdrive_brute' ? 26 : (type === 'heavy_mech' || type === 'phase_brute' ? 24 : (type === 'plasma_turret' ? 22 : (type === 'air_bomber_drone' || type === 'time_bomb_drone' ? 20 : (type === 'hyper_chaser' ? 19 : 18)))));
         this.facing = opts.facing || 1;
-        this.isShieldActive = (type === 'shield' || type === 'heavy_mech' || type === 'phase_brute');
+        this.isShieldActive = (type === 'shield' || type === 'heavy_mech' || type === 'phase_brute' || type === 'overdrive_brute');
         this.frozenTimer = 0;
         this.stunTimer = 0;
         this.shootTimer = 1.0 + Math.random() * 1.5;
         this.isDead = false;
 
-        // Mission 4 Mechanics Properties
+        // Mission 4 & 5 Mechanics Properties
         this.fuseTimer = type === 'time_bomb_drone' ? (opts.fuseTimer || 4.2) : 0;
-        this.phaseTimer = type === 'phase_brute' ? (Math.random() * 2.5) : 0;
+        this.phaseTimer = (type === 'phase_brute' || type === 'overdrive_brute') ? (Math.random() * 2.5) : 0;
         this.warpTimer = 0;
 
         // Dynamic Movement System
-        this.moveType = opts.moveType || (type === 'patrol' || type === 'hover_drone' || type === 'chaser' || type === 'air_bomber_drone' || type === 'time_bomb_drone' || type === 'shadow_mimic' || type === 'phase_brute' ? type : (type.startsWith('boss') ? 'boss' : 'static'));
-        this.moveSpeed = opts.moveSpeed || (type === 'time_bomb_drone' ? 145 : (type === 'shadow_mimic' ? 135 : (type === 'chaser' ? 120 : (type === 'hover_drone' ? 85 : (type === 'air_bomber_drone' ? 95 : 75)))));
+        this.moveType = opts.moveType || (type === 'patrol' || type === 'hover_drone' || type === 'chaser' || type === 'hyper_chaser' || type === 'plasma_turret' || type === 'air_bomber_drone' || type === 'time_bomb_drone' || type === 'shadow_mimic' || type === 'phase_brute' || type === 'overdrive_brute' ? type : (type.startsWith('boss') ? 'boss' : 'static'));
+        this.moveSpeed = opts.moveSpeed || (type === 'hyper_chaser' ? 165 : (type === 'time_bomb_drone' ? 145 : (type === 'shadow_mimic' ? 135 : (type === 'chaser' ? 120 : (type === 'plasma_turret' ? 95 : (type === 'hover_drone' ? 85 : (type === 'air_bomber_drone' ? 95 : 75)))))));
         this.patrolMinX = opts.patrolMinX !== undefined ? opts.patrolMinX : (x - 130);
         this.patrolMaxX = opts.patrolMaxX !== undefined ? opts.patrolMaxX : (x + 130);
         this.floatAngle = Math.random() * Math.PI * 2;
         this.walkAnimTimer = 0;
 
         // Health Points Assignment
-        if (type === 'boss_chronos_nexus') this.hp = 60;
-        else if (type === 'boss_void_singularity') this.hp = 50;
-        else if (type === 'boss_glitch_reaper') this.hp = 45;
+        if (type === 'boss_singularity_overlord') this.hp = 70;
+        else if (type === 'boss_chronos_nexus' || type === 'boss_tempest_god') this.hp = 60;
+        else if (type === 'boss_hyperion_dread') this.hp = 55;
+        else if (type === 'boss_void_singularity' || type === 'boss_velocity_phantom') this.hp = 50;
+        else if (type === 'boss_glitch_reaper' || type === 'boss_chrono_crusher' || type === 'boss_omega_architect') this.hp = 45;
         else if (type === 'boss_chrono_sentinel') this.hp = 40;
-        else if (type === 'boss_omega_architect') this.hp = 45;
-        else if (type === 'boss_overlord_flame') this.hp = 36;
+        else if (type === 'boss_overlord_flame' || type === 'boss_cyber_jaguar') this.hp = 35;
         else if (type === 'boss_vortex_dragon') this.hp = 32;
         else if (type === 'boss_skyfall_carrier') this.hp = 28;
         else if (type === 'boss_solaris_shogun') this.hp = 25;
@@ -5066,9 +4836,12 @@
         else if (type === 'boss_shogun') this.hp = 10;
         else if (type === 'boss_mantis') this.hp = 8;
         else if (type === 'boss_drone') this.hp = 6;
+        else if (type === 'overdrive_brute') this.hp = 6;
+        else if (type === 'plasma_turret') this.hp = 4;
         else if (type === 'phase_brute') this.hp = 4;
         else if (type === 'shadow_mimic') this.hp = 3;
         else if (type === 'heavy_mech') this.hp = 3;
+        else if (type === 'hyper_chaser') this.hp = 3;
         else if (type === 'air_bomber_drone') this.hp = 3;
         else if (type === 'time_bomb_drone') this.hp = 2;
         else if (type === 'chaser') this.hp = 2;
@@ -5305,6 +5078,42 @@
             createBullet(baseAngle + k * (Math.PI / 3), 390, 6.5, '#8b5cf6');
           }
           spawnFireball(this.x, this.y, Math.cos(baseAngle) * 350, Math.sin(baseAngle) * 350, 660);
+        } else if (this.type === 'boss_singularity_overlord') {
+          // Ultimate Grand Overlord: 9-way starburst plasma barrage + surface rolling fireball
+          for (let k = -4; k <= 4; k++) {
+            createBullet(baseAngle + k * 0.15, 470, 8, k % 2 === 0 ? '#ff0055' : '#00f0ff');
+          }
+          spawnRollingFireball(this.x + this.facing * 40, -320, 26);
+        } else if (this.type === 'boss_tempest_god') {
+          for (let k = 0; k < 8; k++) {
+            createBullet(baseAngle + k * (Math.PI / 4), 430, 7, '#38bdf8');
+          }
+        } else if (this.type === 'boss_hyperion_dread') {
+          for (let k = -3; k <= 3; k++) {
+            createBullet(baseAngle + k * 0.15, 440, 7, '#10b981');
+          }
+          spawnRollingFireball(this.x + this.facing * 35, -290, 24);
+        } else if (this.type === 'boss_velocity_phantom') {
+          for (let k = -2; k <= 2; k++) {
+            createBullet(baseAngle + k * 0.18, 470, 6.5, '#c084fc');
+          }
+        } else if (this.type === 'boss_chrono_crusher') {
+          for (let k = -2; k <= 2; k++) {
+            createBullet(baseAngle + k * 0.22, 420, 8, '#f97316');
+          }
+          spawnRollingFireball(this.x + this.facing * 30, -280, 22);
+        } else if (this.type === 'boss_cyber_jaguar') {
+          createBullet(baseAngle - 0.18, 480, 6.5, '#fbbf24');
+          createBullet(baseAngle, 500, 7.5, '#ef4444');
+          createBullet(baseAngle + 0.18, 480, 6.5, '#fbbf24');
+        } else if (this.type === 'overdrive_brute') {
+          createBullet(baseAngle - 0.1, 420, 8, '#f43f5e');
+          createBullet(baseAngle + 0.1, 420, 8, '#f43f5e');
+        } else if (this.type === 'plasma_turret') {
+          createBullet(baseAngle - 0.12, 450, 6, '#00f0ff');
+          createBullet(baseAngle + 0.12, 450, 6, '#00f0ff');
+        } else if (this.type === 'hyper_chaser') {
+          createBullet(baseAngle, 440, 5, '#fb7185');
         } else if (this.type === 'boss_chronos_nexus') {
           // Ultimate Grand Apex God Barrage
           for (let k = -3; k <= 3; k++) {
@@ -5525,7 +5334,25 @@
         let bodyColor = '#1e1b4b';
         let strokeColor = '#a855f7';
         if (this.type.startsWith('boss')) {
-          if (this.type === 'boss_chronos_nexus') {
+          if (this.type === 'boss_singularity_overlord') {
+            bodyColor = '#050515';
+            strokeColor = '#e11d48';
+          } else if (this.type === 'boss_tempest_god') {
+            bodyColor = '#082f49';
+            strokeColor = '#38bdf8';
+          } else if (this.type === 'boss_hyperion_dread') {
+            bodyColor = '#052e16';
+            strokeColor = '#22c55e';
+          } else if (this.type === 'boss_velocity_phantom') {
+            bodyColor = '#3b0764';
+            strokeColor = '#c084fc';
+          } else if (this.type === 'boss_chrono_crusher') {
+            bodyColor = '#7c2d12';
+            strokeColor = '#f97316';
+          } else if (this.type === 'boss_cyber_jaguar') {
+            bodyColor = '#78350f';
+            strokeColor = '#fbbf24';
+          } else if (this.type === 'boss_chronos_nexus') {
             bodyColor = '#0f172a';
             strokeColor = '#fbbf24';
           } else if (this.type === 'boss_void_singularity') {
@@ -5550,6 +5377,15 @@
             bodyColor = '#831843';
             strokeColor = '#f43f5e';
           }
+        } else if (this.type === 'overdrive_brute') {
+          bodyColor = '#4c0519';
+          strokeColor = '#f43f5e';
+        } else if (this.type === 'plasma_turret') {
+          bodyColor = '#042f2e';
+          strokeColor = '#14b8a6';
+        } else if (this.type === 'hyper_chaser') {
+          bodyColor = '#500724';
+          strokeColor = '#fb7185';
         } else if (this.type === 'phase_brute') {
           bodyColor = '#3b0764';
           strokeColor = '#c084fc';
@@ -5820,129 +5656,145 @@
       }
     }
 
-    // --- 60 CAMPAIGN LEVELS (MISSION 1: 1–30 // MISSION 2: 31–60) ---
+    // --- 150 HANDCRAFTED CAMPAIGN LEVELS (MISSIONS 1 TO 5) ---
     function generateCampaignLevel(lvl) {
       enemies = [];
       hazards = [];
 
       // Determine Mission & Stage
-      const isMission4 = lvl > 90;
+      const isMission5 = lvl > 120;
+      const isMission4 = lvl > 90 && lvl <= 120;
       const isMission3 = lvl > 60 && lvl <= 90;
       const isMission2 = lvl > 30 && lvl <= 60;
-      let stage = Math.ceil(lvl / 10); // Stages 1 to 12
+      let stage = Math.ceil(lvl / 10); // Stages 1 to 15
 
-      // Set World Width for Side-Scrolling (Missions 2, 3, and 4)
-      if (isMission4) {
+      // Set World Width for Side-Scrolling & Autoscrolling (Missions 2, 3, 4, and 5)
+      if (isMission5) {
+        currentWorldWidth = (stage === 15) ? 4200 : ((stage === 14) ? 3800 : 3400);
+      } else if (isMission4) {
         currentWorldWidth = (stage === 12) ? 3200 : ((stage === 11) ? 3000 : 2800);
       } else if (isMission3) {
         currentWorldWidth = (stage === 9) ? 3000 : ((stage === 8) ? 2800 : 2600);
       } else if (isMission2) {
         currentWorldWidth = (stage === 6) ? 2800 : ((stage === 5) ? 2600 : 2400);
       } else {
-        currentWorldWidth = 1200;
+        // Mission 1: Dynamically match full mobile phone screen width so player can move forward freely with zero wasted vacant screen
+        currentWorldWidth = Math.max(VIRTUAL_WIDTH, 1200);
       }
 
-      platforms = [{ x: 0, y: 660, w: currentWorldWidth, h: 40 }];
+      // Continuous base ground platform spanning the full level so player strictly stays on surface
+      platforms = [{ x: -200, y: 660, w: Math.max(currentWorldWidth + 1000, 10000), h: 90 }];
       player = new Player(140, 590);
 
       // =========================================================================
       // MISSION 1: CHRONO MATRIX (LEVELS 1–30)
       // =========================================================================
       if (lvl <= 30) {
+        const W = currentWorldWidth;
         // STAGE 1: NEO-TOKYO ROOFTOPS (1-10)
         if (stage === 1) {
-          platforms.push({ x: 300, y: 480, w: 220, h: 20 });
-          platforms.push({ x: 680, y: 440, w: 220, h: 20 });
-          hazards.push(new Hazard('jump_pad', 220, 660));
-          hazards.push(new Hazard('barrel', 550, 630));
-          hazards.push(new Hazard('grapple_orb', 600, 260));
+          platforms.push({ x: Math.round(W * 0.22), y: 480, w: Math.round(Math.min(260, W * 0.18)), h: 20 });
+          platforms.push({ x: Math.round(W * 0.54), y: 440, w: Math.round(Math.min(260, W * 0.18)), h: 20 });
+          if (W >= 1400) {
+            platforms.push({ x: Math.round(W * 0.78), y: 460, w: Math.round(Math.min(220, W * 0.15)), h: 20 });
+          }
+          if (lvl >= 6) {
+            hazards.push(new Hazard('jump_pad', Math.round(W * 0.54), 660));
+          }
+          hazards.push(new Hazard('barrel', Math.round(W * 0.45), 630));
+          hazards.push(new Hazard('grapple_orb', Math.round(W * 0.5), 260));
 
           if (lvl === 1) {
             // Level 1: Gentle Warmup - Single stationary grunt in clear sight
-            enemies.push(new Enemy('grunt', 550, 620));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.52), 620));
           } else if (lvl === 2) {
             // Level 2: Two basic grunts, spaced out comfortably
-            enemies.push(new Enemy('grunt', 460, 620));
-            enemies.push(new Enemy('grunt', 760, 620));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.38), 620));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.68), 620));
           } else if (lvl === 3) {
             // Level 3: Two grunts on ground, one on low platform
-            enemies.push(new Enemy('grunt', 420, 620));
-            enemies.push(new Enemy('grunt', 780, 620));
-            enemies.push(new Enemy('grunt', 410, 440));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.36), 620));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.7), 620));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.32), 440));
           } else if (lvl === 4) {
             // Level 4: Two grunts + one slow sniper with generous reaction window
-            enemies.push(new Enemy('grunt', 380, 620));
-            enemies.push(new Enemy('grunt', 660, 620));
-            enemies.push(new Enemy('sniper', 790, 400));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.34), 620));
+            enemies.push(new Enemy('grunt', Math.round(W * 0.58), 620));
+            enemies.push(new Enemy('sniper', Math.round(W * 0.72), 400));
           } else if (lvl === 5) {
             // Level 5: Gentle Training Boss Drone (3 HP only for an easy confidence-boosting win!)
-            const droneBoss = new Enemy('boss_drone', 600, 280);
+            const droneBoss = new Enemy('boss_drone', Math.round(W * 0.5), 280);
             droneBoss.hp = 3;
             droneBoss.maxHp = 3;
             enemies.push(droneBoss);
           } else if (lvl === 10) {
-            enemies.push(new Enemy('boss_shogun', 600, 300));
+            enemies.push(new Enemy('boss_shogun', Math.round(W * 0.5), 300));
           } else {
             const enemyCount = Math.min(3 + Math.floor((lvl - 5) * 0.5), 6);
             const types = ['grunt', 'grunt', 'sniper'];
+            const step = (W * 0.48) / Math.max(1, enemyCount - 1);
             for (let i = 0; i < enemyCount; i++) {
               const tName = types[i % types.length];
-              enemies.push(new Enemy(tName, 450 + i * 110, 400 + (i % 2) * 120));
+              enemies.push(new Enemy(tName, Math.round(W * 0.35 + i * step), 400 + (i % 2) * 120));
             }
           }
         }
         // STAGE 2: CRYO-LABS & LASER VAULT (11-20)
         else if (stage === 2) {
-          platforms.push({ x: 220, y: 490, w: 200, h: 20 });
-          platforms.push({ x: 780, y: 490, w: 200, h: 20 });
-          platforms.push({ x: 500, y: 340, w: 200, h: 20 });
+          const platW = Math.round(Math.min(220, W * 0.18));
+          platforms.push({ x: Math.round(W * 0.18), y: 490, w: platW, h: 20 });
+          platforms.push({ x: Math.round(W * 0.5 - 100), y: 340, w: 200, h: 20 });
+          platforms.push({ x: W - Math.round(W * 0.18) - platW, y: 490, w: platW, h: 20 });
           hazards.push(new Hazard('portal', 140, 420, { color: '#00f0ff' }));
-          hazards.push(new Hazard('portal', 1060, 420, { color: '#ffaa00' }));
-          hazards.push(new Hazard('jump_pad', 500, 660));
+          hazards.push(new Hazard('portal', W - 140, 420, { color: '#ffaa00' }));
+          hazards.push(new Hazard('jump_pad', Math.round(W * 0.5), 660));
 
           if (lvl === 15) {
-            enemies.push(new Enemy('boss_drone', 600, 250));
-            enemies.push(new Enemy('sniper', 240, 450));
-            enemies.push(new Enemy('sniper', 960, 450));
+            enemies.push(new Enemy('boss_drone', Math.round(W * 0.5), 250));
+            enemies.push(new Enemy('sniper', Math.round(W * 0.2), 450));
+            enemies.push(new Enemy('sniper', W - Math.round(W * 0.2), 450));
           } else if (lvl === 20) {
-            enemies.push(new Enemy('boss_shogun', 600, 280));
-            enemies.push(new Enemy('shield', 320, 450));
-            enemies.push(new Enemy('shield', 880, 450, { facing: -1 }));
+            enemies.push(new Enemy('boss_shogun', Math.round(W * 0.5), 280));
+            enemies.push(new Enemy('shield', Math.round(W * 0.26), 450));
+            enemies.push(new Enemy('shield', W - Math.round(W * 0.26), 450, { facing: -1 }));
           } else {
             const enemyCount = Math.min(4 + Math.floor((lvl - 10) * 0.5), 7);
             const types = ['shield', 'sniper', 'grunt'];
+            const step = (W * 0.54) / Math.max(1, enemyCount - 1);
             for (let i = 0; i < enemyCount; i++) {
               const tName = types[i % types.length];
-              enemies.push(new Enemy(tName, 320 + i * 110, 400 + (i % 2) * 100));
+              enemies.push(new Enemy(tName, Math.round(W * 0.25 + i * step), 400 + (i % 2) * 100));
             }
           }
         }
         // STAGE 3: ORBITAL VOID CORE (21-30)
         else {
-          platforms.push({ x: 180, y: 500, w: 180, h: 20 });
-          platforms.push({ x: 840, y: 500, w: 180, h: 20 });
-          platforms.push({ x: 500, y: 320, w: 200, h: 20 });
-          hazards.push(new Hazard('jump_pad', 300, 660));
-          hazards.push(new Hazard('jump_pad', 900, 660));
-          hazards.push(new Hazard('grapple_orb', 600, 180));
+          const platW = Math.round(Math.min(200, W * 0.16));
+          platforms.push({ x: Math.round(W * 0.15), y: 500, w: platW, h: 20 });
+          platforms.push({ x: Math.round(W * 0.5 - 100), y: 320, w: 200, h: 20 });
+          platforms.push({ x: W - Math.round(W * 0.15) - platW, y: 500, w: platW, h: 20 });
+          hazards.push(new Hazard('jump_pad', Math.round(W * 0.25), 660));
+          hazards.push(new Hazard('jump_pad', W - Math.round(W * 0.25), 660));
+          hazards.push(new Hazard('grapple_orb', Math.round(W * 0.5), 180));
           hazards.push(new Hazard('portal', 120, 360, { color: '#a855f7' }));
-          hazards.push(new Hazard('portal', 1080, 360, { color: '#ff0055' }));
+          hazards.push(new Hazard('portal', W - 120, 360, { color: '#ff0055' }));
 
           if (lvl === 25) {
-            enemies.push(new Enemy('boss_drone', 600, 240));
-            enemies.push(new Enemy('shield', 260, 460));
-            enemies.push(new Enemy('shield', 940, 460, { facing: -1 }));
+            enemies.push(new Enemy('boss_drone', Math.round(W * 0.5), 240));
+            enemies.push(new Enemy('shield', Math.round(W * 0.22), 460));
+            enemies.push(new Enemy('shield', W - Math.round(W * 0.22), 460, { facing: -1 }));
           } else if (lvl === 30) {
             // GRAND FINALE OF MISSION 1: OMEGA MECHA TITAN (15 HP)
-            enemies.push(new Enemy('boss_titan', 600, 240));
-            enemies.push(new Enemy('sniper', 200, 460));
-            enemies.push(new Enemy('sniper', 1000, 460));
+            enemies.push(new Enemy('boss_titan', Math.round(W * 0.5), 240));
+            enemies.push(new Enemy('sniper', Math.round(W * 0.18), 460));
+            enemies.push(new Enemy('sniper', W - Math.round(W * 0.18), 460));
           } else {
             const enemyCount = Math.min(5 + Math.floor((lvl - 20) * 0.4), 8);
             const types = ['shield', 'sniper', 'grunt', 'sniper'];
+            const step = (W * 0.58) / Math.max(1, enemyCount - 1);
             for (let i = 0; i < enemyCount; i++) {
               const tName = types[i % types.length];
-              enemies.push(new Enemy(tName, 260 + i * 110, 380 + (i % 2) * 100));
+              enemies.push(new Enemy(tName, Math.round(W * 0.22 + i * step), 380 + (i % 2) * 100));
             }
           }
         }
@@ -6317,7 +6169,7 @@
       // MISSION 4: CHRONO-VOID QUANTUM GLITCH MATRIX (LEVELS 91–120)
       // High Difficulty, Shadow Mimics, Time-Bomb Drones, Phase Brutes & 4 Bosses
       // =========================================================================
-      else {
+      else if (lvl <= 120) {
         // STAGE 10: QUANTUM GLITCH MATRIX (LEVELS 91–100, 2800px wide)
         if (stage === 10) {
           platforms.push({ x: 240, y: 500, w: 260, h: 20 });
@@ -6504,22 +6356,214 @@
           }
         }
       }
+      // =========================================================================
+      // MISSION 5: HYPER-RUN OVERDRIVE (LEVELS 121–150)
+      // Screen autoscrolls forward continuously, rolling fireballs along the surface,
+      // and enemy numbers and power escalate per level!
+      // =========================================================================
+      else if (lvl <= 150) {
+        // STAGE 13: CYBER HYPER-TRACK (LEVELS 121–130, 3400px wide)
+        if (stage === 13) {
+          platforms.push({ x: 260, y: 500, w: 260, h: 20 });
+          platforms.push({ x: 640, y: 380, w: 260, h: 20 });
+          platforms.push({ x: 1040, y: 490, w: 280, h: 20 });
+          platforms.push({ x: 1480, y: 360, w: 280, h: 20 });
+          platforms.push({ x: 1920, y: 490, w: 280, h: 20 });
+          platforms.push({ x: 2360, y: 370, w: 280, h: 20 });
+          platforms.push({ x: 2800, y: 490, w: 280, h: 20 });
+
+          hazards.push(new Hazard('jump_pad', 220, 660));
+          hazards.push(new Hazard('jump_pad', 1000, 660));
+          hazards.push(new Hazard('jump_pad', 1860, 660));
+          hazards.push(new Hazard('jump_pad', 2700, 660));
+          hazards.push(new Hazard('grapple_orb', 640, 180));
+          hazards.push(new Hazard('grapple_orb', 1480, 170));
+          hazards.push(new Hazard('grapple_orb', 2360, 180));
+          hazards.push(new Hazard('portal', 180, 440, { color: '#00f0ff' }));
+          hazards.push(new Hazard('portal', 3200, 440, { color: '#fbbf24' }));
+
+          if (lvl === 125) {
+            // BOSS 125: CYBER JAGUAR X (35 HP, Rapid Dash Attacks)
+            enemies.push(new Enemy('boss_cyber_jaguar', 1700, 620, { patrolMinX: 1100, patrolMaxX: 2500 }));
+            enemies.push(new Enemy('hyper_chaser', 750, 620));
+            enemies.push(new Enemy('hyper_chaser', 2450, 620));
+            enemies.push(new Enemy('hover_drone', 1200, 280));
+            enemies.push(new Enemy('hover_drone', 2050, 280));
+          } else if (lvl === 130) {
+            // BOSS 130: TITAN CHRONO CRUSHER (45 HP, Ground Shockwaves)
+            enemies.push(new Enemy('boss_chrono_crusher', 1800, 590, { patrolMinX: 1100, patrolMaxX: 2600 }));
+            enemies.push(new Enemy('hyper_chaser', 650, 620));
+            enemies.push(new Enemy('hyper_chaser', 2550, 620));
+            enemies.push(new Enemy('phase_brute', 1150, 450, { patrolMinX: 1050, patrolMaxX: 1250 }));
+            enemies.push(new Enemy('phase_brute', 2250, 450, { patrolMinX: 2150, patrolMaxX: 2350 }));
+            enemies.push(new Enemy('plasma_turret', 1500, 260, { patrolMinX: 1350, patrolMaxX: 1650 }));
+          } else {
+            // Regular levels 121-129: Enemy count & power scale with level!
+            const count = Math.min(6 + Math.floor((lvl - 120) * 0.45), 10);
+            const step = Math.floor(2700 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 320 + i * step;
+              const ey = 360 + (i % 3) * 60;
+              if (i % 3 === 0) {
+                const ch = new Enemy('hyper_chaser', ex, 620);
+                if (lvl >= 126) ch.hp = 4;
+                enemies.push(ch);
+              } else if (i % 3 === 1) {
+                enemies.push(new Enemy('hover_drone', ex, ey - 40, { patrolMinX: ex - 90, patrolMaxX: ex + 90 }));
+              } else {
+                enemies.push(new Enemy('shield', ex, 620, { facing: i % 2 === 0 ? 1 : -1 }));
+              }
+            }
+          }
+        }
+        // STAGE 14: NEON MAG-LEV OVERDRIVE (LEVELS 131–140, 3800px wide)
+        else if (stage === 14) {
+          platforms.push({ x: 260, y: 500, w: 280, h: 20 });
+          platforms.push({ x: 680, y: 360, w: 300, h: 20 });
+          platforms.push({ x: 1140, y: 490, w: 280, h: 20 });
+          platforms.push({ x: 1580, y: 340, w: 320, h: 20 });
+          platforms.push({ x: 2080, y: 480, w: 280, h: 20 });
+          platforms.push({ x: 2540, y: 350, w: 300, h: 20 });
+          platforms.push({ x: 3020, y: 480, w: 300, h: 20 });
+
+          hazards.push(new Hazard('jump_pad', 220, 660));
+          hazards.push(new Hazard('jump_pad', 1080, 660));
+          hazards.push(new Hazard('jump_pad', 1980, 660));
+          hazards.push(new Hazard('jump_pad', 2900, 660));
+          hazards.push(new Hazard('grapple_orb', 680, 160));
+          hazards.push(new Hazard('grapple_orb', 1580, 140));
+          hazards.push(new Hazard('grapple_orb', 2540, 150));
+          hazards.push(new Hazard('portal', 180, 440, { color: '#10b981' }));
+          hazards.push(new Hazard('portal', 3550, 440, { color: '#00f0ff' }));
+
+          if (lvl === 135) {
+            // BOSS 135: PHANTOM VELOCITY VOID (50 HP, Phase Teleport Slash)
+            enemies.push(new Enemy('boss_velocity_phantom', 1900, 300, { patrolMinX: 1100, patrolMaxX: 2800 }));
+            enemies.push(new Enemy('hyper_chaser', 750, 620));
+            enemies.push(new Enemy('hyper_chaser', 2850, 620));
+            enemies.push(new Enemy('plasma_turret', 1300, 250, { patrolMinX: 1150, patrolMaxX: 1450 }));
+            enemies.push(new Enemy('plasma_turret', 2350, 250, { patrolMinX: 2200, patrolMaxX: 2500 }));
+            enemies.push(new Enemy('overdrive_brute', 1800, 620, { patrolMinX: 1650, patrolMaxX: 1950 }));
+          } else if (lvl === 140) {
+            // BOSS 140: HYPERION DREADNOUGHT (55 HP, Twin Plasma Cannon Turrets)
+            enemies.push(new Enemy('boss_hyperion_dread', 2000, 270, { patrolMinX: 1200, patrolMaxX: 3000 }));
+            enemies.push(new Enemy('hyper_chaser', 800, 620));
+            enemies.push(new Enemy('hyper_chaser', 3000, 620));
+            enemies.push(new Enemy('plasma_turret', 1400, 240, { patrolMinX: 1250, patrolMaxX: 1550 }));
+            enemies.push(new Enemy('plasma_turret', 2500, 240, { patrolMinX: 2350, patrolMaxX: 2650 }));
+            enemies.push(new Enemy('overdrive_brute', 1100, 450, { patrolMinX: 1000, patrolMaxX: 1200 }));
+            enemies.push(new Enemy('overdrive_brute', 2700, 450, { patrolMinX: 2600, patrolMaxX: 2800 }));
+          } else {
+            // Regular levels 131-139: Enemy count & power scale with level!
+            const count = Math.min(8 + Math.floor((lvl - 130) * 0.5), 13);
+            const step = Math.floor(3100 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 300 + i * step;
+              const ey = 340 + (i % 3) * 60;
+              if (i % 4 === 0) {
+                const ch = new Enemy('hyper_chaser', ex, 620);
+                if (lvl >= 136) ch.hp = 4;
+                enemies.push(ch);
+              } else if (i % 4 === 1) {
+                const pt = new Enemy('plasma_turret', ex, ey - 30, { patrolMinX: ex - 90, patrolMaxX: ex + 90 });
+                if (lvl >= 136) pt.hp = 5;
+                enemies.push(pt);
+              } else if (i % 4 === 2) {
+                enemies.push(new Enemy('overdrive_brute', ex, 620, { patrolMinX: ex - 80, patrolMaxX: ex + 80 }));
+              } else {
+                enemies.push(new Enemy('time_bomb_drone', ex, 180 + (i % 2) * 40, { fuseTimer: 3.5, moveSpeed: 160 }));
+              }
+            }
+          }
+        }
+        // STAGE 15: QUANTUM CHRONO SINGULARITY APEX (LEVELS 141–150, 4200px wide)
+        else {
+          platforms.push({ x: 260, y: 500, w: 300, h: 20 });
+          platforms.push({ x: 720, y: 350, w: 320, h: 20 });
+          platforms.push({ x: 1200, y: 480, w: 300, h: 20 });
+          platforms.push({ x: 1680, y: 330, w: 340, h: 20 });
+          platforms.push({ x: 2200, y: 480, w: 300, h: 20 });
+          platforms.push({ x: 2700, y: 340, w: 320, h: 20 });
+          platforms.push({ x: 3200, y: 480, w: 300, h: 20 });
+          platforms.push({ x: 3660, y: 360, w: 300, h: 20 });
+
+          hazards.push(new Hazard('jump_pad', 200, 660));
+          hazards.push(new Hazard('jump_pad', 1100, 660));
+          hazards.push(new Hazard('jump_pad', 2050, 660));
+          hazards.push(new Hazard('jump_pad', 3050, 660));
+          hazards.push(new Hazard('jump_pad', 3850, 660));
+          hazards.push(new Hazard('grapple_orb', 720, 150));
+          hazards.push(new Hazard('grapple_orb', 1680, 130));
+          hazards.push(new Hazard('grapple_orb', 2700, 140));
+          hazards.push(new Hazard('grapple_orb', 3660, 150));
+          hazards.push(new Hazard('portal', 160, 440, { color: '#ff0055' }));
+          hazards.push(new Hazard('portal', 4000, 440, { color: '#fbbf24' }));
+
+          if (lvl === 145) {
+            // BOSS 145: CHRONO TEMPEST GOD (60 HP, Lightning Storm Ring)
+            enemies.push(new Enemy('boss_tempest_god', 2100, 260, { patrolMinX: 1300, patrolMaxX: 3200 }));
+            enemies.push(new Enemy('hyper_chaser', 850, 620));
+            enemies.push(new Enemy('hyper_chaser', 3350, 620));
+            enemies.push(new Enemy('plasma_turret', 1500, 220, { patrolMinX: 1350, patrolMaxX: 1650 }));
+            enemies.push(new Enemy('plasma_turret', 2700, 220, { patrolMinX: 2550, patrolMaxX: 2850 }));
+            enemies.push(new Enemy('overdrive_brute', 1150, 440, { patrolMinX: 1050, patrolMaxX: 1250 }));
+            enemies.push(new Enemy('overdrive_brute', 3050, 440, { patrolMinX: 2950, patrolMaxX: 3150 }));
+            enemies.push(new Enemy('shadow_mimic', 2100, 620, { moveSpeed: 145 }));
+          } else if (lvl === 150) {
+            // ULTIMATE GRAND FINALE LEVEL 150: CHRONO SINGULARITY OVERLORD (70 HP)
+            enemies.push(new Enemy('boss_singularity_overlord', 2200, 260, { patrolMinX: 1200, patrolMaxX: 3400 }));
+            enemies.push(new Enemy('hyper_chaser', 750, 620));
+            enemies.push(new Enemy('hyper_chaser', 3550, 620));
+            enemies.push(new Enemy('plasma_turret', 1400, 220, { patrolMinX: 1250, patrolMaxX: 1550 }));
+            enemies.push(new Enemy('plasma_turret', 2900, 220, { patrolMinX: 2750, patrolMaxX: 3050 }));
+            enemies.push(new Enemy('overdrive_brute', 1150, 440, { patrolMinX: 1050, patrolMaxX: 1250 }));
+            enemies.push(new Enemy('overdrive_brute', 3200, 440, { patrolMinX: 3100, patrolMaxX: 3300 }));
+            enemies.push(new Enemy('shadow_mimic', 1800, 620, { moveSpeed: 150 }));
+            enemies.push(new Enemy('shadow_mimic', 2600, 620, { moveSpeed: 150 }));
+            enemies.push(new Enemy('heavy_mech', 2200, 450, { moveType: 'patrol', patrolMinX: 2000, patrolMaxX: 2400 }));
+          } else {
+            // Regular levels 141-149: Enemy count & power scale with level!
+            const count = Math.min(10 + Math.floor((lvl - 140) * 0.6), 16);
+            const step = Math.floor(3500 / count);
+            for (let i = 0; i < count; i++) {
+              const ex = 300 + i * step;
+              const ey = 330 + (i % 3) * 60;
+              if (i % 4 === 0) {
+                const ch = new Enemy('hyper_chaser', ex, 620);
+                ch.hp = lvl >= 146 ? 4 : 3;
+                enemies.push(ch);
+              } else if (i % 4 === 1) {
+                const pt = new Enemy('plasma_turret', ex, ey - 30, { patrolMinX: ex - 90, patrolMaxX: ex + 90 });
+                pt.hp = lvl >= 146 ? 5 : 4;
+                enemies.push(pt);
+              } else if (i % 4 === 2) {
+                const ob = new Enemy('overdrive_brute', ex, 620, { patrolMinX: ex - 90, patrolMaxX: ex + 90 });
+                ob.hp = lvl >= 146 ? 7 : 6;
+                enemies.push(ob);
+              } else {
+                enemies.push(new Enemy('shadow_mimic', ex, 620, { moveSpeed: 145 }));
+              }
+            }
+          }
+        }
+      }
     }
 
     function startCampaignLevel(lvl) {
       if (lvl < 1) lvl = 1;
-      if (lvl > 120) lvl = 120;
+      if (lvl > 150) lvl = 150;
       currentLevelIndex = lvl;
       gameMode = 'CAMPAIGN';
       gameState = 'PLAYING';
       setBannerVisibility(false);
       isPaused = false;
 
-      // Sync active mission & stage trackers
+      // Sync active mission & stage trackers across 5 missions
       if (lvl <= 30) currentSelectedMission = 1;
       else if (lvl <= 60) currentSelectedMission = 2;
       else if (lvl <= 90) currentSelectedMission = 3;
-      else currentSelectedMission = 4;
+      else if (lvl <= 120) currentSelectedMission = 4;
+      else currentSelectedMission = 5;
 
       currentSelectedStage = Math.ceil(lvl / 10);
       currentSideMission = currentSelectedMission;
@@ -6543,6 +6587,8 @@
       mission3FireballTimer = 2.0;
       airDroneStrikeTimer = 7.0;
       airStrikeAlertTimer = 0;
+      mission5ScrollX = 0;
+      mission5FireballTimer = 2.0;
       isVictorySequenceRunning = false;
       isFinalKillZoom = false;
       if (cinematicVignette) cinematicVignette.classList.remove('active');
@@ -6620,9 +6666,9 @@
       lastLevelClearReward = Math.round(40 * currentLevelIndex * greed);
       progression.addShards(lastLevelClearReward);
 
-      // Advance level unlock up to 120
+      // Advance level unlock up to 150
       if (currentLevelIndex >= progression.data.highestLevelReached) {
-        progression.data.highestLevelReached = Math.min(120, currentLevelIndex + 1);
+        progression.data.highestLevelReached = Math.min(150, currentLevelIndex + 1);
         progression.save();
       }
 
@@ -6632,20 +6678,28 @@
         progression.save();
       }
 
-      if (currentLevelIndex === 120) {
-        // Grand Finale: All 120 levels conquered!
-        document.getElementById('allclear-header').textContent = 'ALL 4 MISSIONS CONQUERED';
-        document.getElementById('allclear-title').textContent = 'COSMIC MATRIX RESTORED (120/120)';
-        document.getElementById('allclear-desc').textContent = 'You conquered all 120 handcrafted campaign levels across Missions 1, 2, 3, and 4, neutralized every single enemy across all sectors, and defeated the Quantum Nexus God!';
-        document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 120/120 (Missions 1, 2, 3 & 4)';
+      if (currentLevelIndex === 150) {
+        // Grand Finale: All 150 levels conquered across all 5 Missions!
+        document.getElementById('allclear-header').textContent = 'ALL 5 MISSIONS CONQUERED';
+        document.getElementById('allclear-title').textContent = 'COSMIC MATRIX RESTORED (150/150)';
+        document.getElementById('allclear-desc').textContent = 'You conquered all 150 handcrafted campaign levels across Missions 1, 2, 3, 4, and 5, survived the Hyper-Run Overdrive, avoided rolling surface fireballs, and defeated the Chrono Singularity Overlord!';
+        document.getElementById('allclear-stat-sectors').textContent = 'Total Sectors Cleared: 150/150 (Missions 1, 2, 3, 4 & 5)';
         document.getElementById('final-total-shards').textContent = progression.data.shards;
         modalAllClear.classList.remove('hidden');
+      } else if (currentLevelIndex === 120) {
+        // Mission 4 Complete -> Unlocks Mission 5!
+        document.getElementById('victory-title').textContent = 'MISSION 4 COMPLETE (120/120)!';
+        document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
+        document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
+        document.getElementById('btn-claim-3x-shards').textContent = `⚡ CLAIM 2X SHARDS BONUS (+${lastLevelClearReward} ⚡)`;
+        document.getElementById('btn-claim-3x-shards').disabled = false;
+        modalVictory.classList.remove('hidden');
       } else if (currentLevelIndex === 90) {
         // Mission 3 Complete
         document.getElementById('victory-title').textContent = 'MISSION 3 COMPLETE (90/90)!';
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
+        document.getElementById('btn-claim-3x-shards').textContent = `⚡ CLAIM 2X SHARDS BONUS (+${lastLevelClearReward} ⚡)`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       } else if (currentLevelIndex === 60) {
@@ -6653,7 +6707,7 @@
         document.getElementById('victory-title').textContent = 'MISSION 2 COMPLETE (60/60)!';
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
+        document.getElementById('btn-claim-3x-shards').textContent = `⚡ CLAIM 2X SHARDS BONUS (+${lastLevelClearReward} ⚡)`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       } else if (currentLevelIndex === 30) {
@@ -6661,29 +6715,23 @@
         document.getElementById('victory-title').textContent = 'MISSION 1 COMPLETE (30/30)!';
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
+        document.getElementById('btn-claim-3x-shards').textContent = `⚡ CLAIM 2X SHARDS BONUS (+${lastLevelClearReward} ⚡)`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       } else {
-        const missionNum = currentLevelIndex <= 30 ? 1 : (currentLevelIndex <= 60 ? 2 : (currentLevelIndex <= 90 ? 3 : 4));
+        const missionNum = currentLevelIndex <= 30 ? 1 : (currentLevelIndex <= 60 ? 2 : (currentLevelIndex <= 90 ? 3 : (currentLevelIndex <= 120 ? 4 : 5)));
         document.getElementById('victory-title').textContent = `M${missionNum} · LEVEL ${currentLevelIndex} CLEARED`;
         document.getElementById('victory-combo').textContent = `x${maxAirComboThisRun}`;
         document.getElementById('victory-shards').textContent = `+${lastLevelClearReward} ⚡`;
-        document.getElementById('btn-claim-3x-shards').textContent = `🎬 CLAIM 2X SHARDS (+${lastLevelClearReward} ⚡) [10s AD]`;
+        document.getElementById('btn-claim-3x-shards').textContent = `⚡ CLAIM 2X SHARDS BONUS (+${lastLevelClearReward} ⚡)`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
       }
 
-      // Boss Level Rewarded Interstitial (+250 ⚡) vs Standard Interstitial every 3 non-boss levels
+      // Boss Level Bonus (+250 ⚡) granted directly without ads
       const isBoss = (currentLevelIndex % 5 === 0);
       if (isBoss) {
         triggerRewardedInterstitialAd();
-      } else {
-        progression.data.levelsClearedCount = (progression.data.levelsClearedCount || 0) + 1;
-        progression.save();
-        if (progression.data.levelsClearedCount % 3 === 0) {
-          triggerInterstitialAd();
-        }
       }
 
       sound.playReward();
@@ -6699,12 +6747,13 @@
     }
 
     function updateHUD() {
-      if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/120`;
+      if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/150`;
       if (hudSectorLabel) {
         if (currentLevelIndex <= 30) hudSectorLabel.textContent = 'MISSION 1';
         else if (currentLevelIndex <= 60) hudSectorLabel.textContent = 'MISSION 2 (SCROLL)';
         else if (currentLevelIndex <= 90) hudSectorLabel.textContent = 'MISSION 3 (INFERNO)';
-        else hudSectorLabel.textContent = 'MISSION 4 (CHRONO-VOID)';
+        else if (currentLevelIndex <= 120) hudSectorLabel.textContent = 'MISSION 4 (CHRONO-VOID)';
+        else hudSectorLabel.textContent = 'MISSION 5 (HYPER-RUN)';
       }
       if (hudComboText) hudComboText.textContent = `x${airCombo}`;
       if (hudShardsText) hudShardsText.textContent = `${progression.data.shards} ⚡`;
@@ -6794,7 +6843,7 @@
             actionHtml = `
               <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-end;">
                 <button class="shop-action-btn buy" onclick="buyBlade('${item.id}', ${item.cost})">${t('unlock')} (${item.cost} ⚡)</button>
-                <button class="shop-action-btn try-btn" onclick="tryBladeWithAd('${item.id}')">🎬 Try 1 Level (Ad)</button>
+                <button class="shop-action-btn try-btn" onclick="tryBladeDirectly('${item.id}')">✨ Free Trial (1 Lvl)</button>
               </div>
             `;
           }
@@ -7000,8 +7049,12 @@
       updateHUD();
     };
 
+    window.tryBladeDirectly = function(id) {
+      window.onAdMobRewardGranted('try_blade:' + id);
+    };
+
     window.tryBladeWithAd = function(id) {
-      triggerRewardedAd('try_blade:' + id);
+      window.tryBladeDirectly(id);
     };
 
     window.buySuit = function(id, cost) {
@@ -7038,23 +7091,26 @@
       }
     };
 
-    // --- LEVEL SELECT SYSTEM WITH MISSIONS 1–4 (LEVELS 1–120) ---
+    // --- LEVEL SELECT SYSTEM WITH MISSIONS 1–5 (LEVELS 1–150) ---
     function renderLevelSelect(stage = currentSelectedStage) {
       currentSelectedStage = stage;
       if (stage <= 3) currentSelectedMission = 1;
       else if (stage <= 6) currentSelectedMission = 2;
       else if (stage <= 9) currentSelectedMission = 3;
-      else currentSelectedMission = 4;
+      else if (stage <= 12) currentSelectedMission = 4;
+      else currentSelectedMission = 5;
 
       // Update Mission Tab styles
       const tabM1 = document.getElementById('tab-mission-1');
       const tabM2 = document.getElementById('tab-mission-2');
       const tabM3 = document.getElementById('tab-mission-3');
       const tabM4 = document.getElementById('tab-mission-4');
+      const tabM5 = document.getElementById('tab-mission-5');
       if (tabM1) tabM1.classList.toggle('active', currentSelectedMission === 1);
       if (tabM2) tabM2.classList.toggle('active', currentSelectedMission === 2);
       if (tabM3) tabM3.classList.toggle('active', currentSelectedMission === 3);
       if (tabM4) tabM4.classList.toggle('active', currentSelectedMission === 4);
+      if (tabM5) tabM5.classList.toggle('active', currentSelectedMission === 5);
 
       // Re-populate stage tabs container based on active mission
       const stageTabsContainer = document.getElementById('modal-stage-tabs-container');
@@ -7067,8 +7123,10 @@
           stageList = [{ stage: 4, label: 'STAGE 4 (31–40)' }, { stage: 5, label: 'STAGE 5 (41–50)' }, { stage: 6, label: 'STAGE 6 (51–60)' }];
         } else if (currentSelectedMission === 3) {
           stageList = [{ stage: 7, label: 'STAGE 7 (61–70)' }, { stage: 8, label: 'STAGE 8 (71–80)' }, { stage: 9, label: 'STAGE 9 (81–90)' }];
-        } else {
+        } else if (currentSelectedMission === 4) {
           stageList = [{ stage: 10, label: 'STAGE 10 (91–100)' }, { stage: 11, label: 'STAGE 11 (101–110)' }, { stage: 12, label: 'STAGE 12 (111–120)' }];
+        } else {
+          stageList = [{ stage: 13, label: 'STAGE 13 (121–130)' }, { stage: 14, label: 'STAGE 14 (131–140)' }, { stage: 15, label: 'STAGE 15 (141–150)' }];
         }
 
         stageList.forEach(item => {
@@ -7101,7 +7159,10 @@
         else if (stage === 9) descEl.textContent = 'Mission 3 · Stage 9: Apocalyptic Cyber Core (Levels 81–90) // Mega Fireballs & Grand Architect Omega';
         else if (stage === 10) descEl.textContent = 'Mission 4 · Stage 10: Quantum Glitch Matrix (Levels 91–100) // Shadow Mimics & Chrono Sentinel';
         else if (stage === 11) descEl.textContent = 'Mission 4 · Stage 11: Singularity Gravity Rift (Levels 101–110) // Phase Brutes & Glitch Reaper';
-        else descEl.textContent = 'Mission 4 · Stage 12: The Chrono-Void Apex (Levels 111–120) // Time-Bomb Drones, Void Singularity & Grand Nexus God';
+        else if (stage === 12) descEl.textContent = 'Mission 4 · Stage 12: The Chrono-Void Apex (Levels 111–120) // Time-Bomb Drones & Nexus God';
+        else if (stage === 13) descEl.textContent = 'Mission 5 · Stage 13: Cyber Hyper-Track (Levels 121–130) // Speed Autoscroll, Rolling Fireballs & Cyber Jaguar';
+        else if (stage === 14) descEl.textContent = 'Mission 5 · Stage 14: Neon Mag-Lev Overdrive (Levels 131–140) // Faster Scroll, Dense Fireballs & Hyperion';
+        else descEl.textContent = 'Mission 5 · Stage 15: Quantum Singularity Apex (Levels 141–150) // Relentless Rolling Fire & Singularity Overlord';
       }
 
       for (let i = start; i <= end; i++) {
@@ -7138,6 +7199,9 @@
     });
     document.getElementById('tab-mission-4')?.addEventListener('click', () => {
       renderLevelSelect(10);
+    });
+    document.getElementById('tab-mission-5')?.addEventListener('click', () => {
+      renderLevelSelect(13);
     });
 
     // --- REWARDED AD BUTTON HOOKS ---
@@ -7316,7 +7380,8 @@
       if (stage <= 3) currentSideMission = 1;
       else if (stage <= 6) currentSideMission = 2;
       else if (stage <= 9) currentSideMission = 3;
-      else currentSideMission = 4;
+      else if (stage <= 12) currentSideMission = 4;
+      else currentSideMission = 5;
 
       const container = document.getElementById('side-levels-grid');
       if (!container) return;
@@ -7327,17 +7392,19 @@
       if (resumeNumEl) resumeNumEl.textContent = highestUnlocked;
 
       const progressTextEl = document.getElementById('side-levels-progress-text');
-      if (progressTextEl) progressTextEl.textContent = `Highest: LVL ${highestUnlocked} / 120`;
+      if (progressTextEl) progressTextEl.textContent = `Highest: LVL ${highestUnlocked} / 150`;
 
       // Update side mission tabs
       const sideM1 = document.getElementById('side-m-btn-1');
       const sideM2 = document.getElementById('side-m-btn-2');
       const sideM3 = document.getElementById('side-m-btn-3');
       const sideM4 = document.getElementById('side-m-btn-4');
+      const sideM5 = document.getElementById('side-m-btn-5');
       if (sideM1) sideM1.classList.toggle('active', currentSideMission === 1);
       if (sideM2) sideM2.classList.toggle('active', currentSideMission === 2);
       if (sideM3) sideM3.classList.toggle('active', currentSideMission === 3);
       if (sideM4) sideM4.classList.toggle('active', currentSideMission === 4);
+      if (sideM5) sideM5.classList.toggle('active', currentSideMission === 5);
 
       // Re-populate side stage tabs
       const stageTabsContainer = document.getElementById('side-stage-tabs-container');
@@ -7350,8 +7417,10 @@
           stageList = [{ stage: 4, label: 'STAGE 4 (31–40)' }, { stage: 5, label: 'STAGE 5 (41–50)' }, { stage: 6, label: 'STAGE 6 (51–60)' }];
         } else if (currentSideMission === 3) {
           stageList = [{ stage: 7, label: 'STAGE 7 (61–70)' }, { stage: 8, label: 'STAGE 8 (71–80)' }, { stage: 9, label: 'STAGE 9 (81–90)' }];
-        } else {
+        } else if (currentSideMission === 4) {
           stageList = [{ stage: 10, label: 'STAGE 10 (91–100)' }, { stage: 11, label: 'STAGE 11 (101–110)' }, { stage: 12, label: 'STAGE 12 (111–120)' }];
+        } else {
+          stageList = [{ stage: 13, label: 'STAGE 13 (121–130)' }, { stage: 14, label: 'STAGE 14 (131–140)' }, { stage: 15, label: 'STAGE 15 (141–150)' }];
         }
 
         stageList.forEach(item => {
@@ -7379,7 +7448,10 @@
         else if (stage === 9) descEl.textContent = 'Mission 3 · Stage 9: Apocalyptic Cyber Core (Levels 81–90) · Mega Fireballs & Grand Architect Omega';
         else if (stage === 10) descEl.textContent = 'Mission 4 · Stage 10: Quantum Glitch Matrix (Levels 91–100) · Shadow Mimics & Chrono Sentinel';
         else if (stage === 11) descEl.textContent = 'Mission 4 · Stage 11: Singularity Gravity Rift (Levels 101–110) · Phase Brutes & Glitch Reaper';
-        else descEl.textContent = 'Mission 4 · Stage 12: Chrono-Void Nexus (Levels 111–120) · Time-Bomb Drones, Void Singularity & Grand Nexus God';
+        else if (stage === 12) descEl.textContent = 'Mission 4 · Stage 12: Chrono-Void Nexus (Levels 111–120) · Time-Bomb Drones, Void Singularity & Grand Nexus God';
+        else if (stage === 13) descEl.textContent = 'Mission 5 · Stage 13: Cyber Hyper-Track (Levels 121–130) · Speed Autoscroll, Rolling Fireballs & Cyber Jaguar';
+        else if (stage === 14) descEl.textContent = 'Mission 5 · Stage 14: Neon Mag-Lev Overdrive (Levels 131–140) · Faster Scroll, Dense Fireballs & Hyperion';
+        else descEl.textContent = 'Mission 5 · Stage 15: Quantum Singularity Apex (Levels 141–150) · Relentless Rolling Fire & Singularity Overlord';
       }
 
       const start = (stage - 1) * 10 + 1;
@@ -7423,6 +7495,9 @@
     document.getElementById('side-m-btn-4')?.addEventListener('click', () => {
       renderSideLevels(10);
     });
+    document.getElementById('side-m-btn-5')?.addEventListener('click', () => {
+      renderSideLevels(13);
+    });
 
     document.getElementById('btn-side-resume-level')?.addEventListener('click', () => {
       closeSideMenu();
@@ -7437,7 +7512,6 @@
       updateSideMenuProfile();
       renderSideWeapons();
       renderSideLevels(currentSideStage || 1);
-      updateAdMobDiagnosticsUI();
       sideMenuDrawer.classList.add('active');
       sideMenuOverlay.classList.add('active');
     }
@@ -7523,8 +7597,6 @@
         if (pane) pane.classList.add('active');
         if (target === 'levels') {
           renderSideLevels(currentSideStage || 1);
-        } else if (target === 'ads') {
-          updateAdMobDiagnosticsUI();
         }
       });
     });
@@ -7562,86 +7634,14 @@
       });
     }
 
-    // --- ADMOB TEST SUITE EVENT LISTENERS ---
+    // --- ADMOB TEST SUITE EVENT LISTENERS (REMOVED) ---
     function initAdMobTestSuiteControls() {
-      // 1. Mode Switcher (TEST MODE <-> PROD MODE)
-      document.getElementById('btn-toggle-admob-mode')?.addEventListener('click', () => {
-        sound.playDeflect();
-        triggerHaptic([20]);
-        ADMOB_CONFIG.setTestMode(!ADMOB_CONFIG.TEST_MODE);
-        spawnFloatingText(
-          VIRTUAL_WIDTH / 2, 220,
-          ADMOB_CONFIG.TEST_MODE ? '🟢 ADMOB: TEST MODE (100% FILL)' : '🔴 ADMOB: PROD MODE (LIVE IDS)',
-          ADMOB_CONFIG.TEST_MODE ? '#fbbf24' : '#ef4444'
-        );
-      });
-
-      // 2. 1-Click Test Rewarded Ad (10s Sponsor / 2X Bounty)
-      document.getElementById('btn-test-ad-rewarded-10s')?.addEventListener('click', () => {
-        sound.resume();
-        triggerRewardedAd('double_win');
-      });
-
-      // 3. 1-Click Test Shop Ad Chest (+600 Shards)
-      document.getElementById('btn-test-ad-chest')?.addEventListener('click', () => {
-        sound.resume();
-        triggerRewardedAd('shop_600');
-      });
-
-      // 4. 1-Click Test Interstitial Ad (5s Fullscreen)
-      document.getElementById('btn-test-ad-interstitial')?.addEventListener('click', () => {
-        sound.resume();
-        triggerInterstitialAd();
-      });
-
-      // 5. 1-Click Toggle Test Banner (320x50)
-      document.getElementById('btn-test-ad-banner')?.addEventListener('click', () => {
-        sound.resume();
-        const banner = document.getElementById('admob-test-banner');
-        const isHidden = !banner || banner.classList.contains('hidden');
-        setBannerVisibility(isHidden);
-        sound.playDeflect();
-        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, isHidden ? '📢 320x50 BANNER: SHOWN' : '📢 320x50 BANNER: HIDDEN', '#00f0ff');
-      });
-
-      // 6. 1-Click Test Boss Bonus (+250 Shards)
-      document.getElementById('btn-test-ad-boss')?.addEventListener('click', () => {
-        sound.resume();
-        triggerRewardedInterstitialAd();
-      });
-
-      // 7. Banner Click Reaction
-      document.getElementById('btn-test-banner-click')?.addEventListener('click', () => {
-        sound.playReward();
-        triggerHaptic([20, 30]);
-        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, '📢 TEST AD BANNER CLICKED', '#fbbf24');
-      });
-
-      // 8. In-App Video & Interstitial Install Click Reaction
-      document.getElementById('btn-ad-reward-install')?.addEventListener('click', () => {
-        sound.playReward();
-        triggerHaptic([20, 30]);
-        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, '🚀 TEST AD: SIMULATING APP INSTALL', '#10b981');
-      });
-
-      document.getElementById('btn-interstitial-install')?.addEventListener('click', () => {
-        sound.playReward();
-        triggerHaptic([20, 30]);
-        spawnFloatingText(VIRTUAL_WIDTH / 2, 220, '🚀 TEST AD: SIMULATING APP INSTALL', '#10b981');
-      });
-
-      // 9. Sound mute toggle inside Rewarded Video Ad
-      document.getElementById('ad-reward-mute-btn')?.addEventListener('click', (e) => {
-        const isMuted = sound.toggleMute();
-        e.currentTarget.textContent = isMuted ? '🔇' : '🔊';
-      });
-
-      updateAdMobDiagnosticsUI();
+      // Ads completely removed per user instructions
     }
 
     function updateSideMenuProfile() {
       document.getElementById('profile-shards-display').textContent = `${progression.data.shards} ⚡ SHARDS`;
-      document.getElementById('profile-stat-campaign').textContent = `LVL ${progression.data.highestLevelReached || 1} / 120`;
+      document.getElementById('profile-stat-campaign').textContent = `LVL ${progression.data.highestLevelReached || 1} / 150`;
       document.getElementById('profile-stat-blades').textContent = `${progression.data.unlockedBlades.length} / 8`;
       document.getElementById('profile-stat-equipped-blade').textContent = progression.getEffectiveBlade().toUpperCase();
       document.getElementById('profile-stat-suit').textContent = progression.data.equippedSuit.toUpperCase();
@@ -7675,7 +7675,7 @@
         } else if (isUnlocked) {
           btn = `<button class="shop-action-btn equip" style="padding: 3px 8px; font-size: 10px;" onclick="equipBlade('${b.id}'); renderSideWeapons();">EQUIP</button>`;
         } else {
-          btn = `<button class="shop-action-btn try-btn" style="padding: 3px 8px; font-size: 10px;" onclick="tryBladeWithAd('${b.id}'); closeSideMenu();">🎬 Try (Ad)</button>`;
+          btn = `<button class="shop-action-btn try-btn" style="padding: 3px 8px; font-size: 10px;" onclick="tryBladeDirectly('${b.id}'); closeSideMenu();">✨ Free Trial</button>`;
         }
 
         row.innerHTML = `
@@ -7758,29 +7758,48 @@
       modalLanguage.classList.add('hidden');
     });
 
-    // --- CANVAS RESIZE & ROTATION (ADAPTIVE PHONE SCREEN SIZING) ---
+    // --- CANVAS RESIZE & ROTATION (ADAPTIVE PHONE SCREEN SIZING - 100% COVERAGE) ---
     function resizeCanvas() {
-      // Use visualViewport if available for exact viewport dimensions on mobile phones (accounts for notch, status bar, navigation bar)
-      const w = window.visualViewport ? Math.round(window.visualViewport.width) : (window.innerWidth || document.documentElement.clientWidth);
-      const h = window.visualViewport ? Math.round(window.visualViewport.height) : (window.innerHeight || document.documentElement.clientHeight);
+      // Accurately obtain viewport dimensions across all mobile browsers (without corrupting with portrait screen.height)
+      const winW = window.innerWidth || document.documentElement.clientWidth || 0;
+      const winH = window.innerHeight || document.documentElement.clientHeight || 0;
+      const vw = window.visualViewport ? Math.round(window.visualViewport.width) : 0;
+      const vh = window.visualViewport ? Math.round(window.visualViewport.height) : 0;
       
-      const isPortrait = h > w;
-      const screenAspect = w / h;
+      const w = Math.max(winW, vw) || 1200;
+      const h = Math.max(winH, vh) || 750;
+      
+      // Determine if screen is in landscape mode
+      const isLandscape = (w >= h) || (window.screen?.orientation?.type?.includes('landscape')) || (Math.abs(Number(window.orientation)) === 90) || isLandscapeLocked;
+      const isPortrait = !isLandscape;
 
-      if (!isPortrait && isFullScreenAdapt) {
-        // Modern smartphones in landscape have aspect ratios from 1.6 (16:10) to 2.4 (21:9)
-        // Dynamically expand virtual width so the game fills 100% of the phone's screen with ZERO black bars or cutouts!
-        const targetAspect = Math.max(1.6, Math.min(2.4, screenAspect));
-        VIRTUAL_WIDTH = Math.round(750 * targetAspect);
+      if (isLandscape) {
+        // Landscape Mode: Fill 100% of the mobile screen with ZERO vacant space
+        // Supports all phone aspect ratios: 16:9 (1.78), 18:9 (2.0), 19.5:9 (2.17), 20:9 (2.22), 21:9 (2.33), foldables & ultra-wides (up to 3.2)
+        const landscapeW = Math.max(w, h);
+        const landscapeH = Math.min(w, h);
+        const screenAspect = landscapeW / Math.max(1, landscapeH);
+        const targetAspect = Math.max(1.33, Math.min(3.2, screenAspect));
+        
         VIRTUAL_HEIGHT = 750;
-        canvasScale = h / VIRTUAL_HEIGHT;
+        VIRTUAL_WIDTH = Math.round(750 * targetAspect);
+        canvasScale = landscapeH / VIRTUAL_HEIGHT;
 
         canvas.width = VIRTUAL_WIDTH;
         canvas.height = VIRTUAL_HEIGHT;
-        canvas.style.width = `${w}px`;
-        canvas.style.height = `${h}px`;
+        canvas.style.position = 'fixed';
+        canvas.style.inset = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.maxWidth = '100%';
+        canvas.style.maxHeight = '100%';
+        canvas.style.margin = '0';
+        canvas.style.padding = '0';
+        canvas.style.border = 'none';
+        canvas.style.borderRadius = '0';
+        canvas.style.boxShadow = 'none';
       } else {
-        // Standard fixed-ratio fitting
+        // Portrait Mode: Clean centered aspect fit
         VIRTUAL_WIDTH = 1200;
         VIRTUAL_HEIGHT = 750;
         const scaleX = w / VIRTUAL_WIDTH;
@@ -7789,8 +7808,24 @@
 
         canvas.width = VIRTUAL_WIDTH;
         canvas.height = VIRTUAL_HEIGHT;
+        canvas.style.position = 'relative';
+        canvas.style.inset = 'auto';
         canvas.style.width = `${Math.floor(VIRTUAL_WIDTH * canvasScale)}px`;
         canvas.style.height = `${Math.floor(VIRTUAL_HEIGHT * canvasScale)}px`;
+        canvas.style.maxWidth = '100vw';
+        canvas.style.maxHeight = '100vh';
+        canvas.style.margin = 'auto';
+        canvas.style.border = '1px solid rgba(0, 240, 255, 0.16)';
+        canvas.style.borderRadius = '6px';
+        canvas.style.boxShadow = '0 0 45px rgba(0, 240, 255, 0.12)';
+      }
+
+      // Synchronize world width so game page has 0% vacant space and player can navigate edge-to-edge
+      if (typeof currentLevelIndex !== 'undefined' && (currentLevelIndex <= 30 || currentWorldWidth < VIRTUAL_WIDTH)) {
+        currentWorldWidth = Math.max(VIRTUAL_WIDTH, 1200);
+        if (typeof platforms !== 'undefined' && platforms && platforms[0]) {
+          platforms[0].w = Math.max(currentWorldWidth + 1000, 10000);
+        }
       }
 
       // Check Mobile Phone Orientation Assistant
@@ -7808,8 +7843,9 @@
       window.visualViewport.addEventListener('resize', resizeCanvas);
     }
     window.addEventListener('orientationchange', () => {
-      setTimeout(resizeCanvas, 100);
-      setTimeout(resizeCanvas, 300);
+      setTimeout(resizeCanvas, 50);
+      setTimeout(resizeCanvas, 150);
+      setTimeout(resizeCanvas, 350);
     });
     resizeCanvas();
 
@@ -7818,8 +7854,8 @@
       const scaleX = rect.width / VIRTUAL_WIDTH;
       const scaleY = rect.height / VIRTUAL_HEIGHT;
       return {
-        x: Math.max(0, Math.min(VIRTUAL_WIDTH, (clientX - rect.left) / scaleX)),
-        y: Math.max(0, Math.min(VIRTUAL_HEIGHT, (clientY - rect.top) / scaleY))
+        x: Math.max(0, Math.min(VIRTUAL_WIDTH, (clientX - rect.left) / (scaleX || 1))),
+        y: Math.max(0, Math.min(VIRTUAL_HEIGHT, (clientY - rect.top) / (scaleY || 1)))
       };
     }
 
@@ -7971,8 +8007,30 @@
           player.canDash = false;
         }
 
-        player.vx = Math.cos(input.aimAngle) * player.dashSpeed;
-        player.vy = Math.sin(input.aimAngle) * player.dashSpeed;
+        // Flexible proportional power based on drag distance
+        const powerRatio = Math.min(1.0, Math.max(0.7, input.dragDist / 85));
+        const effectiveSpeed = player.dashSpeed * powerRatio;
+
+        let dashVx = Math.cos(input.aimAngle) * effectiveSpeed;
+        let dashVy = Math.sin(input.aimAngle) * effectiveSpeed;
+
+        // Controlled vertical impulse: prevents sudden giant rocket leaps while giving generous jump clearance
+        dashVy = Math.max(-490, Math.min(490, dashVy));
+
+        // Natural Ninja Leap from Ground (No surface dragging / scraping):
+        // When player is on the ground, leaping forward gives a nimble, low aerodynamic leap (~22px above floor)
+        // so the player glides gracefully above the surface instead of scraping flat!
+        if (player.isGrounded || player.y >= 660 - player.radius - 2) {
+          const isMostlyHorizontal = Math.abs(Math.sin(input.aimAngle)) < 0.45;
+          if (isMostlyHorizontal) {
+            dashVy = -170; // Clean, agile ninja forward leap off the floor
+            dashVx = (Math.cos(input.aimAngle) >= 0 ? 1 : -1) * (effectiveSpeed * 0.91);
+          }
+        }
+
+        player.vx = dashVx;
+        player.vy = dashVy;
+        player.isGrounded = false;
         player.facing = player.vx >= 0 ? 1 : -1;
 
         // Omega Blade twin energy waves
@@ -8033,7 +8091,9 @@
     window.addEventListener('mouseup', (e) => { if (e.button === 0) handlePointerEnd(); });
 
     // Keyboard controls
+    window.activeKeys = {};
     window.addEventListener('keydown', (e) => {
+      window.activeKeys[e.code] = true;
       if (e.code === 'Space') {
         e.preventDefault();
         triggerChronoOverdrive();
@@ -8045,6 +8105,10 @@
         const isMuted = sound.toggleMute();
         soundIcon.textContent = isMuted ? '🔇' : '🔊';
       }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      window.activeKeys[e.code] = false;
     });
 
     // Speed Preset cycling
@@ -8222,8 +8286,24 @@
       if (gameState === 'PLAYING' && player && !isPaused) {
         player.update(scaledDt);
 
-        // Smooth Dynamic Camera Tracking for Mission 2 Horizontal Side-Scrolling
-        if (currentWorldWidth > VIRTUAL_WIDTH) {
+        // Smooth Dynamic Camera Tracking: Mission 5 Autoscroll vs Standard Side-Scrolling
+        if (currentLevelIndex > 120 && currentLevelIndex <= 150) {
+          // MISSION 5: Screen autoscrolls forward continuously! Speed scales with level
+          const lvlOffset = currentLevelIndex - 120;
+          const scrollSpeed = 160 + lvlOffset * 3.8;
+          mission5ScrollX += scrollSpeed * scaledDt;
+
+          const halfV = VIRTUAL_WIDTH / 2;
+          const targetCamX = Math.max(halfV + mission5ScrollX, player.x);
+          cameraFocusX = Math.max(cameraFocusX, Math.min(currentWorldWidth - halfV, targetCamX));
+
+          // Screen pushes the player forward if falling behind the visible screen
+          const leftScreenEdge = cameraFocusX - halfV;
+          if (player.x < leftScreenEdge + player.radius + 15) {
+            player.x = leftScreenEdge + player.radius + 15;
+            player.vx = Math.max(player.vx, scrollSpeed);
+          }
+        } else if (currentWorldWidth > VIRTUAL_WIDTH) {
           const halfV = VIRTUAL_WIDTH / 2;
           const targetCamX = Math.max(halfV, Math.min(currentWorldWidth - halfV, player.x));
           cameraFocusX += (targetCamX - cameraFocusX) * 0.14;
@@ -8346,6 +8426,34 @@
             spawnSparks(clampedX, 450 + Math.random() * 150, '#c084fc', 20);
           }
         }
+
+        // Mission 5 Surface Rolling Fireballs Spawner ("Surface pr rolling hote hue aag ke gole")
+        if (currentLevelIndex > 120 && currentLevelIndex <= 150 && gameState === 'PLAYING') {
+          const lvlOffset = currentLevelIndex - 120; // 1 to 30
+          mission5FireballTimer -= scaledDt;
+          if (mission5FireballTimer <= 0) {
+            // Frequency increases with level: from 3.2s down to 1.05s
+            const interval = Math.max(1.05, 3.2 - lvlOffset * 0.075);
+            mission5FireballTimer = interval;
+
+            // Number of rolling fireballs scales with level:
+            // Levels 121-130: 1 fireball
+            // Levels 131-140: 1 to 2 fireballs
+            // Levels 141-150: 2 to 3 fireballs
+            const rollCount = lvlOffset <= 10 ? 1 : (lvlOffset <= 20 ? (Math.random() < 0.65 ? 2 : 1) : (Math.random() < 0.55 ? 3 : 2));
+            const halfV = VIRTUAL_WIDTH / 2;
+            const spawnBaseX = Math.max(cameraFocusX + halfV + 60, player.x + 420);
+            const rollSpeed = -(260 + lvlOffset * 4.5);
+            const rollRadius = 20 + Math.min(10, lvlOffset * 0.3);
+
+            for (let b = 0; b < rollCount; b++) {
+              const delayX = b * 200;
+              const spawnX = Math.min(currentWorldWidth - 40, spawnBaseX + delayX);
+              spawnRollingFireball(spawnX, rollSpeed, rollRadius);
+            }
+          }
+        }
+
         if (airStrikeAlertTimer > 0) {
           airStrikeAlertTimer -= scaledDt;
         }
@@ -8357,18 +8465,38 @@
           fb.y += fb.vy * scaledDt;
           fb.life -= scaledDt;
 
-          // Trailing fiery sparks
-          if (Math.random() < 0.6) {
-            particles.push({
-              type: 'spark',
-              x: fb.x + (Math.random() - 0.5) * 12,
-              y: fb.y + (Math.random() - 0.5) * 12,
-              vx: (Math.random() - 0.5) * 40,
-              vy: -Math.random() * 70,
-              color: Math.random() > 0.4 ? '#ff5500' : '#fbbf24',
-              size: 2.5 + Math.random() * 2,
-              life: 0.3
-            });
+          if (fb.isRolling) {
+            // Firmly sticks to surface at y = 660
+            fb.y = 660 - fb.radius;
+            fb.rotationAngle = (fb.rotationAngle || 0) + (fb.rollSpeed || -10) * scaledDt;
+
+            // Ground rolling contact sparks
+            if (Math.random() < 0.65) {
+              particles.push({
+                type: 'spark',
+                x: fb.x + (Math.random() - 0.5) * (fb.radius * 0.7),
+                y: 658,
+                vx: -fb.vx * 0.12 + (Math.random() - 0.5) * 40,
+                vy: -Math.random() * 55,
+                color: Math.random() > 0.4 ? '#ff5500' : '#fbbf24',
+                size: 2.8,
+                life: 0.25
+              });
+            }
+          } else {
+            // Trailing fiery sparks for falling fireballs
+            if (Math.random() < 0.6) {
+              particles.push({
+                type: 'spark',
+                x: fb.x + (Math.random() - 0.5) * 12,
+                y: fb.y + (Math.random() - 0.5) * 12,
+                vx: (Math.random() - 0.5) * 40,
+                vy: -Math.random() * 70,
+                color: Math.random() > 0.4 ? '#ff5500' : '#fbbf24',
+                size: 2.5 + Math.random() * 2,
+                life: 0.3
+              });
+            }
           }
 
           // Check Katana Slash / Deflection on Fireball
@@ -8381,7 +8509,7 @@
               triggerHaptic([30, 20]);
               triggerHitStop(4);
               addScreenShake(7);
-              spawnFloatingText(fb.x, fb.y - 25, '🔥 FIREBALL SLICED!', '#fbbf24');
+              spawnFloatingText(fb.x, fb.y - 25, fb.isRolling ? '🔥 ROLLING FIRE SLICED!' : '🔥 FIREBALL SLICED!', '#fbbf24');
               incrementAirCombo();
               player.canDash = true;
               player.energy = player.maxEnergy;
@@ -8399,7 +8527,7 @@
             // Direct impact with player
             const dist = Math.hypot(player.x - fb.x, player.y - fb.y);
             if (dist < player.radius + fb.radius) {
-              player.takeDamage('Incinerated by Falling Fireball');
+              player.takeDamage(fb.isRolling ? 'Incinerated by Rolling Fireball' : 'Incinerated by Falling Fireball');
               spawnSparks(fb.x, fb.y, '#ff3300', 25);
               addScreenShake(12);
               triggerHaptic([40, 40]);
@@ -8408,7 +8536,16 @@
             }
           }
 
-          // Platform or Ground Impact
+          if (fb.isRolling) {
+            // Rolling fireball despawns when it passes far left of screen or expires
+            const halfV = VIRTUAL_WIDTH / 2;
+            if (fb.x < cameraFocusX - halfV - 140 || fb.life <= 0) {
+              fireballs.splice(i, 1);
+            }
+            continue;
+          }
+
+          // Platform or Ground Impact for falling fireballs
           let exploded = false;
           if (fb.y >= fb.targetGroundY) {
             exploded = true;
@@ -8586,6 +8723,26 @@
         ctx.beginPath();
         ctx.arc(fb.x, fb.y, fb.radius * 0.55, 0, Math.PI * 2);
         ctx.fill();
+
+        // If rolling fireball, render rotating internal spokes & flame vortex
+        if (fb.isRolling) {
+          ctx.save();
+          ctx.translate(fb.x, fb.y);
+          ctx.rotate(fb.rotationAngle || 0);
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2.2;
+          ctx.shadowColor = '#fbbf24';
+          ctx.shadowBlur = 8;
+          for (let s = 0; s < 4; s++) {
+            const rot = (Math.PI / 2) * s;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(Math.cos(rot) * (fb.radius * 0.85), Math.sin(rot) * (fb.radius * 0.85));
+            ctx.stroke();
+          }
+          ctx.restore();
+        }
+
         ctx.restore();
       }
 
