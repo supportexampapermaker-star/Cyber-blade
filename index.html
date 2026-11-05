@@ -2017,7 +2017,7 @@
 
         <div class="hud-card">
           <span class="hud-label" id="hud-shards-label">SHARDS</span>
-          <span class="hud-value amber" id="hud-shards-text">100 ⚡</span>
+          <span class="hud-value amber" id="hud-shards-text">50 ⚡</span>
         </div>
       </div>
 
@@ -2087,14 +2087,14 @@
               <!-- Total Points Tab -->
               <div class="hud-card title-shards-card">
                 <span class="hud-label title-shards-label">TOTAL POINTS</span>
-                <span class="hud-value gold title-shards-val" id="title-total-shards">⚡ 100</span>
+                <span class="hud-value gold title-shards-val" id="title-total-shards">⚡ 50</span>
               </div>
 
               <!-- 24H Chrono Gift Tab -->
               <div class="title-gift-card">
                 <div class="title-gift-info">
                   <div class="title-gift-header">🎁 24H GIFT</div>
-                  <div class="title-gift-desc" id="daily-gift-timer-text">+300 ⚡ Shards</div>
+                  <div class="title-gift-desc" id="daily-gift-timer-text">+150 ⚡ Shards</div>
                 </div>
                 <button class="btn-daily-gift title-gift-btn" id="btn-claim-daily-gift">
                   CLAIM
@@ -2179,13 +2179,13 @@
             <div class="modal-subtitle" id="shop-modal-sub" style="text-align: left;">Blades, Combat Suits, and Core Tech Upgrades.</div>
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
-            <!-- Free Cyber Shards Chest (+600 ⚡) -->
-            <button class="btn-ad-reward" id="btnAdChest" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800;" title="Claim 600 Free Cyber Shards">
-              🎁 +600 ⚡ FREE CHEST
+            <!-- Free Cyber Shards Chest (+300 ⚡) -->
+            <button class="btn-ad-reward" id="btnAdChest" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 800;" title="Claim 300 Free Cyber Shards">
+              🎁 +300 ⚡ FREE CHEST
             </button>
             <div class="hud-card" style="margin: 0;">
               <span class="hud-label" id="shop-shards-label">AVAILABLE SHARDS</span>
-              <span class="hud-value amber" id="shop-shards-display">100 ⚡</span>
+              <span class="hud-value amber" id="shop-shards-display">50 ⚡</span>
             </div>
           </div>
         </div>
@@ -2222,7 +2222,7 @@
           </div>
           <div class="hud-card" style="text-align: center;">
             <span class="hud-label" id="victory-label-shards">SHARDS RECOVERED</span>
-            <span class="hud-value amber" id="victory-shards" style="justify-content: center;">+40 ⚡</span>
+            <span class="hud-value amber" id="victory-shards" style="justify-content: center;">+20 ⚡</span>
           </div>
         </div>
 
@@ -2524,7 +2524,7 @@
             <div class="profile-info" style="display: flex; flex-direction: column; gap: 2px;">
               <div style="font-size: 13.5px; font-weight: 900; color: #fff;" id="profile-codename-display">SHADOW_NINJA</div>
               <div style="font-size: 10px; color: var(--cyan); font-weight: 700;" id="profile-rank-display">CYBER STRIKER // RANK A</div>
-              <div style="font-size: 10px; color: var(--amber); font-weight: 800;" id="profile-shards-display">100 ⚡ SHARDS</div>
+              <div style="font-size: 10px; color: var(--amber); font-weight: 800;" id="profile-shards-display">50 ⚡ SHARDS</div>
             </div>
           </div>
 
@@ -2646,7 +2646,7 @@
         <div class="side-pane" id="pane-weapons">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
             <div style="font-size: 11px; font-weight: 800; color: var(--cyan); letter-spacing: 0.08em;">8 CYBER BLADES ARSENAL</div>
-            <span style="font-size: 11px; font-weight: 800; color: var(--amber);" id="side-armory-shards-display">100 ⚡</span>
+            <span style="font-size: 11px; font-weight: 800; color: var(--amber);" id="side-armory-shards-display">50 ⚡</span>
           </div>
 
           <div id="side-weapons-list" style="display: flex; flex-direction: column; gap: 6px;">
@@ -3315,7 +3315,7 @@
     class ProgressionManager {
       constructor() {
         this.data = {
-          shards: 100, // Balanced initial coins (100 ⚡)
+          shards: 50, // Balanced initial coins (50 ⚡)
           equippedBlade: 'plasma',
           unlockedBlades: ['plasma'],
           trialBlade: null, // Temporary 1-level ad trial blade
@@ -3344,7 +3344,7 @@
             this.data = Object.assign(this.data, JSON.parse(saved));
           }
           if (typeof this.data.shards !== 'number' || isNaN(this.data.shards)) {
-            this.data.shards = 100;
+            this.data.shards = 50;
           }
           if (!Array.isArray(this.data.unlockedBlades)) {
             this.data.unlockedBlades = ['plasma'];
@@ -3718,30 +3718,30 @@
     /**
      * Global AdMob Reward Callback (window.onAdMobRewardGranted)
      * Directly invoked by Android WebView wrapper or simulated browser countdown:
-     * - 'shop_600' -> +600 ⚡ Cyber Shards in the Armory
+     * - 'shop_600' / 'shop_300' -> +300 ⚡ Cyber Shards in the Armory
      * - 'double_win' / 'triple_win' -> Doubles (2X) current Level Clear Shards bonus on Victory screen
      * - 'revive' -> Revives player on spot with Full Hearts + Active Shield + clears bullets
      * - 'try_blade:<bladeId>' -> Equips locked high-tier/Mythic blade for 1 full level for free
-     * - 'boss_bonus' -> +250 ⚡ Boss Clear Bonus Shards
+     * - 'boss_bonus' -> +125 ⚡ Boss Clear Bonus Shards
      */
     window.onAdMobRewardGranted = function(rewardType) {
       if (!rewardType) return;
       const type = String(rewardType).trim();
 
-      // 1. Armory +600 Cyber Shards
-      if (type === 'shop_600' || type === 'shop_chest') {
-        progression.addShards(600);
+      // 1. Armory +300 Cyber Shards (Rebalanced reward)
+      if (type === 'shop_600' || type === 'shop_chest' || type === 'shop_300') {
+        progression.addShards(300);
         sound.playReward();
         triggerHaptic([30, 40, 50]);
         updateHUD();
         renderShop();
         renderArmorySideTab();
-        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 260, '🎬 +600 ⚡ CYBER SHARDS GRANTED!', '#00f0ff');
+        spawnFloatingText(player ? player.x : VIRTUAL_WIDTH / 2, 260, '🎬 +300 ⚡ CYBER SHARDS GRANTED!', '#00f0ff');
       }
 
       // 2. Victory Modal Doubles (2X) Shards Bounty (10s Rewarded Ad)
       else if (type === 'double_win' || type === 'triple_win' || type === 'victory_2x' || type === 'victory_3x') {
-        const bonus = (typeof lastLevelClearReward === 'number' && lastLevelClearReward > 0) ? lastLevelClearReward : 100;
+        const bonus = (typeof lastLevelClearReward === 'number' && lastLevelClearReward > 0) ? lastLevelClearReward : 50;
         progression.addShards(bonus);
         const btn2x = document.getElementById('btn-claim-3x-shards');
         if (btn2x) {
@@ -3800,14 +3800,14 @@
         }
       }
 
-      // 5. Boss Clear Rewarded Interstitial Bonus (+250 ⚡)
+      // 5. Boss Clear Rewarded Interstitial Bonus (+125 ⚡)
       else if (type === 'boss_bonus') {
-        progression.addShards(250);
+        progression.addShards(125);
         sound.playReward();
         triggerHaptic([40, 50, 60]);
         updateHUD();
         renderShop();
-        spawnFloatingText(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, '👑 +250 ⚡ BOSS CLEAR BONUS!', '#fbbf24');
+        spawnFloatingText(VIRTUAL_WIDTH / 2, VIRTUAL_HEIGHT / 2, '👑 +125 ⚡ BOSS CLEAR BONUS!', '#fbbf24');
       }
 
       // Invoke optional registered listener
@@ -4049,7 +4049,7 @@
         id: 'frost',
         category: 'blades',
         name: '❄️ Frost Zero Katana',
-        desc: 'Dashing within 140px freezes enemies solid for 3.5s; slicing frozen enemies grants +15 ⚡ bonus shards.',
+        desc: 'Dashing within 140px freezes enemies solid for 3.5s; slicing frozen enemies grants +8 ⚡ bonus shards.',
         cost: 8400,
         color: '#38bdf8'
       },
@@ -5473,10 +5473,10 @@
 
         const isBoss = this.type.startsWith('boss');
         const greed = progression.getGreedMultiplier();
-        let shardReward = isBoss ? Math.round(90 * greed) : Math.round(5 * Math.max(1, airCombo) * greed);
+        let shardReward = isBoss ? Math.round(45 * greed) : Math.max(1, Math.round(2.5 * Math.max(1, airCombo) * greed));
 
         if (this.frozenTimer > 0) {
-          shardReward += Math.round(15 * greed); // Frost Zero bonus!
+          shardReward += Math.round(8 * greed); // Frost Zero bonus!
         }
 
         progression.addShards(shardReward);
@@ -5487,7 +5487,7 @@
         sound.playExplosion();
         triggerHaptic(isBoss ? [60, 40, 60] : [40, 30]);
         addScreenShake(isBoss ? 16 : 8);
-        spawnFloatingText(this.x, this.y - 25, isBoss ? '💥 BOSS DESTROYED! +90 ⚡' : '💥 DESTROYED!', isBoss ? '#ff0055' : '#10b981');
+        spawnFloatingText(this.x, this.y - 25, isBoss ? '💥 BOSS DESTROYED! +45 ⚡' : '💥 DESTROYED!', isBoss ? '#ff0055' : '#10b981');
         spawnSparks(this.x, this.y, isBoss ? '#ff0055' : '#00f0ff', isBoss ? 48 : 26);
 
         // Debris fragment particles
@@ -7178,14 +7178,14 @@
         sound.playSlowMoExit();
         sound.playReward();
 
-        // 2500 Shards reward for conquering Mission Unlimited!
-        progression.addShards(2500);
+        // 1250 Shards reward for conquering Mission Unlimited!
+        progression.addShards(1250);
         progression.save();
 
         document.getElementById('victory-title').textContent = '👑 MISSION UNLIMITED CONQUERED!';
         document.getElementById('victory-combo').textContent = `${unlimitedKills} KILLS + TITAN VOLCANUS SLAIN`;
-        document.getElementById('victory-shards').textContent = '+2,500 ⚡';
-        document.getElementById('btn-claim-3x-shards').textContent = '⚡ CLAIM 2X SHARDS BONUS (+2,500 ⚡)';
+        document.getElementById('victory-shards').textContent = '+1,250 ⚡';
+        document.getElementById('btn-claim-3x-shards').textContent = '⚡ CLAIM 2X SHARDS BONUS (+1,250 ⚡)';
         document.getElementById('btn-claim-3x-shards').disabled = false;
         modalVictory.classList.remove('hidden');
         updateHUD();
@@ -7308,9 +7308,9 @@
       gameState = 'VICTORY';
       setBannerVisibility(true);
 
-      // Calculate clear reward: 40 ⚡ × currentLevel × greed
+      // Calculate clear reward: 20 ⚡ × currentLevel × greed
       const greed = progression.getGreedMultiplier();
-      lastLevelClearReward = Math.round(40 * currentLevelIndex * greed);
+      lastLevelClearReward = Math.round(20 * currentLevelIndex * greed);
       progression.addShards(lastLevelClearReward);
 
       // Advance level unlock up to 180
@@ -7383,7 +7383,7 @@
         modalVictory.classList.remove('hidden');
       }
 
-      // Boss Level Bonus (+250 ⚡) granted directly without ads
+      // Boss Level Bonus (+125 ⚡) granted directly without ads
       const isBoss = (currentLevelIndex % 5 === 0);
       if (isBoss) {
         triggerRewardedInterstitialAd();
@@ -7889,7 +7889,7 @@
     });
 
     // --- REWARDED AD BUTTON HOOKS ---
-    // 1. Armory Rewarded Ad Chest (+600 ⚡)
+    // 1. Armory Rewarded Ad Chest (+300 ⚡)
     document.getElementById('btnAdChest').addEventListener('click', () => {
       triggerRewardedAd('shop_600');
     });
@@ -7908,7 +7908,7 @@
       triggerRewardedAd('revive');
     });
 
-    // 4. Daily Gift with 24h Cooldown (+300 ⚡)
+    // 4. Daily Gift with 24h Cooldown (+150 ⚡)
     function updateDailyGiftButtonUI() {
       const btn = document.getElementById('btn-claim-daily-gift');
       const timerText = document.getElementById('daily-gift-timer-text');
@@ -7919,7 +7919,7 @@
 
       if (diff >= cooldownMs) {
         btn.disabled = false;
-        btn.textContent = '🎁 CLAIM +300 ⚡';
+        btn.textContent = '🎁 CLAIM +150 ⚡';
         timerText.textContent = 'Ready to claim right now!';
         timerText.style.color = '#34d399';
       } else {
@@ -7939,10 +7939,10 @@
       const cooldownMs = 24 * 60 * 60 * 1000;
       if (now - lastClaim >= cooldownMs) {
         progression.data.lastDailyGiftClaim = now;
-        progression.addShards(300);
+        progression.addShards(150);
         sound.playReward();
         triggerHaptic([30, 40]);
-        spawnFloatingText(VIRTUAL_WIDTH / 2, 260, '🎁 +300 ⚡ DAILY GIFT CLAIMED!', '#34d399');
+        spawnFloatingText(VIRTUAL_WIDTH / 2, 260, '🎁 +150 ⚡ DAILY GIFT CLAIMED!', '#34d399');
         updateDailyGiftButtonUI();
         updateHUD();
       }
