@@ -3682,11 +3682,11 @@
         REWARDED_INTERSTITIAL: "ca-app-pub-5448696131672998/9727877783"
       },
 
-      getAppId() { return this.TEST_MODE ? this.TEST_UNITS.APP_ID : this.PROD_UNITS.APP_ID; },
-      getBannerId() { return this.TEST_MODE ? this.TEST_UNITS.BANNER : this.PROD_UNITS.BANNER; },
-      getInterstitialId() { return this.TEST_MODE ? this.TEST_UNITS.INTERSTITIAL : this.PROD_UNITS.INTERSTITIAL; },
-      getRewardedId() { return this.TEST_MODE ? this.TEST_UNITS.REWARDED : this.PROD_UNITS.REWARDED; },
-      getRewardedInterstitialId() { return this.TEST_MODE ? this.TEST_UNITS.REWARDED_INTERSTITIAL : this.PROD_UNITS.REWARDED_INTERSTITIAL; },
+      getAppId() { return this.TEST_UNITS.APP_ID; },
+      getBannerId() { return this.TEST_UNITS.BANNER; },
+      getInterstitialId() { return this.TEST_UNITS.INTERSTITIAL; },
+      getRewardedId() { return this.TEST_UNITS.REWARDED; },
+      getRewardedInterstitialId() { return this.TEST_UNITS.REWARDED_INTERSTITIAL; },
 
       setTestMode(enabled) {
         this.TEST_MODE = !!enabled;
@@ -3711,7 +3711,7 @@
       const bannerEl = document.getElementById('admob-test-banner');
       if (bannerEl) bannerEl.classList.add('hidden');
       if (window.AndroidAds && typeof window.AndroidAds.setBannerVisible === 'function') {
-        try { window.AndroidAds.setBannerVisible(false); } catch (e) {}
+        try { window.AndroidAds.setBannerVisible(visible); } catch (e) {}
       }
     };
 
