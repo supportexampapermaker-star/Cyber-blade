@@ -161,16 +161,12 @@ jobs:
          curl -sL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o gradle.zip
          echo "sdk.dir=$ANDROID_HOME" > local.properties
          unzip -q gradle.zip
-         echo "sdk.dir=$ANDROID_HOME" > local.properties
-         unzip -q gradle.zip
-         find . -name "build.gradle*" -exec sed -i 's/minSdkVersion 21/minSdkVersion 24/g' {} +
-         find . -name "build.gradle*" -exec sed -i 's/minSdk 21/minSdk 24/g' {} +
-         find . -name "build.gradle*" -exec sed -i 's/minSdkVersion 23/minSdkVersion 24/g' {} +
-         find . -name "build.gradle*" -exec sed -i 's/minSdk 23/minSdk 24/g' {} +
+         find . -name "build.gradle*" -exec sed -i 's/minSdkVersion [0-9]*/minSdkVersion 24/g' {} +
+         find . -name "build.gradle*" -exec sed -i 's/minSdk [0-9]*/minSdk 24/g' {} +
          find . -name "build.gradle*" -exec sed -i 's/versionCode [0-9]*/versionCode ${{ github.run_number }}/g' {} +
-         find app/src/main/res -name "*launcher*.png" -exec cp ../icon-512.png {} \;
-         rm -rf app/src/main/res/mipmap-anydpi-v26*
-         ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemonn
+         find . -name "*launcher*.png" -exec cp ../icon-512.png {} \; 2>/dev/null || true
+         find . -type d -name "mipmap-anydpi-v26*" -exec rm -rf {} + 2>/dev/null || true
+         ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon
 
       - name: Upload Ready-to-Publish Play Store AAB & APK
         uses: actions/upload-artifact@v4
