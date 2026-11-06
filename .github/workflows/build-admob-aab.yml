@@ -161,6 +161,8 @@ jobs:
           curl -sL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o gradle.zip
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           unzip -q gradle.zip
+          find . -name "build.gradle*" -exec sed -i 's/minSdkVersion 21/minSdkVersion 24/g' {} +
+          find . -name "build.gradle*" -exec sed -i 's/minSdk 21/minSdk 24/g' {} +
           ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon
 
       - name: Upload Ready-to-Publish Play Store AAB & APK
