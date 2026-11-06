@@ -147,12 +147,8 @@ jobs:
           if [ -f "index.html" ]; then
             cp index.html android_build/app/src/main/assets/index.html
           fi
-          keytool -genkeypair -v \
-            -keystore android_build/app/release.keystore \
-            -alias cyberblade \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -storepass cyberblade123 -keypass cyberblade123 \
-            -dname "CN=Subham Indoria, OU=Game, O=CyberBlade, L=Pilani, S=RJ, C=IN"
+           run: |
+           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android_build/release.keystore
 
       - name: Install Gradle 8.5 & Build AAB + APK
         working-directory: android_build
