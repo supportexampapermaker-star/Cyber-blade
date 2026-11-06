@@ -147,23 +147,31 @@ jobs:
           if [ -f "index.html" ]; then
             cp index.html android_build/app/src/main/assets/index.html
           fi
-           run: |
-           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android_build/release.keystore
+           - name: Decode Keystore from Secret
+          run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android_build/release.keystore
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > android_build/app/release.keystore 2>/dev/null || true
 
-      - name: Install Gradle 8.5 & Build AAB + APK
-        working-directory: android_build
-        run: |
-         yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
-         curl -sL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o gradle.zip
-         echo "sdk.dir=$ANDROID_HOME" > local.properties
-         unzip -q gradle.zip
-         find . -name "build.gradle*" -exec sed -i 's/minSdkVersion [0-9]*/minSdkVersion 24/g' {} +
-         find . -name "build.gradle*" -exec sed -i 's/minSdk [0-9]*/minSdk 24/g' {} +
-         find . -name "build.gradle*" -exec sed -i 's/versionCode [0-9]*/versionCode ${{ github.run_number }}/g' {} +
-         find . -name "*launcher*.png" -exec cp ../icon-512.png {} \; 2>/dev/null || true
-         find . -type d -name "mipmap-anydpi-v26*" -exec rm -rf {} + 2>/dev/null || true
-         ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon
-
+          - name: Install Gradle 8.5 & Build AAB + APK
+          working-directory: android_build
+          env:
+          STORE_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS_NAME: ${{ secrets.KEY_ALIAS }}
+          KEY_PASS: ${{ secrets.KEY_PASSWORD }}
+          run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null || true
+          curl -sL https://services.gradle.org/distributions/gradle-8.5-bin.zip -o gradle.zip
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          unzip -q gradle.zip
+          find . -name "build.gradle*" -exec sed -i 's/minSdkVersion [0-9]*/minSdkVersion 24/g' {} +
+          find . -name "build.gradle*" -exec sed -i 's/minSdk [0-9]*/minSdk 24/g' {} +
+          find . -name "build.gradle*" -exec sed -i 's/versionCode [0-9]*/versionCode ${{ github.run_number }}/g' {} +
+          find . -name "build.gradle*" -exec sed -i "s/storePassword .*/storePassword '$STORE_PASS'/g" {} +
+          find . -name "build.gradle*" -exec sed -i "s/keyPassword .*/keyPassword '$KEY_PASS'/g" {} +
+          find . -name "build.gradle*" -exec sed -i "s/keyAlias .*/keyAlias '$KEY_ALIAS_NAME'/g" {} +
+          find . -name "*launcher*.png" -exec cp ../icon-512.png {} \; 2>/dev/null || true
+          find . -type d -name "mipmap-anydpi-v26*" -exec rm -rf {} + 2>/dev/null || true
+          ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon
       - name: Upload Ready-to-Publish Play Store AAB & APK
         uses: actions/upload-artifact@v4
         with:
