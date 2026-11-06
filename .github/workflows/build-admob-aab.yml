@@ -163,7 +163,6 @@ jobs:
           unzip -q gradle.zip
           find . -name "build.gradle*" -exec sed -i 's/minSdkVersion 21/minSdkVersion 24/g' {} +
           find . -name "build.gradle*" -exec sed -i 's/minSdk 21/minSdk 24/g' {} +
-          cat android_build/app/src/main/AndroidManifest.xml
           ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon
 
       - name: Upload Ready-to-Publish Play Store AAB & APK
