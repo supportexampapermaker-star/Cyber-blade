@@ -163,6 +163,8 @@ jobs:
           unzip -q gradle.zip
           find . -name "build.gradle*" -exec sed -i 's/minSdkVersion 21/minSdkVersion 24/g' {} +
           find . -name "build.gradle*" -exec sed -i 's/minSdk 21/minSdk 24/g' {} +
+          find app/src/main/res -name "*launcher*.png" -exec cp ../icon-512.png {} \;
+          rm -rf app/src/main/res/mipmap-anydpi-v26*
           ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon
 
       - name: Upload Ready-to-Publish Play Store AAB & APK
