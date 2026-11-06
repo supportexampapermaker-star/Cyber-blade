@@ -3830,36 +3830,38 @@
      * Directly grants reward instantly without displaying any ads per user instructions.
      */
     window.triggerRewardedAd = function(rewardType, onRewarded) {
-      window.onAdMobRewardGranted(rewardType);
-      if (typeof onRewarded === 'function') {
-        try { onRewarded(rewardType); } catch (e) { console.warn(e); }
-      }
-    };
+    if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
+        window.AndroidAds.showRewardedAd(rewardType);
+    } else {
+        // अगर फ़ोन में AndroidAds ब्रिज न मिले (जैसे ब्राउज़र में टेस्ट करते समय)
+        console.warn("AndroidAds not found, granting reward directly.");
+        window.onAdMobRewardGranted(rewardType);
+    }
+};
 
     function showInAppRewardedTestAd(rewardType) {
       window.onAdMobRewardGranted(rewardType);
     }
 
     /**
-     * 2. Direct Boss Bonus (triggerRewardedInterstitialAd)
-     * Directly grants boss clear bonus shards without displaying any interstitial ads.
-     */
-    window.triggerRewardedInterstitialAd = function() {
-      window.onAdMobRewardGranted('boss_bonus');
-    };
-
-    /**
-     * 3. Standard Interstitial Ads (triggerInterstitialAd)
-     * Disabled completely: zero ads shown.
-     */
-    window.triggerInterstitialAd = function() {
-      return;
-    };
-
-    function showInAppInterstitialTestAd() {
-      return;
+ * 2. Boss Bonus Rewarded Ad (triggerRewardedInterstitialAd)
+ */
+window.triggerRewardedInterstitialAd = function() {
+    if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
+        window.AndroidAds.showRewardedAd('boss_bonus');
+    } else {
+        window.onAdMobRewardGranted('boss_bonus');
     }
+};
 
+/**
+ * 3. Standard Interstitial Ads (triggerInterstitialAd)
+ */
+window.triggerInterstitialAd = function() {
+    if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
+        window.AndroidAds.showInterstitialAd();
+    }
+};
     // Diagnostics UI Updater (clean no-op as Ads pane is removed)
     function updateAdMobDiagnosticsUI() {
       // Ads pane removed per user instructions
