@@ -3830,26 +3830,26 @@
      * Directly grants reward instantly without displaying any ads per user instructions.
      */
     window.triggerRewardedAd = function(rewardType, onRewarded) {
-    if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
+     if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
         window.AndroidAds.showRewardedAd(rewardType);
-    } else {
+     } else {
         window.onAdMobRewardGranted(rewardType);
-    }
-};
+     }
+    };
 
-window.triggerRewardedInterstitialAd = function() {
+   window.triggerRewardedInterstitialAd = function() {
     if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
         window.AndroidAds.showRewardedAd('boss_bonus');
-    } else {
+     } else {
         window.onAdMobRewardGranted('boss_bonus');
-    }
-};
+     }
+    };
 
-window.triggerInterstitialAd = function() {
+   window.triggerInterstitialAd = function() {
     if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
         window.AndroidAds.showInterstitialAd();
-    }
-};
+     }
+   };
     // Diagnostics UI Updater (clean no-op as Ads pane is removed)
     function updateAdMobDiagnosticsUI() {
       // Ads pane removed per user instructions
