@@ -1,0 +1,41 @@
+{
+  "packageId": "com.subhamindoria.cyberblade",
+  "host": "supportexampapermaker-star.github.io",
+  "name": "Cyber Blade",
+  "launcherName": "CyberBlade",
+  "themeColor": "#000000",
+  "navigationColor": "#000000",
+  "backgroundColor": "#000000",
+  "startUrl": "/Cyber-blade/",
+  "iconUrl": "https://supportexampapermaker-star.github.io/Cyber-blade/icon-512.png",
+  "maskableIconUrl": "https://supportexampapermaker-star.github.io/Cyber-blade/icon-512.png",
+  "appVersionName": "1.0.2",
+  "appVersionCode": 2,
+  "signingKey": {
+    "path": "./signing.keystore",
+    "alias": "subhamindoria-key-alias"
+  },
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://supportexampapermaker-star.github.io/Cyber-blade/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": false
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableNotifications": false
+}
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableNotifications": false
+}
