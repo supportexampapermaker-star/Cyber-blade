@@ -3833,19 +3833,10 @@
     if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
         window.AndroidAds.showRewardedAd(rewardType);
     } else {
-        // अगर फ़ोन में AndroidAds ब्रिज न मिले (जैसे ब्राउज़र में टेस्ट करते समय)
-        console.warn("AndroidAds not found, granting reward directly.");
         window.onAdMobRewardGranted(rewardType);
     }
 };
 
-    function showInAppRewardedTestAd(rewardType) {
-      window.onAdMobRewardGranted(rewardType);
-    }
-
-    /**
- * 2. Boss Bonus Rewarded Ad (triggerRewardedInterstitialAd)
- */
 window.triggerRewardedInterstitialAd = function() {
     if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
         window.AndroidAds.showRewardedAd('boss_bonus');
@@ -3854,9 +3845,6 @@ window.triggerRewardedInterstitialAd = function() {
     }
 };
 
-/**
- * 3. Standard Interstitial Ads (triggerInterstitialAd)
- */
 window.triggerInterstitialAd = function() {
     if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
         window.AndroidAds.showInterstitialAd();
