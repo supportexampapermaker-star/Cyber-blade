@@ -168,6 +168,10 @@ jobs:
          find . -name "build.gradle*" -exec sed -i "s/keyAlias .*/keyAlias '$KEY_ALIAS_NAME'/g" {} +
          find . -name "*launcher*.png" -exec cp ../icon-512.png {} \; 2>/dev/null || true
          find . -type d -name "mipmap-anydpi-v26*" -exec rm -rf {} + 2>/dev/null || true
+         - name: Test Keystore Password & Alias
+           run: |
+             echo "--> Testing Keystore with provided Password..."
+             keytool -list -v -keystore android_build/release.keystore -storepass "${{ secrets.KEYSTORE_PASSWORD }}"
          ./gradle-8.5/bin/gradle bundleRelease assembleRelease --no-daemon 
          - name: Upload Ready-to-Publish Play Store AAB & APK
          uses: actions/upload-artifact@v4
