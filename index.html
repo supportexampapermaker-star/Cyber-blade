@@ -2113,10 +2113,10 @@
               </button>
             </div>
 
-            <!-- Row 3: Mission Unlimited (New World) + System Menu Tab -->
+            <!-- Row 3: Select Level / Missions + System Menu Tab -->
             <div class="title-tabs-row system" style="display: flex; gap: 8px;">
-              <button class="btn-primary title-btn-action" id="btn-start-unlimited" style="flex: 1.2; background: linear-gradient(135deg, #a855f7 0%, #00f0ff 100%); color: #000; font-weight: 900; box-shadow: 0 0 16px rgba(168, 85, 247, 0.45); font-size: 11.5px;">
-                ♾️ MISSION UNLIMITED (NEW WORLD)
+              <button class="btn-primary title-btn-action" id="btn-title-levels" style="flex: 1.2; background: linear-gradient(135deg, #00f0ff 0%, #0088ff 100%); color: #000; font-weight: 900; box-shadow: 0 0 16px rgba(0, 240, 255, 0.45); font-size: 12px;">
+                🎯 SELECT LEVEL / MISSIONS
               </button>
               <button class="btn-secondary title-sysmenu-btn" id="btn-title-side-menu" style="flex: 0.9;">
                 ☰ SYSTEM MENU
@@ -2138,10 +2138,35 @@
           <button class="btn-secondary" id="btn-close-level-select" style="padding: 6px 12px;">✕</button>
         </div>
 
-        <!-- Direct Shortcut to New World: Mission Unlimited -->
-        <button class="mission-tab-btn" id="btn-goto-unlimited-from-select" style="width: 100%; margin: 6px 0 2px 0; background: linear-gradient(135deg, rgba(168, 85, 247, 0.3), rgba(0, 240, 255, 0.25)); border: 1px solid #c084fc; color: #fff; font-weight: 800; font-size: 11px; padding: 7px; text-align: center;">
-          ♾️ ENTER NEW WORLD: MISSION UNLIMITED (500 KILLS + GIANT TITAN) ↗
-        </button>
+        <!-- Specially Highlighted: Mission Unlimited (New World) Card with 3 Levels -->
+        <div class="unlimited-level-banner" id="card-unlimited-highlight" style="margin: 8px 0 10px 0; padding: 10px 14px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.28) 0%, rgba(6, 182, 212, 0.22) 50%, rgba(255, 85, 0, 0.2) 100%); border: 2px solid #c084fc; border-radius: 10px; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), inset 0 0 15px rgba(0, 240, 255, 0.15);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="font-size: 26px; line-height: 1; filter: drop-shadow(0 0 8px #c084fc);">♾️</div>
+              <div style="text-align: left;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 13.5px; font-weight: 900; color: #fff; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(168,85,247,0.8);">MISSION UNLIMITED (NEW WORLD)</span>
+                  <span style="font-size: 8.5px; font-weight: 900; padding: 2px 6px; border-radius: 4px; background: linear-gradient(135deg, #a855f7, #00f0ff); color: #000; text-transform: uppercase;">SPECIAL</span>
+                </div>
+                <div style="font-size: 9.5px; color: #cbd5e1; font-weight: 600; margin-top: 2px;">
+                  Continuous Arena · 500 Kills Climax Titan Boss per Level · Select Your World:
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 3 Dedicated Level Select Buttons -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn-primary" id="btn-unlimited-lvl-1" style="flex: 1; min-width: 140px; padding: 7px 10px; font-size: 11px; font-weight: 900; background: linear-gradient(135deg, #f97316 0%, #ef4444 100%); color: #fff; box-shadow: 0 0 10px rgba(249, 115, 22, 0.4); border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 5px;">
+              <span>🌋 LVL 1: VOLCANO</span>
+            </button>
+            <button class="btn-primary" id="btn-unlimited-lvl-2" style="flex: 1; min-width: 140px; padding: 7px 10px; font-size: 11px; font-weight: 900; background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); color: #fff; box-shadow: 0 0 10px rgba(6, 182, 212, 0.4); border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 5px;">
+              <span>❄️ LVL 2: CRYO GLACIER</span>
+            </button>
+            <button class="btn-primary" id="btn-unlimited-lvl-3" style="flex: 1; min-width: 140px; padding: 7px 10px; font-size: 11px; font-weight: 900; background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%); color: #fff; box-shadow: 0 0 10px rgba(217, 70, 239, 0.4); border-radius: 6px; display: flex; align-items: center; justify-content: center; gap: 5px;">
+              <span>🌌 LVL 3: QUANTUM VOID</span>
+            </button>
+          </div>
+        </div>
 
         <!-- Mission Selection Tabs (Missions 1 to 6) -->
         <div class="mission-tabs" id="modal-mission-tabs">
@@ -2594,6 +2619,30 @@
             <button class="btn-primary" id="btn-side-resume-level" style="padding: 6px 10px; font-size: 10.5px; white-space: nowrap;">
               ▶️ PLAY LVL <span id="side-resume-lvl-num">1</span>
             </button>
+          </div>
+
+          <!-- Specially Highlighted: Mission Unlimited (New World) Card in Side Pane Levels -->
+          <div class="unlimited-level-banner" id="side-card-unlimited-highlight" style="margin-bottom: 8px; padding: 8px 10px; background: linear-gradient(135deg, rgba(168, 85, 247, 0.28) 0%, rgba(6, 182, 212, 0.22) 50%, rgba(255, 85, 0, 0.2) 100%); border: 1.5px solid #c084fc; border-radius: 8px; box-shadow: 0 0 14px rgba(168, 85, 247, 0.35); display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px;">♾️</span>
+                <div>
+                  <div style="font-size: 11px; font-weight: 900; color: #fff;">MISSION UNLIMITED (NEW WORLD)</div>
+                  <div style="font-size: 8.5px; color: #cbd5e1;">Continuous Arena · 500 Kills Titan Boss per Level</div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 5px;">
+              <button class="btn-primary" id="btn-side-unlimited-lvl-1" style="flex: 1; padding: 4px 6px; font-size: 9.5px; font-weight: 900; background: linear-gradient(135deg, #f97316, #ef4444); color: #fff; border-radius: 4px;">
+                🌋 LVL 1
+              </button>
+              <button class="btn-primary" id="btn-side-unlimited-lvl-2" style="flex: 1; padding: 4px 6px; font-size: 9.5px; font-weight: 900; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #fff; border-radius: 4px;">
+                ❄️ LVL 2
+              </button>
+              <button class="btn-primary" id="btn-side-unlimited-lvl-3" style="flex: 1; padding: 4px 6px; font-size: 9.5px; font-weight: 900; background: linear-gradient(135deg, #a855f7, #d946ef); color: #fff; border-radius: 4px;">
+                🌌 LVL 3
+              </button>
+            </div>
           </div>
 
           <!-- Mission Switcher Tabs -->
@@ -3283,6 +3332,23 @@
         osc.start(now);
         osc.stop(now + 0.32);
       }
+
+      playIceShatter() {
+        if (this.muted || !this.ctx) return;
+        this.resume();
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(1200, now);
+        osc.frequency.exponentialRampToValueAtTime(380, now + 0.18);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        osc.start(now);
+        osc.stop(now + 0.22);
+      }
     }
 
     const rawSound = new SoundEngine();
@@ -3661,8 +3727,8 @@
 
     // --- GOOGLE ADMOB CONFIGURATION & ANDROID WEBVIEW BRIDGE ---
     const ADMOB_CONFIG = {
-      // Default to TEST_MODE = true so test ads always fill and display during testing & dev
-      TEST_MODE: localStorage.getItem('admob_test_mode') === null ? true : (localStorage.getItem('admob_test_mode') === 'true'),
+      // Strictly TEST_MODE = true (only official Google test ads everywhere)
+      TEST_MODE: true,
 
       // Official Google Sample / Test Ad Unit IDs for Android (100% Fill Rate Guaranteed by Google)
       TEST_UNITS: {
@@ -3673,13 +3739,13 @@
         REWARDED_INTERSTITIAL: "ca-app-pub-3940256099942544/5354046379"
       },
 
-      // Production Play Store Live Ad Unit IDs
+      // Fallback / Standard Units now strictly point to Google Test Ad Units
       PROD_UNITS: {
-        APP_ID: "ca-app-pub-5448696131672998~4497188679",
-        BANNER: "ca-app-pub-5448696131672998/7945479093",
-        INTERSTITIAL: "ca-app-pub-5448696131672998/6906273320",
-        REWARDED: "ca-app-pub-5448696131672998/5728923023",
-        REWARDED_INTERSTITIAL: "ca-app-pub-5448696131672998/9727877783"
+        APP_ID: "ca-app-pub-3940256099942544~3347511713",
+        BANNER: "ca-app-pub-3940256099942544/6300978111",
+        INTERSTITIAL: "ca-app-pub-3940256099942544/1033173712",
+        REWARDED: "ca-app-pub-3940256099942544/5224354917",
+        REWARDED_INTERSTITIAL: "ca-app-pub-3940256099942544/5354046379"
       },
 
       getAppId() { return this.TEST_UNITS.APP_ID; },
@@ -3689,10 +3755,10 @@
       getRewardedInterstitialId() { return this.TEST_UNITS.REWARDED_INTERSTITIAL; },
 
       setTestMode(enabled) {
-        this.TEST_MODE = !!enabled;
-        localStorage.setItem('admob_test_mode', this.TEST_MODE ? 'true' : 'false');
+        this.TEST_MODE = true;
+        localStorage.setItem('admob_test_mode', 'true');
         if (window.AndroidAds && typeof window.AndroidAds.setTestMode === 'function') {
-          try { window.AndroidAds.setTestMode(this.TEST_MODE); } catch (e) {}
+          try { window.AndroidAds.setTestMode(true); } catch (e) {}
         }
         updateAdMobDiagnosticsUI();
       }
@@ -3711,7 +3777,7 @@
       const bannerEl = document.getElementById('admob-test-banner');
       if (bannerEl) bannerEl.classList.add('hidden');
       if (window.AndroidAds && typeof window.AndroidAds.setBannerVisible === 'function') {
-        try { window.AndroidAds.setBannerVisible(visible); } catch (e) {}
+        try { window.AndroidAds.setBannerVisible(false); } catch (e) {}
       }
     };
 
@@ -3830,26 +3896,36 @@
      * Directly grants reward instantly without displaying any ads per user instructions.
      */
     window.triggerRewardedAd = function(rewardType, onRewarded) {
-     if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
-        window.AndroidAds.showRewardedAd(rewardType);
-     } else {
-        window.onAdMobRewardGranted(rewardType);
-     }
+      window.onAdMobRewardGranted(rewardType);
+      if (typeof onRewarded === 'function') {
+        try { onRewarded(rewardType); } catch (e) { console.warn(e); }
+      }
     };
 
-   window.triggerRewardedInterstitialAd = function() {
-    if (window.AndroidAds && typeof window.AndroidAds.showRewardedAd === 'function') {
-        window.AndroidAds.showRewardedAd('boss_bonus');
-     } else {
-        window.onAdMobRewardGranted('boss_bonus');
-     }
+    function showInAppRewardedTestAd(rewardType) {
+      window.onAdMobRewardGranted(rewardType);
+    }
+
+    /**
+     * 2. Direct Boss Bonus (triggerRewardedInterstitialAd)
+     * Directly grants boss clear bonus shards without displaying any interstitial ads.
+     */
+    window.triggerRewardedInterstitialAd = function() {
+      window.onAdMobRewardGranted('boss_bonus');
     };
 
-   window.triggerInterstitialAd = function() {
-    if (window.AndroidAds && typeof window.AndroidAds.showInterstitialAd === 'function') {
-        window.AndroidAds.showInterstitialAd();
-     }
-   };
+    /**
+     * 3. Standard Interstitial Ads (triggerInterstitialAd)
+     * Disabled completely: zero ads shown.
+     */
+    window.triggerInterstitialAd = function() {
+      return;
+    };
+
+    function showInAppInterstitialTestAd() {
+      return;
+    }
+
     // Diagnostics UI Updater (clean no-op as Ads pane is removed)
     function updateAdMobDiagnosticsUI() {
       // Ads pane removed per user instructions
@@ -3908,8 +3984,13 @@
     let hasUsedReviveThisRun = false; // Strictly 1 revive allowed per sector attempt in campaign
     let unlimitedKills = 0; // Mission Unlimited total enemies destroyed (target 500)
     let unlimitedSpawnTimer = 0; // Continuous dynamic wave spawner
-    let isGiantBossSpawned = false; // Giant Boss Volcanus trigger flag
-    let giantBossRef = null; // Reference to Giant Boss Volcanus
+    let unlimitedSelectedLevel = 1; // 1: Volcanic Hellfire, 2: Cryo-Collapse, 3: Quantum Eclipse
+    let unlimitedGravityTimer = 5.0; // Gravity fluctuation timer for Unlimited Level 3
+    let unlimitedLowGravityActive = false;
+    let unlimitedParticles = []; // Atmospheric particles for Unlimited (embers, snow, stardust)
+    let unlimitedSingularityVortexAngle = 0;
+    let isGiantBossSpawned = false; // Giant Boss trigger flag
+    let giantBossRef = null; // Reference to Giant Boss
     window.portraitDismissed = false;
 
     const canvas = document.getElementById('gameCanvas');
@@ -4279,8 +4360,10 @@
             this.vy *= 0.65;
           }
         } else {
-          // Normal Gravity & Flexible Movement (Mission 6 Fluctuating Gravity Support)
-          const stageGravity = (currentLevelIndex > 150 && currentLevelIndex <= 180) ? (mission6LowGravityActive ? 300 : 660) : (currentLevelIndex >= 21 ? 380 : 620);
+          // Normal Gravity & Flexible Movement (Mission 6 & Unlimited Level 3 Fluctuating Gravity Support)
+          const stageGravity = (gameMode === 'UNLIMITED' && unlimitedSelectedLevel === 3)
+            ? (unlimitedLowGravityActive ? 320 : 680)
+            : ((currentLevelIndex > 150 && currentLevelIndex <= 180) ? (mission6LowGravityActive ? 300 : 660) : (currentLevelIndex >= 21 ? 380 : 620));
           this.vy += stageGravity * dt;
 
           // Keyboard movement (ArrowLeft/ArrowRight or A/D keys for nimble running)
@@ -4313,8 +4396,9 @@
             this.canDash = true;
           }
 
-          // Natural air/ground friction: smooth deceleration without scraping
-          this.vx *= Math.pow(this.isGrounded ? 0.88 : 0.94, dt * 60);
+          // Natural air/ground friction: smooth deceleration (Slight icy slide in Unlimited Level 2)
+          const groundFriction = (gameMode === 'UNLIMITED' && unlimitedSelectedLevel === 2) ? 0.94 : 0.88;
+          this.vx *= Math.pow(this.isGrounded ? groundFriction : 0.94, dt * 60);
           this.checkPlatformCollisions();
           this.checkEnemyContact();
         }
@@ -4904,21 +4988,22 @@
       }
     }
 
-    // --- FIREBALL SYSTEM ("Aag ke Gole") ---
-    function spawnFireball(x, y, vx = 0, vy = 320, targetGroundY = 660) {
+    // --- FIREBALL & ELEMENTAL HAZARDS SYSTEM ("Aag ke Gole & Elemental Hazards") ---
+    function spawnFireball(x, y, vx = 0, vy = 320, targetGroundY = 660, element = 'fire') {
       fireballs.push({
         x: x,
         y: y,
         vx: vx,
         vy: vy,
-        radius: 15,
+        radius: element === 'cryo' ? 14 : (element === 'quantum' ? 16 : 15),
         targetGroundY: targetGroundY,
+        element: element,
         life: 4.5
       });
     }
 
-    // Surface Rolling Fireballs for Mission 5 ("Surface pr rolling hote hue aag ke gole")
-    function spawnRollingFireball(x, vx = -280, radius = 22) {
+    // Surface Rolling Fireballs & Hazards for Mission 5 & Unlimited
+    function spawnRollingFireball(x, vx = -280, radius = 22, element = 'fire') {
       fireballs.push({
         x: x,
         y: 660 - radius,
@@ -4929,6 +5014,7 @@
         isRolling: true,
         rotationAngle: 0,
         rollSpeed: vx / radius,
+        element: element,
         life: 16.0
       });
     }
@@ -4941,9 +5027,9 @@
         this.y = y;
         this.startX = x;
         this.startY = y;
-        this.radius = type.startsWith('boss') ? (type === 'boss_giant_volcanus' ? 68 : (type === 'boss_chrono_eclipse_master' || type === 'boss_singularity_overlord' ? 48 : (type === 'boss_chronos_nexus' || type === 'boss_tempest_god' ? 44 : (type === 'boss_hyperion_dread' || type === 'boss_chrono_crusher' || type === 'boss_void_stalker' || type === 'boss_eclipse_titan' ? 42 : (type === 'boss_void_singularity' || type === 'boss_omega_architect' || type === 'boss_velocity_phantom' || type === 'boss_astral_phantom' ? 40 : 35))))) : (type === 'overdrive_brute' ? 26 : (type === 'heavy_mech' || type === 'phase_brute' ? 24 : (type === 'plasma_turret' ? 22 : (type === 'air_bomber_drone' || type === 'time_bomb_drone' || type === 'eclipse_assassin' || type === 'gravity_drone' || type === 'void_stalker' ? 20 : (type === 'hyper_chaser' ? 19 : 18)))));
+        this.radius = type.startsWith('boss') ? (type === 'boss_singularity_lord' ? 72 : (type === 'boss_titan_ymir' ? 70 : (type === 'boss_giant_volcanus' ? 68 : (type === 'boss_chrono_eclipse_master' || type === 'boss_singularity_overlord' ? 48 : (type === 'boss_chronos_nexus' || type === 'boss_tempest_god' ? 44 : (type === 'boss_hyperion_dread' || type === 'boss_chrono_crusher' || type === 'boss_void_stalker' || type === 'boss_eclipse_titan' ? 42 : (type === 'boss_void_singularity' || type === 'boss_omega_architect' || type === 'boss_velocity_phantom' || type === 'boss_astral_phantom' ? 40 : 35))))))) : (type === 'overdrive_brute' ? 26 : (type === 'heavy_mech' || type === 'phase_brute' ? 24 : (type === 'plasma_turret' ? 22 : (type === 'air_bomber_drone' || type === 'time_bomb_drone' || type === 'eclipse_assassin' || type === 'gravity_drone' || type === 'void_stalker' ? 20 : (type === 'hyper_chaser' ? 19 : 18)))));
         this.facing = opts.facing || 1;
-        this.isShieldActive = (type === 'shield' || type === 'heavy_mech' || type === 'phase_brute' || type === 'overdrive_brute' || type === 'boss_chrono_eclipse_master' || type === 'boss_giant_volcanus');
+        this.isShieldActive = (type === 'shield' || type === 'heavy_mech' || type === 'phase_brute' || type === 'overdrive_brute' || type === 'boss_chrono_eclipse_master' || type === 'boss_giant_volcanus' || type === 'boss_titan_ymir' || type === 'boss_singularity_lord');
         this.frozenTimer = 0;
         this.stunTimer = 0;
         this.shootTimer = 1.0 + Math.random() * 1.5;
@@ -4963,7 +5049,9 @@
         this.walkAnimTimer = 0;
 
         // Health Points Assignment
-        if (type === 'boss_giant_volcanus') this.hp = 150;
+        if (type === 'boss_singularity_lord') this.hp = 200;
+        else if (type === 'boss_titan_ymir') this.hp = 175;
+        else if (type === 'boss_giant_volcanus') this.hp = 150;
         else if (type === 'boss_chrono_eclipse_master') this.hp = 80;
         else if (type === 'boss_singularity_overlord') this.hp = 70;
         else if (type === 'boss_chronos_nexus' || type === 'boss_tempest_god') this.hp = 60;
@@ -5120,6 +5208,33 @@
               if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; }
               else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; }
             }
+          } else if (this.type === 'boss_titan_ymir') {
+            // Apex Glacial Titan Ymir-Zero (Cryo Glider & Frost Quake)
+            this.floatAngle += dt * 1.5;
+            this.y = 560 + Math.sin(this.floatAngle) * 12;
+            if (player && player.hearts > 0) {
+              const dir = player.x > this.x ? 1 : -1;
+              this.facing = dir;
+              this.x += dir * 75 * dt;
+              if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; }
+              else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; }
+            }
+          } else if (this.type === 'boss_singularity_lord') {
+            // Apex Cosmic Titan Singularity Lord (Event Horizon Hover & Gravitational Pull)
+            this.floatAngle += dt * 1.8;
+            this.y = 540 + Math.sin(this.floatAngle) * 20;
+            if (player && player.hearts > 0) {
+              const dir = player.x > this.x ? 1 : -1;
+              this.facing = dir;
+              this.x += dir * 85 * dt;
+              if (this.x <= this.patrolMinX) { this.x = this.patrolMinX; }
+              else if (this.x >= this.patrolMaxX) { this.x = this.patrolMaxX; }
+              // Singularity Gravitational Pull on Player
+              const pDist = Math.hypot(player.x - this.x, player.y - this.y);
+              if (pDist < 580 && pDist > 70) {
+                player.x += (this.x - player.x) * (0.018 * dt * 60);
+              }
+            }
           } else if (this.type === 'boss_chrono_sentinel') {
             this.y = this.startY + Math.sin(this.floatAngle) * 35;
             this.warpTimer = (this.warpTimer || 0) + dt;
@@ -5184,7 +5299,7 @@
         if (this.shootTimer <= 0 && player && player.hearts > 0) {
           this.fireProjectile();
           const isM5 = (currentLevelIndex > 120 && currentLevelIndex <= 150);
-          const baseInterval = (this.type === 'boss_giant_volcanus' ? 1.5 : (this.type.startsWith('boss') ? 1.35 : (this.type === 'heavy_mech' || this.type === 'air_bomber_drone' || this.type === 'phase_brute' ? 2.0 : 2.5)));
+          const baseInterval = (this.type === 'boss_singularity_lord' ? 1.3 : (this.type === 'boss_titan_ymir' ? 1.4 : (this.type === 'boss_giant_volcanus' ? 1.5 : (this.type.startsWith('boss') ? 1.35 : (this.type === 'heavy_mech' || this.type === 'air_bomber_drone' || this.type === 'phase_brute' ? 2.0 : 2.5)))));
           this.shootTimer = isM5 ? (baseInterval * 0.6) : baseInterval;
         }
       }
@@ -5292,12 +5407,32 @@
           // Giant Infernal Titan Volcanus: Dual rolling fireballs + 7-way apocalyptic barrage + mortar fireball
           sound.playBomb();
           addScreenShake(12);
-          spawnRollingFireball(this.x - 40, -320, 26);
-          spawnRollingFireball(this.x + 40, 320, 26);
+          spawnRollingFireball(this.x - 40, -320, 26, 'fire');
+          spawnRollingFireball(this.x + 40, 320, 26, 'fire');
           for (let k = -3; k <= 3; k++) {
             createBullet(baseAngle + k * 0.18, 440, 8.5, k % 2 === 0 ? '#ff5500' : '#fbbf24');
           }
-          spawnFireball(this.x, this.y - 20, Math.cos(baseAngle) * 380, Math.sin(baseAngle) * 380, 660);
+          spawnFireball(this.x, this.y - 20, Math.cos(baseAngle) * 380, Math.sin(baseAngle) * 380, 660, 'fire');
+        } else if (this.type === 'boss_titan_ymir') {
+          // Apex Glacial Titan Ymir-Zero: Dual rolling frost orbs + 8-way Sub-Zero Frost Nova + overhead cryo spike
+          sound.playIceShatter();
+          addScreenShake(14);
+          spawnRollingFireball(this.x - 40, -340, 26, 'cryo');
+          spawnRollingFireball(this.x + 40, 340, 26, 'cryo');
+          for (let k = -4; k <= 4; k++) {
+            createBullet(baseAngle + k * 0.16, 460, 8, k % 2 === 0 ? '#06b6d4' : '#38bdf8');
+          }
+          spawnFireball(player.x + (Math.random() - 0.5) * 100, -40, 0, 460, 660, 'cryo');
+        } else if (this.type === 'boss_singularity_lord') {
+          // Apex Cosmic Titan Singularity Lord: Dual rolling antimatter orbs + 10-way void barrage + singularity collapse
+          sound.playAirStrike();
+          addScreenShake(16);
+          spawnRollingFireball(this.x - 45, -360, 28, 'quantum');
+          spawnRollingFireball(this.x + 45, 360, 28, 'quantum');
+          for (let k = -5; k <= 5; k++) {
+            createBullet(baseAngle + k * 0.15, 480, 8.5, k % 2 === 0 ? '#d946ef' : '#c084fc');
+          }
+          spawnFireball(player.x, -50, (Math.random() - 0.5) * 100, 440, 660, 'quantum');
         } else if (this.type === 'boss_velocity_phantom') {
           for (let k = -2; k <= 2; k++) {
             createBullet(baseAngle + k * 0.18, 470, 6.5, '#c084fc');
@@ -5452,12 +5587,12 @@
         if (gameMode === 'UNLIMITED') {
           unlimitedKills++;
           updateHUD();
-          if (this.type === 'boss_giant_volcanus') {
+          if (this.type === 'boss_giant_volcanus' || this.type === 'boss_titan_ymir' || this.type === 'boss_singularity_lord') {
             executeUnlimitedVictory();
             return;
           }
           if (unlimitedKills >= 500 && !isGiantBossSpawned) {
-            spawnGiantVolcanusBoss();
+            spawnUnlimitedBoss();
           }
         }
 
@@ -5601,6 +5736,12 @@
           } else if (this.type === 'boss_giant_volcanus') {
             bodyColor = '#450a0a';
             strokeColor = '#ff5500';
+          } else if (this.type === 'boss_titan_ymir') {
+            bodyColor = '#04202c';
+            strokeColor = '#22d3ee';
+          } else if (this.type === 'boss_singularity_lord') {
+            bodyColor = '#150524';
+            strokeColor = '#e879f9';
           } else if (this.type === 'boss_pyro_drake' || this.type === 'boss_solaris_shogun' || this.type === 'boss_overlord_flame') {
             bodyColor = '#7c2d12';
             strokeColor = '#f97316';
@@ -5736,11 +5877,72 @@
           c.lineTo(35, 22);
           c.stroke();
           c.restore();
+        } else if (this.type === 'boss_titan_ymir') {
+          // Glacial Titan Ymir crystalline horns and frost runes
+          c.save();
+          c.fillStyle = '#06b6d4';
+          c.strokeStyle = '#e0f2fe';
+          c.lineWidth = 3.5;
+          // Left Glacial Spires
+          c.beginPath();
+          c.moveTo(-35, -this.radius + 15);
+          c.lineTo(-58, -this.radius - 40);
+          c.lineTo(-20, -this.radius + 5);
+          c.fill();
+          c.stroke();
+          // Right Glacial Spires
+          c.beginPath();
+          c.moveTo(35, -this.radius + 15);
+          c.lineTo(58, -this.radius - 40);
+          c.lineTo(20, -this.radius + 5);
+          c.fill();
+          c.stroke();
+          // Ice fissure lines
+          c.strokeStyle = '#67e8f9';
+          c.lineWidth = 2.5;
+          c.beginPath();
+          c.moveTo(-32, -8);
+          c.lineTo(-6, 20);
+          c.lineTo(14, -14);
+          c.lineTo(32, 20);
+          c.stroke();
+          c.restore();
+        } else if (this.type === 'boss_singularity_lord') {
+          // Cosmic Titan Singularity Lord Event-Horizon Crown
+          c.save();
+          c.fillStyle = '#a855f7';
+          c.strokeStyle = '#f0abfc';
+          c.lineWidth = 3.5;
+          // 3-Point Void Crown
+          c.beginPath();
+          c.moveTo(-45, -this.radius + 10);
+          c.lineTo(-60, -this.radius - 35);
+          c.lineTo(-25, -this.radius - 10);
+          c.lineTo(0, -this.radius - 45);
+          c.lineTo(25, -this.radius - 10);
+          c.lineTo(60, -this.radius - 35);
+          c.lineTo(45, -this.radius + 10);
+          c.closePath();
+          c.fill();
+          c.stroke();
+          // Singularity quantum fissure lines
+          c.strokeStyle = '#e879f9';
+          c.lineWidth = 2.5;
+          c.beginPath();
+          c.arc(0, 0, this.radius * 0.55, 0, Math.PI * 2);
+          c.stroke();
+          c.restore();
         }
 
         // Eye / Visor
         if (this.type === 'boss_giant_volcanus') {
           c.fillStyle = '#ffcc00';
+          c.fillRect(this.facing === 1 ? 8 : -28, -12, 20, 10);
+        } else if (this.type === 'boss_titan_ymir') {
+          c.fillStyle = '#67e8f9';
+          c.fillRect(this.facing === 1 ? 8 : -28, -12, 20, 10);
+        } else if (this.type === 'boss_singularity_lord') {
+          c.fillStyle = '#f5d0fe';
           c.fillRect(this.facing === 1 ? 8 : -28, -12, 20, 10);
         } else {
           c.fillStyle = this.type === 'shadow_mimic' ? '#00f0ff' : '#ff0055';
@@ -7009,7 +7211,11 @@
     // ==============================================================
     // MISSION UNLIMITED (NEW WORLD) LIFECYCLE & WAVE MANAGEMENT
     // ==============================================================
-    function startUnlimitedMode() {
+    function startUnlimitedMode(lvl = 1) {
+      if (lvl < 1) lvl = 1;
+      if (lvl > 3) lvl = 3;
+      unlimitedSelectedLevel = lvl;
+      currentLevelIndex = lvl;
       gameMode = 'UNLIMITED';
       gameState = 'PLAYING';
       setBannerVisibility(false);
@@ -7019,6 +7225,21 @@
       isGiantBossSpawned = false;
       giantBossRef = null;
       unlimitedSpawnTimer = 0;
+      unlimitedGravityTimer = 5.0;
+      unlimitedLowGravityActive = false;
+
+      // Populate atmospheric particles (embers for L1, snowflakes for L2, stardust for L3)
+      unlimitedParticles = [];
+      for (let i = 0; i < 45; i++) {
+        unlimitedParticles.push({
+          x: Math.random() * VIRTUAL_WIDTH,
+          y: Math.random() * VIRTUAL_HEIGHT,
+          vx: (Math.random() - 0.5) * (lvl === 2 ? 80 : 40),
+          vy: lvl === 2 ? (60 + Math.random() * 90) : (lvl === 3 ? (30 + Math.random() * 60) : (40 + Math.random() * 70)),
+          size: lvl === 2 ? (2 + Math.random() * 2.5) : (1.5 + Math.random() * 2),
+          alpha: 0.35 + Math.random() * 0.65
+        });
+      }
 
       // Close all modals
       document.querySelectorAll('.modal-overlay').forEach(m => m.classList.add('hidden'));
@@ -7039,14 +7260,15 @@
       fireTrails = [];
       fireballs = [];
 
-      // Continuous indestructible base ground spanning full 60,000px length
+      // Continuous indestructible base ground spanning full 64,000px length
       platforms.push({ x: -2000, y: 660, w: 64000, h: 100 });
 
       // Procedural floating tactical platforms, jump pads, and grapple orbs across the expansive arena
       for (let px = 800; px < 59200; px += 450 + (px % 320)) {
         const platY = 430 + ((px * 7) % 190);
         const platW = 200 + ((px * 11) % 180);
-        platforms.push({ x: px, y: platY, w: platW, h: 20 });
+        const isAntimatterPlat = (lvl === 3 && px % 900 < 350);
+        platforms.push({ x: px, y: platY, w: platW, h: 20, isAntimatter: isAntimatterPlat });
 
         if (px % 800 < 380) {
           hazards.push(new Hazard('jump_pad', px + platW / 2, platY));
@@ -7068,7 +7290,14 @@
       // Populate initial wave
       maintainUnlimitedEnemySpawns();
 
-      tutorialHint.textContent = '♾️ MISSION UNLIMITED (NEW WORLD): SLAY 500 FOES & DEFEAT GIANT TITAN VOLCANUS!';
+      let bannerText = '♾️ UNLIMITED LVL 1 (VOLCANIC HELLFIRE): SLAY 500 FOES & TITAN VOLCANUS!';
+      if (lvl === 2) {
+        bannerText = '❄️ UNLIMITED LVL 2 (CRYO-COLLAPSE): ICY ARENA · SLAY 500 FOES & TITAN YMIR-ZERO!';
+      } else if (lvl === 3) {
+        bannerText = '🌌 UNLIMITED LVL 3 (QUANTUM ECLIPSE): GRAVITY SHIFTS · SLAY 500 FOES & SINGULARITY LORD!';
+      }
+
+      tutorialHint.textContent = bannerText;
       tutorialHint.style.display = 'block';
       setTimeout(() => { tutorialHint.style.display = 'none'; }, 4500);
 
@@ -7081,8 +7310,8 @@
       if (gameMode !== 'UNLIMITED' || gameState !== 'PLAYING') return;
       if (isGiantBossSpawned) return; // Only boss and current minions when boss is active
 
-      // Scaling target enemy count: from 5 up to 12
-      const targetCount = Math.min(12, 5 + Math.floor(unlimitedKills / 60));
+      // Scaling target enemy count: from 5 up to 13
+      const targetCount = Math.min(13, 5 + Math.floor(unlimitedKills / 55));
       const activeEnemies = enemies.filter(e => !e.isDead && e.hp > 0);
 
       if (activeEnemies.length < targetCount) {
@@ -7094,29 +7323,55 @@
           const ex = Math.max(200, Math.min(currentWorldWidth - 200, player.x + side * spawnDist));
           const ey = 590;
 
-          // Enemy tier selection based on unlimitedKills
+          // Enemy tier selection based on unlimitedSelectedLevel & unlimitedKills
           let type = 'chaser';
           const r = Math.random();
-          if (unlimitedKills < 60) {
-            type = r < 0.45 ? 'chaser' : (r < 0.8 ? 'heavy_mech' : 'hover_drone');
-          } else if (unlimitedKills < 180) {
-            type = r < 0.35 ? 'chaser' : (r < 0.65 ? 'hyper_chaser' : (r < 0.85 ? 'heavy_mech' : 'air_bomber_drone'));
-          } else if (unlimitedKills < 350) {
-            type = r < 0.3 ? 'hyper_chaser' : (r < 0.55 ? 'void_stalker' : (r < 0.8 ? 'phase_brute' : 'air_bomber_drone'));
+          if (unlimitedSelectedLevel === 2) {
+            // Level 2 (Cryo-Collapse): Sub-zero themed tactical foes
+            if (unlimitedKills < 80) {
+              type = r < 0.4 ? 'chaser' : (r < 0.75 ? 'plasma_turret' : 'hover_drone');
+            } else if (unlimitedKills < 200) {
+              type = r < 0.35 ? 'hyper_chaser' : (r < 0.65 ? 'plasma_turret' : (r < 0.85 ? 'heavy_mech' : 'air_bomber_drone'));
+            } else if (unlimitedKills < 380) {
+              type = r < 0.3 ? 'hyper_chaser' : (r < 0.6 ? 'eclipse_assassin' : (r < 0.8 ? 'phase_brute' : 'air_bomber_drone'));
+            } else {
+              type = r < 0.3 ? 'eclipse_assassin' : (r < 0.6 ? 'overdrive_brute' : 'phase_brute');
+            }
+          } else if (unlimitedSelectedLevel === 3) {
+            // Level 3 (Quantum Eclipse): Void, Gravitational & Antimatter foes
+            if (unlimitedKills < 80) {
+              type = r < 0.4 ? 'gravity_drone' : (r < 0.75 ? 'void_stalker' : 'hyper_chaser');
+            } else if (unlimitedKills < 200) {
+              type = r < 0.3 ? 'void_stalker' : (r < 0.6 ? 'shadow_mimic' : (r < 0.8 ? 'time_bomb_drone' : 'gravity_drone'));
+            } else if (unlimitedKills < 380) {
+              type = r < 0.3 ? 'eclipse_assassin' : (r < 0.55 ? 'void_stalker' : (r < 0.8 ? 'phase_brute' : 'time_bomb_drone'));
+            } else {
+              type = r < 0.35 ? 'overdrive_brute' : (r < 0.7 ? 'eclipse_assassin' : 'void_stalker');
+            }
           } else {
-            type = r < 0.25 ? 'hyper_chaser' : (r < 0.5 ? 'overdrive_brute' : (r < 0.75 ? 'eclipse_assassin' : 'phase_brute'));
+            // Level 1 (Volcanic Hellfire)
+            if (unlimitedKills < 60) {
+              type = r < 0.45 ? 'chaser' : (r < 0.8 ? 'heavy_mech' : 'hover_drone');
+            } else if (unlimitedKills < 180) {
+              type = r < 0.35 ? 'chaser' : (r < 0.65 ? 'hyper_chaser' : (r < 0.85 ? 'heavy_mech' : 'air_bomber_drone'));
+            } else if (unlimitedKills < 350) {
+              type = r < 0.3 ? 'hyper_chaser' : (r < 0.55 ? 'void_stalker' : (r < 0.8 ? 'phase_brute' : 'air_bomber_drone'));
+            } else {
+              type = r < 0.25 ? 'hyper_chaser' : (r < 0.5 ? 'overdrive_brute' : (r < 0.75 ? 'eclipse_assassin' : 'phase_brute'));
+            }
           }
 
+          const baseSpeed = unlimitedSelectedLevel === 3 ? 140 : (unlimitedSelectedLevel === 2 ? 130 : 120);
           const opts = {
             moveType: 'chaser',
-            moveSpeed: 120 + Math.min(100, Math.floor(unlimitedKills * 0.2)),
+            moveSpeed: baseSpeed + Math.min(110, Math.floor(unlimitedKills * 0.22)),
             patrolMinX: ex - 300,
             patrolMaxX: ex + 300
           };
 
           const newEnemy = new Enemy(type, ex, ey, opts);
           // Scale HP with progression
-          const bonusHp = Math.floor(unlimitedKills / 90);
+          const bonusHp = Math.floor(unlimitedKills / 85);
           if (bonusHp > 0) {
             newEnemy.maxHp += bonusHp;
             newEnemy.hp += bonusHp;
@@ -7127,29 +7382,47 @@
       }
     }
 
-    function spawnGiantVolcanusBoss() {
+    function spawnUnlimitedBoss() {
       if (isGiantBossSpawned) return;
       isGiantBossSpawned = true;
 
       // Spawn in front of player
       const bossX = Math.max(300, Math.min(currentWorldWidth - 300, player.x + (player.facing === 1 ? 520 : -520)));
-      const boss = new Enemy('boss_giant_volcanus', bossX, 580, {
+      let bossType = 'boss_giant_volcanus';
+      let bossHp = 150;
+      let bossName = '🌋 THE GIANT TITAN VOLCANUS HAS RISEN! (150 HP)';
+      let bossColor = '#ff5500';
+
+      if (unlimitedSelectedLevel === 2) {
+        bossType = 'boss_titan_ymir';
+        bossHp = 175;
+        bossName = '❄️ THE APEX TITAN YMIR-ZERO HAS RISEN! (175 HP)';
+        bossColor = '#06b6d4';
+      } else if (unlimitedSelectedLevel === 3) {
+        bossType = 'boss_singularity_lord';
+        bossHp = 200;
+        bossName = '🌌 THE TITAN SINGULARITY LORD HAS RISEN! (200 HP)';
+        bossColor = '#d946ef';
+      }
+
+      const boss = new Enemy(bossType, bossX, 580, {
         moveType: 'chaser',
-        moveSpeed: 95
+        moveSpeed: unlimitedSelectedLevel === 3 ? 105 : (unlimitedSelectedLevel === 2 ? 100 : 95)
       });
-      boss.hp = 150;
-      boss.maxHp = 150;
+      boss.hp = bossHp;
+      boss.maxHp = bossHp;
       boss.isShieldActive = true;
       giantBossRef = boss;
       enemies.push(boss);
 
       sound.playAirStrike();
       sound.playBossAlert();
-      addScreenShake(24);
-      triggerHaptic([60, 50, 70]);
-      spawnFloatingText(player.x, 150, '🌋 THE GIANT TITAN VOLCANUS HAS RISEN! (150 HP)', '#ff0055');
+      addScreenShake(26);
+      triggerHaptic([70, 50, 80]);
+      spawnFloatingText(player.x, 150, bossName, bossColor);
       updateHUD();
     }
+    const spawnGiantVolcanusBoss = spawnUnlimitedBoss;
 
     function executeUnlimitedVictory() {
       if (isVictorySequenceRunning) return;
@@ -7168,15 +7441,33 @@
         sound.playSlowMoExit();
         sound.playReward();
 
-        // 1250 Shards reward for conquering Mission Unlimited!
-        progression.addShards(1250);
+        let shardBonus = 1250;
+        let titleText = '👑 MISSION UNLIMITED: LEVEL 1 CONQUERED!';
+        let comboText = `${unlimitedKills} KILLS + TITAN VOLCANUS SLAIN`;
+        let nextBtnText = '❄️ PROCEED TO LEVEL 2: CRYO GLACIER ↗';
+
+        if (unlimitedSelectedLevel === 2) {
+          shardBonus = 1500;
+          titleText = '👑 MISSION UNLIMITED: LEVEL 2 CONQUERED!';
+          comboText = `${unlimitedKills} KILLS + TITAN YMIR-ZERO DESTROYED`;
+          nextBtnText = '🌌 PROCEED TO LEVEL 3: QUANTUM ECLIPSE ↗';
+        } else if (unlimitedSelectedLevel === 3) {
+          shardBonus = 2500;
+          titleText = '🏆 SUPREME UNLIMITED GRAND CHAMPION!';
+          comboText = `ALL 3 WORLDS CONQUERED · 1,500 TOTAL KILLS + SINGULARITY LORD SLAIN`;
+          nextBtnText = '👑 RETURN TO LEVEL SELECT ↗';
+        }
+
+        progression.addShards(shardBonus);
         progression.save();
 
-        document.getElementById('victory-title').textContent = '👑 MISSION UNLIMITED CONQUERED!';
-        document.getElementById('victory-combo').textContent = `${unlimitedKills} KILLS + TITAN VOLCANUS SLAIN`;
-        document.getElementById('victory-shards').textContent = '+1,250 ⚡';
-        document.getElementById('btn-claim-3x-shards').textContent = '⚡ CLAIM 2X SHARDS BONUS (+1,250 ⚡)';
+        document.getElementById('victory-title').textContent = titleText;
+        document.getElementById('victory-combo').textContent = comboText;
+        document.getElementById('victory-shards').textContent = `+${shardBonus.toLocaleString()} ⚡`;
+        document.getElementById('btn-claim-3x-shards').textContent = `⚡ CLAIM 2X SHARDS BONUS (+${shardBonus.toLocaleString()} ⚡)`;
         document.getElementById('btn-claim-3x-shards').disabled = false;
+        const nextLvlBtn = document.getElementById('btn-next-level');
+        if (nextLvlBtn) nextLvlBtn.textContent = nextBtnText;
         modalVictory.classList.remove('hidden');
         updateHUD();
       }, 1400);
@@ -7393,8 +7684,15 @@
 
     function updateHUD() {
       if (gameMode === 'UNLIMITED') {
-        if (hudSectorLabel) hudSectorLabel.textContent = 'MISSION UNLIMITED';
-        if (hudLevelText) hudLevelText.textContent = isGiantBossSpawned ? (giantBossRef && giantBossRef.hp > 0 ? `TITAN: ${giantBossRef.hp}/150 HP` : 'TITAN SLAIN') : `KILLS: ${unlimitedKills}/500`;
+        const lvlName = unlimitedSelectedLevel === 3 ? 'QUANTUM VOID' : (unlimitedSelectedLevel === 2 ? 'CRYO GLACIER' : 'VOLCANO');
+        if (hudSectorLabel) hudSectorLabel.textContent = `UNLIMITED · ${lvlName}`;
+        const maxBossHp = unlimitedSelectedLevel === 3 ? 200 : (unlimitedSelectedLevel === 2 ? 175 : 150);
+        const bossShortName = unlimitedSelectedLevel === 3 ? 'SINGULARITY' : (unlimitedSelectedLevel === 2 ? 'YMIR-ZERO' : 'VOLCANUS');
+        if (hudLevelText) {
+          hudLevelText.textContent = isGiantBossSpawned
+            ? (giantBossRef && giantBossRef.hp > 0 ? `${bossShortName}: ${giantBossRef.hp}/${maxBossHp} HP` : 'TITAN SLAIN')
+            : `LVL ${unlimitedSelectedLevel} · ${unlimitedKills}/500 KILLS`;
+        }
       } else {
         if (hudLevelText) hudLevelText.textContent = `LVL ${currentLevelIndex}/180`;
         if (hudSectorLabel) {
@@ -7411,9 +7709,10 @@
       const hudTargetsCount = document.getElementById('hud-targets-count');
       if (hudTargetsCount) {
         if (gameMode === 'UNLIMITED') {
+          const maxBossHp = unlimitedSelectedLevel === 3 ? 200 : (unlimitedSelectedLevel === 2 ? 175 : 150);
           if (isGiantBossSpawned && giantBossRef) {
-            hudTargetsCount.textContent = `${giantBossRef.hp}/150 HP`;
-            hudTargetsCount.style.color = giantBossRef.hp <= 30 ? '#ef4444' : '#fbbf24';
+            hudTargetsCount.textContent = `${giantBossRef.hp}/${maxBossHp} HP`;
+            hudTargetsCount.style.color = giantBossRef.hp <= 35 ? '#ef4444' : '#fbbf24';
           } else {
             hudTargetsCount.textContent = `${unlimitedKills}/500`;
             hudTargetsCount.style.color = unlimitedKills >= 500 ? '#10b981' : '#00f0ff';
@@ -8872,14 +9171,14 @@
     });
     document.getElementById('btn-restart')?.addEventListener('click', () => {
       if (gameMode === 'UNLIMITED') {
-        startUnlimitedMode();
+        startUnlimitedMode(unlimitedSelectedLevel);
         return;
       }
       startCampaignLevel(currentLevelIndex);
     });
     document.getElementById('btn-retry-level')?.addEventListener('click', () => {
       if (gameMode === 'UNLIMITED') {
-        startUnlimitedMode();
+        startUnlimitedMode(unlimitedSelectedLevel);
         return;
       }
       startCampaignLevel(currentLevelIndex);
@@ -8887,9 +9186,15 @@
     document.getElementById('btn-next-level')?.addEventListener('click', () => {
       if (gameMode === 'UNLIMITED') {
         modalVictory.classList.add('hidden');
-        gameState = 'TITLE';
-        setBannerVisibility(true);
-        modalTitle.classList.remove('hidden');
+        if (unlimitedSelectedLevel === 1) {
+          startUnlimitedMode(2);
+        } else if (unlimitedSelectedLevel === 2) {
+          startUnlimitedMode(3);
+        } else {
+          gameState = 'TITLE';
+          setBannerVisibility(true);
+          modalTitle.classList.remove('hidden');
+        }
         return;
       }
       startCampaignLevel(currentLevelIndex + 1);
@@ -8908,24 +9213,26 @@
       startCampaignLevel(1);
     });
 
-    // Mission Unlimited (New World) Launch Handlers
-    document.getElementById('btn-start-unlimited')?.addEventListener('click', () => {
-      sound.resume();
-      if (!isLandscapeLocked) toggleLandscapeMode();
-      startUnlimitedMode();
-    });
-    document.getElementById('btn-goto-unlimited-from-select')?.addEventListener('click', () => {
+    // Mission Unlimited (New World) Launch Handlers (Supports Levels 1, 2, and 3)
+    const launchUnlimitedAtLevel = (lvl = 1) => {
       sound.resume();
       if (!isLandscapeLocked) toggleLandscapeMode();
       modalLevelSelect.classList.add('hidden');
-      startUnlimitedMode();
-    });
-    document.getElementById('btn-side-start-unlimited')?.addEventListener('click', () => {
-      sound.resume();
-      if (!isLandscapeLocked) toggleLandscapeMode();
       closeSideMenu();
-      startUnlimitedMode();
-    });
+      startUnlimitedMode(lvl);
+    };
+
+    document.getElementById('btn-start-unlimited')?.addEventListener('click', () => launchUnlimitedAtLevel(1));
+    document.getElementById('btn-goto-unlimited-from-select')?.addEventListener('click', () => launchUnlimitedAtLevel(1));
+    document.getElementById('btn-side-start-unlimited')?.addEventListener('click', () => launchUnlimitedAtLevel(1));
+
+    document.getElementById('btn-unlimited-lvl-1')?.addEventListener('click', () => launchUnlimitedAtLevel(1));
+    document.getElementById('btn-unlimited-lvl-2')?.addEventListener('click', () => launchUnlimitedAtLevel(2));
+    document.getElementById('btn-unlimited-lvl-3')?.addEventListener('click', () => launchUnlimitedAtLevel(3));
+
+    document.getElementById('btn-side-unlimited-lvl-1')?.addEventListener('click', () => launchUnlimitedAtLevel(1));
+    document.getElementById('btn-side-unlimited-lvl-2')?.addEventListener('click', () => launchUnlimitedAtLevel(2));
+    document.getElementById('btn-side-unlimited-lvl-3')?.addEventListener('click', () => launchUnlimitedAtLevel(3));
 
     // Endless arena button (safe optional chaining)
     document.getElementById('btn-start-endless')?.addEventListener('click', () => {
@@ -9184,40 +9491,83 @@
         if (gameMode === 'UNLIMITED' && gameState === 'PLAYING') {
           const killFactor = Math.min(1.0, (unlimitedKills || 0) / 500);
 
-          // 1. Dynamic Fireball Rain & Rolling Fireballs - Scales with kills
-          if (!window.unlimitedFireballTimer) window.unlimitedFireballTimer = 2.0;
-          window.unlimitedFireballTimer -= scaledDt;
-          if (window.unlimitedFireballTimer <= 0) {
-            window.unlimitedFireballTimer = Math.max(0.75, 2.8 - killFactor * 2.0);
+          // 1. Dynamic Environmental Hazard Spawner per Level
+          if (!window.unlimitedHazardTimer) window.unlimitedHazardTimer = 2.0;
+          window.unlimitedHazardTimer -= scaledDt;
+          if (window.unlimitedHazardTimer <= 0) {
+            window.unlimitedHazardTimer = Math.max(0.75, 2.8 - killFactor * 2.0);
 
-            // A. Downward falling fireballs from above
-            const rainCount = killFactor < 0.3 ? 1 : (killFactor < 0.7 ? (Math.random() < 0.6 ? 2 : 1) : (Math.random() < 0.5 ? 3 : 2));
-            for (let r = 0; r < rainCount; r++) {
-              const dropX = player.x + (Math.random() - 0.5) * 700;
-              const clampedX = Math.max(80, Math.min(currentWorldWidth - 80, dropX));
-              spawnFireball(clampedX, -35, (Math.random() - 0.5) * 90, 340 + killFactor * 160, 660);
+            if (unlimitedSelectedLevel === 2) {
+              // Level 2 (Cryo-Collapse): Sub-Zero Falling Cryo Spikes & Rolling Frost Orbs
+              const spikeCount = killFactor < 0.3 ? 1 : (killFactor < 0.7 ? (Math.random() < 0.65 ? 2 : 1) : (Math.random() < 0.55 ? 3 : 2));
+              for (let r = 0; r < spikeCount; r++) {
+                const dropX = player.x + (Math.random() - 0.5) * 650;
+                const clampedX = Math.max(80, Math.min(currentWorldWidth - 80, dropX));
+                spawnFireball(clampedX, -35, (Math.random() - 0.5) * 60, 420 + killFactor * 180, 660, 'cryo');
+              }
+              if (unlimitedKills >= 20) {
+                const dir = Math.random() < 0.5 ? 1 : -1;
+                const rollSpawnX = player.x + dir * 540;
+                const clampedRollX = Math.max(60, Math.min(currentWorldWidth - 60, rollSpawnX));
+                const rollSpeed = -dir * (290 + killFactor * 150);
+                spawnRollingFireball(clampedRollX, rollSpeed, 22 + killFactor * 10, 'cryo');
+              }
+            } else if (unlimitedSelectedLevel === 3) {
+              // Level 3 (Quantum Eclipse): Antimatter Singularity Spheres & Rolling Event-Horizon Orbs
+              const sphereCount = killFactor < 0.35 ? 1 : (killFactor < 0.75 ? 2 : 3);
+              for (let r = 0; r < sphereCount; r++) {
+                const dropX = player.x + (Math.random() - 0.5) * 720;
+                const clampedX = Math.max(80, Math.min(currentWorldWidth - 80, dropX));
+                spawnFireball(clampedX, -40, (Math.random() - 0.5) * 110, 370 + killFactor * 170, 660, 'quantum');
+              }
+              if (unlimitedKills >= 15) {
+                const dir = Math.random() < 0.5 ? 1 : -1;
+                const rollSpawnX = player.x + dir * 560;
+                const clampedRollX = Math.max(60, Math.min(currentWorldWidth - 60, rollSpawnX));
+                const rollSpeed = -dir * (280 + killFactor * 160);
+                spawnRollingFireball(clampedRollX, rollSpeed, 24 + killFactor * 12, 'quantum');
+              }
+            } else {
+              // Level 1 (Volcanic Hellfire): Downward fireballs & Rolling Fireballs
+              const rainCount = killFactor < 0.3 ? 1 : (killFactor < 0.7 ? (Math.random() < 0.6 ? 2 : 1) : (Math.random() < 0.5 ? 3 : 2));
+              for (let r = 0; r < rainCount; r++) {
+                const dropX = player.x + (Math.random() - 0.5) * 700;
+                const clampedX = Math.max(80, Math.min(currentWorldWidth - 80, dropX));
+                spawnFireball(clampedX, -35, (Math.random() - 0.5) * 90, 340 + killFactor * 160, 660, 'fire');
+              }
+              if (unlimitedKills >= 25) {
+                const dir = Math.random() < 0.5 ? 1 : -1;
+                const rollSpawnX = player.x + dir * 550;
+                const clampedRollX = Math.max(60, Math.min(currentWorldWidth - 60, rollSpawnX));
+                const rollSpeed = -dir * (260 + killFactor * 140);
+                spawnRollingFireball(clampedRollX, rollSpeed, 20 + killFactor * 10, 'fire');
+              }
             }
+          }
 
-            // B. Surface Rolling Fireballs (from both left and right directions!)
-            if (unlimitedKills >= 25) {
-              const dir = Math.random() < 0.5 ? 1 : -1;
-              const rollSpawnX = player.x + dir * 550;
-              const clampedRollX = Math.max(60, Math.min(currentWorldWidth - 60, rollSpawnX));
-              const rollSpeed = -dir * (260 + killFactor * 140);
-              spawnRollingFireball(clampedRollX, rollSpeed, 20 + killFactor * 10);
+          // Level 3 Quantum Fluctuating Gravity Shifts
+          if (unlimitedSelectedLevel === 3) {
+            unlimitedGravityTimer -= scaledDt;
+            if (unlimitedGravityTimer <= 0) {
+              unlimitedGravityTimer = unlimitedLowGravityActive ? 6.0 : 3.6;
+              unlimitedLowGravityActive = !unlimitedLowGravityActive;
+              addScreenShake(unlimitedLowGravityActive ? 7 : 5);
+              sound.playSlowMoEnter();
+              triggerHaptic([25, 35]);
+              spawnFloatingText(cameraFocusX, 130, unlimitedLowGravityActive ? '🌌 ZERO-G SURGE ACTIVE (LOW GRAVITY)!' : '⚡ HIGH-GRAVITY STABILIZED!', unlimitedLowGravityActive ? '#e879f9' : '#38bdf8');
             }
           }
 
           // 2. Continuous Dynamic Wave Spawner (keeps pressure alive around player)
           unlimitedSpawnTimer -= scaledDt;
           if (unlimitedSpawnTimer <= 0) {
-            unlimitedSpawnTimer = Math.max(1.4, 3.5 - killFactor * 1.8);
+            unlimitedSpawnTimer = Math.max(1.3, 3.4 - killFactor * 1.8);
             maintainUnlimitedEnemySpawns();
           }
 
-          // 3. Climax Boss Check (after almost 500 enemy kills)
+          // 3. Climax Boss Check (after 500 enemy kills)
           if (unlimitedKills >= 500 && !isGiantBossSpawned) {
-            spawnGiantVolcanusBoss();
+            spawnUnlimitedBoss();
           }
         }
 
@@ -9301,17 +9651,24 @@
             }
           }
 
-          // Check Katana Slash / Deflection on Fireball
+          // Check Katana Slash / Deflection on Fireball & Elemental Hazard
           if (player.isDashing) {
             const dist = Math.hypot(player.x - fb.x, player.y - fb.y);
             if (dist < player.radius + fb.radius + 18) {
-              spawnSparks(fb.x, fb.y, '#fbbf24', 22);
-              sound.playDeflect();
+              const elColor = fb.element === 'cryo' ? '#06b6d4' : (fb.element === 'quantum' ? '#d946ef' : '#fbbf24');
+              const sliceLabel = fb.element === 'cryo'
+                ? (fb.isRolling ? '❄️ ROLLING FROST SLICED!' : '❄️ CRYO SPIKE SLICED!')
+                : (fb.element === 'quantum'
+                  ? (fb.isRolling ? '🌌 VOID ORB SLICED!' : '🌌 SINGULARITY SLICED!')
+                  : (fb.isRolling ? '🔥 ROLLING FIRE SLICED!' : '🔥 FIREBALL SLICED!'));
+              spawnSparks(fb.x, fb.y, elColor, 22);
+              if (fb.element === 'cryo') sound.playIceShatter();
+              else sound.playDeflect();
               sound.playSlash();
               triggerHaptic([30, 20]);
               triggerHitStop(4);
               addScreenShake(7);
-              spawnFloatingText(fb.x, fb.y - 25, fb.isRolling ? '🔥 ROLLING FIRE SLICED!' : '🔥 FIREBALL SLICED!', '#fbbf24');
+              spawnFloatingText(fb.x, fb.y - 25, sliceLabel, elColor);
               incrementAirCombo();
               player.canDash = true;
               player.energy = player.maxEnergy;
@@ -9329,8 +9686,13 @@
             // Direct impact with player
             const dist = Math.hypot(player.x - fb.x, player.y - fb.y);
             if (dist < player.radius + fb.radius) {
-              player.takeDamage(fb.isRolling ? 'Incinerated by Rolling Fireball' : 'Incinerated by Falling Fireball');
-              spawnSparks(fb.x, fb.y, '#ff3300', 25);
+              const hitCause = fb.element === 'cryo'
+                ? (fb.isRolling ? 'Frozen by Rolling Frost Orb' : 'Impaled by Falling Cryo Spike')
+                : (fb.element === 'quantum'
+                  ? (fb.isRolling ? 'Crushed by Rolling Event-Horizon Singularity' : 'Obliterated by Antimatter Singularity')
+                  : (fb.isRolling ? 'Incinerated by Rolling Fireball' : 'Incinerated by Falling Fireball'));
+              player.takeDamage(hitCause);
+              spawnSparks(fb.x, fb.y, fb.element === 'cryo' ? '#38bdf8' : (fb.element === 'quantum' ? '#d946ef' : '#ff3300'), 25);
               addScreenShake(12);
               triggerHaptic([40, 40]);
               fireballs.splice(i, 1);
@@ -9339,15 +9701,15 @@
           }
 
           if (fb.isRolling) {
-            // Rolling fireball despawns when it passes far left of screen or expires
+            // Rolling hazard despawns when it passes far away from screen or expires
             const halfV = VIRTUAL_WIDTH / 2;
-            if (fb.x < cameraFocusX - halfV - 140 || fb.life <= 0) {
+            if (fb.x < cameraFocusX - halfV - 180 || fb.x > cameraFocusX + halfV + 180 || fb.life <= 0) {
               fireballs.splice(i, 1);
             }
             continue;
           }
 
-          // Platform or Ground Impact for falling fireballs
+          // Platform or Ground Impact for falling hazards
           let exploded = false;
           if (fb.y >= fb.targetGroundY) {
             exploded = true;
@@ -9361,18 +9723,22 @@
           }
 
           if (exploded || fb.life <= 0) {
-            spawnSparks(fb.x, fb.y, '#ff5500', 22);
-            sound.playExplosion();
+            const expColor = fb.element === 'cryo' ? '#06b6d4' : (fb.element === 'quantum' ? '#d946ef' : '#ff5500');
+            spawnSparks(fb.x, fb.y, expColor, 22);
+            if (fb.element === 'cryo') sound.playIceShatter();
+            else sound.playExplosion();
             addScreenShake(6);
-            fireTrails.push({
-              x: fb.x,
-              y: fb.y,
-              radius: 28,
-              life: 2.2,
-              maxLife: 2.2
-            });
+            if (fb.element !== 'cryo') {
+              fireTrails.push({
+                x: fb.x,
+                y: fb.y,
+                radius: 28,
+                life: 2.2,
+                maxLife: 2.2
+              });
+            }
             if (!player.isDashing && player.invulnerableTimer <= 0 && Math.hypot(player.x - fb.x, player.y - fb.y) < 38) {
-              player.takeDamage('Caught in Fireball Blast Radius');
+              player.takeDamage(fb.element === 'cryo' ? 'Caught in Cryo Spike Blast Radius' : (fb.element === 'quantum' ? 'Caught in Antimatter Singularity Radius' : 'Caught in Fireball Blast Radius'));
             }
             fireballs.splice(i, 1);
           }
@@ -9405,7 +9771,17 @@
 
     // --- RENDER PASS ---
     function render() {
-      ctx.fillStyle = '#080c14';
+      if (gameMode === 'UNLIMITED') {
+        if (unlimitedSelectedLevel === 2) {
+          ctx.fillStyle = '#020d18'; // Deep Sub-zero Glacial Void
+        } else if (unlimitedSelectedLevel === 3) {
+          ctx.fillStyle = '#0b0217'; // Deep Cosmic Singularity Void
+        } else {
+          ctx.fillStyle = '#140505'; // Volcanic Inferno Void
+        }
+      } else {
+        ctx.fillStyle = '#080c14';
+      }
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       ctx.save();
@@ -9421,9 +9797,49 @@
       ctx.scale(cameraZoom, cameraZoom);
       ctx.translate(-cameraFocusX, -cameraFocusY);
 
-      // Stage-specific grid color (Stages 1-18 across Missions 1 to 6)
+      // Distant Sky Accretion Disk for Mission Unlimited Level 3 (Quantum Eclipse)
+      if (gameMode === 'UNLIMITED' && unlimitedSelectedLevel === 3) {
+        ctx.save();
+        const bhX = cameraFocusX;
+        const bhY = 160;
+        unlimitedSingularityVortexAngle = (unlimitedSingularityVortexAngle || 0) + 0.01;
+        ctx.translate(bhX, bhY);
+        ctx.rotate(unlimitedSingularityVortexAngle);
+        // Outer Accretion Glow
+        const bhGrad = ctx.createRadialGradient(0, 0, 35, 0, 0, 160);
+        bhGrad.addColorStop(0, '#000000');
+        bhGrad.addColorStop(0.35, '#3b0764');
+        bhGrad.addColorStop(0.65, '#a855f7');
+        bhGrad.addColorStop(0.85, 'rgba(217, 70, 239, 0.35)');
+        bhGrad.addColorStop(1, 'rgba(217, 70, 239, 0)');
+        ctx.fillStyle = bhGrad;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, 180, 52, 0, 0, Math.PI * 2);
+        ctx.fill();
+        // Inner Event Horizon
+        ctx.fillStyle = '#05010a';
+        ctx.beginPath();
+        ctx.arc(0, 0, 40, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#e879f9';
+        ctx.lineWidth = 2.5;
+        ctx.shadowColor = '#d946ef';
+        ctx.shadowBlur = 18;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Stage & Mode specific grid color
       let gridStroke = 'rgba(0, 240, 255, 0.05)';
-      if (currentLevelIndex > 170) gridStroke = 'rgba(232, 121, 249, 0.16)'; // Stage 18: Singularity Eclipse Core (Cosmic Orchid)
+      if (gameMode === 'UNLIMITED') {
+        if (unlimitedSelectedLevel === 2) {
+          gridStroke = 'rgba(6, 182, 212, 0.2)'; // Glacial Cyan Grid
+        } else if (unlimitedSelectedLevel === 3) {
+          gridStroke = 'rgba(217, 70, 239, 0.22)'; // Singularity Orchid/Magenta Grid
+        } else {
+          gridStroke = 'rgba(255, 85, 0, 0.18)'; // Volcanic Amber Grid
+        }
+      } else if (currentLevelIndex > 170) gridStroke = 'rgba(232, 121, 249, 0.16)'; // Stage 18: Singularity Eclipse Core (Cosmic Orchid)
       else if (currentLevelIndex > 160) gridStroke = 'rgba(168, 85, 247, 0.14)'; // Stage 17: Antimatter Event Horizon (Deep Violet)
       else if (currentLevelIndex > 150) gridStroke = 'rgba(56, 189, 248, 0.13)'; // Stage 16: Zero-G Orbital Ring (Quantum Sky)
       else if (currentLevelIndex > 140) gridStroke = 'rgba(239, 68, 68, 0.12)'; // Stage 15: Cyber Hellforge (Crimson Flame)
@@ -9455,9 +9871,49 @@
         ctx.stroke();
       }
 
+      // Atmospheric Weather Particles for Mission Unlimited
+      if (gameMode === 'UNLIMITED' && unlimitedParticles && unlimitedParticles.length > 0) {
+        ctx.save();
+        for (const pt of unlimitedParticles) {
+          pt.y += pt.vy * 0.016;
+          pt.x += pt.vx * 0.016;
+          if (pt.y > VIRTUAL_HEIGHT + 30) {
+            pt.y = -20;
+            pt.x = cameraFocusX + (Math.random() - 0.5) * (VIRTUAL_WIDTH + 500);
+          }
+          if (unlimitedSelectedLevel === 2) {
+            // Glacial Snowflakes & Frost Shimmers
+            ctx.fillStyle = `rgba(186, 230, 253, ${pt.alpha * 0.85})`;
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
+            ctx.fill();
+          } else if (unlimitedSelectedLevel === 3) {
+            // Cosmic Stardust & Event-Horizon Quantum Specks
+            ctx.fillStyle = `rgba(232, 121, 249, ${pt.alpha * 0.8})`;
+            ctx.shadowColor = '#d946ef';
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, pt.size * 1.2, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            // Volcanic Floating Embers
+            ctx.fillStyle = `rgba(255, 120, 30, ${pt.alpha * 0.8})`;
+            ctx.shadowColor = '#ff5500';
+            ctx.shadowBlur = 6;
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y, pt.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+        ctx.restore();
+      }
+
       // Glowing cyber perimeter boundary line
       ctx.save();
-      const borderColor = currentLevelIndex > 150 ? 'rgba(232, 121, 249, 0.85)' : (currentLevelIndex > 120 ? 'rgba(239, 68, 68, 0.8)' : (currentLevelIndex > 110 ? 'rgba(168, 85, 247, 0.8)' : (currentLevelIndex > 100 ? 'rgba(6, 182, 212, 0.75)' : (currentLevelIndex > 90 ? 'rgba(192, 132, 252, 0.7)' : (currentLevelIndex > 80 ? 'rgba(239, 68, 68, 0.65)' : (currentLevelIndex > 70 ? 'rgba(249, 115, 22, 0.6)' : (currentLevelIndex > 60 ? 'rgba(245, 158, 11, 0.55)' : (currentLevelIndex > 50 ? 'rgba(251, 191, 36, 0.5)' : (currentLevelIndex > 40 ? 'rgba(168, 85, 247, 0.5)' : (currentLevelIndex > 30 ? 'rgba(16, 185, 129, 0.5)' : (currentLevelIndex > 20 ? 'rgba(255, 0, 85, 0.45)' : (currentLevelIndex > 10 ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 240, 255, 0.4)'))))))))))));
+      let borderColor = currentLevelIndex > 150 ? 'rgba(232, 121, 249, 0.85)' : (currentLevelIndex > 120 ? 'rgba(239, 68, 68, 0.8)' : (currentLevelIndex > 110 ? 'rgba(168, 85, 247, 0.8)' : (currentLevelIndex > 100 ? 'rgba(6, 182, 212, 0.75)' : (currentLevelIndex > 90 ? 'rgba(192, 132, 252, 0.7)' : (currentLevelIndex > 80 ? 'rgba(239, 68, 68, 0.65)' : (currentLevelIndex > 70 ? 'rgba(249, 115, 22, 0.6)' : (currentLevelIndex > 60 ? 'rgba(245, 158, 11, 0.55)' : (currentLevelIndex > 50 ? 'rgba(251, 191, 36, 0.5)' : (currentLevelIndex > 40 ? 'rgba(168, 85, 247, 0.5)' : (currentLevelIndex > 30 ? 'rgba(16, 185, 129, 0.5)' : (currentLevelIndex > 20 ? 'rgba(255, 0, 85, 0.45)' : (currentLevelIndex > 10 ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 240, 255, 0.4)'))))))))))));
+      if (gameMode === 'UNLIMITED') {
+        borderColor = unlimitedSelectedLevel === 3 ? 'rgba(232, 121, 249, 0.9)' : (unlimitedSelectedLevel === 2 ? 'rgba(56, 189, 248, 0.88)' : 'rgba(239, 68, 68, 0.85)');
+      }
       ctx.strokeStyle = borderColor;
       ctx.lineWidth = 2;
       ctx.shadowColor = borderColor;
@@ -9490,6 +9946,8 @@
         let platformNeon = '#00f0ff';
         if (p.isAntimatter) {
           platformNeon = p.collapseTimer > 0 ? '#ff0055' : '#e879f9';
+        } else if (gameMode === 'UNLIMITED') {
+          platformNeon = unlimitedSelectedLevel === 3 ? '#e879f9' : (unlimitedSelectedLevel === 2 ? '#38bdf8' : '#f97316');
         } else if (currentLevelIndex > 150) {
           platformNeon = '#e879f9';
         } else if (currentLevelIndex > 120) {
@@ -9539,51 +9997,87 @@
       }
       for (const p of projectiles) p.draw(ctx);
 
-      // Fireballs ("Aag ke Gole")
+      // Elemental Hazards ("Fireballs, Cryo Spikes & Quantum Singularities")
       for (const fb of fireballs) {
         ctx.save();
+        const isCryo = fb.element === 'cryo';
+        const isQuantum = fb.element === 'quantum';
+
         // Ground warning shadow
         const shadowScale = Math.max(0.3, Math.min(1.0, 1 - (fb.targetGroundY - fb.y) / 660));
-        ctx.fillStyle = `rgba(255, 60, 0, ${0.15 + shadowScale * 0.35})`;
+        ctx.fillStyle = isCryo
+          ? `rgba(6, 182, 212, ${0.15 + shadowScale * 0.35})`
+          : (isQuantum ? `rgba(217, 70, 239, ${0.16 + shadowScale * 0.35})` : `rgba(255, 60, 0, ${0.15 + shadowScale * 0.35})`);
         ctx.beginPath();
         ctx.ellipse(fb.x, Math.min(fb.targetGroundY, 660) - 2, fb.radius * shadowScale * 1.8, fb.radius * shadowScale * 0.6, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Fiery outer glow
+        // Outer Glow & Body
         const grad = ctx.createRadialGradient(fb.x, fb.y, 2, fb.x, fb.y, fb.radius + 6);
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.3, '#fbbf24');
-        grad.addColorStop(0.7, '#f97316');
-        grad.addColorStop(1, 'rgba(239, 68, 68, 0)');
-        ctx.fillStyle = grad;
-        ctx.shadowColor = '#ff5500';
+        if (isCryo) {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.3, '#bae6fd');
+          grad.addColorStop(0.7, '#06b6d4');
+          grad.addColorStop(1, 'rgba(6, 182, 212, 0)');
+          ctx.fillStyle = grad;
+          ctx.shadowColor = '#00f0ff';
+        } else if (isQuantum) {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.3, '#f5d0fe');
+          grad.addColorStop(0.7, '#d946ef');
+          grad.addColorStop(1, 'rgba(168, 85, 247, 0)');
+          ctx.fillStyle = grad;
+          ctx.shadowColor = '#e879f9';
+        } else {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.3, '#fbbf24');
+          grad.addColorStop(0.7, '#f97316');
+          grad.addColorStop(1, 'rgba(239, 68, 68, 0)');
+          ctx.fillStyle = grad;
+          ctx.shadowColor = '#ff5500';
+        }
+
         ctx.shadowBlur = 18;
         ctx.beginPath();
         ctx.arc(fb.x, fb.y, fb.radius + 6, 0, Math.PI * 2);
         ctx.fill();
 
-        // Fireball Core
-        ctx.fillStyle = '#ffedd5';
+        // Core
+        ctx.fillStyle = isCryo ? '#f0f9ff' : (isQuantum ? '#faf5ff' : '#ffedd5');
         ctx.beginPath();
         ctx.arc(fb.x, fb.y, fb.radius * 0.55, 0, Math.PI * 2);
         ctx.fill();
 
-        // If rolling fireball, render rotating internal spokes & flame vortex
+        // Internal rotating spokes / crystal structure
         if (fb.isRolling) {
           ctx.save();
           ctx.translate(fb.x, fb.y);
           ctx.rotate(fb.rotationAngle || 0);
-          ctx.strokeStyle = '#ffffff';
+          ctx.strokeStyle = isCryo ? '#38bdf8' : (isQuantum ? '#f0abfc' : '#ffffff');
           ctx.lineWidth = 2.2;
-          ctx.shadowColor = '#fbbf24';
+          ctx.shadowColor = isCryo ? '#06b6d4' : (isQuantum ? '#c084fc' : '#fbbf24');
           ctx.shadowBlur = 8;
-          for (let s = 0; s < 4; s++) {
-            const rot = (Math.PI / 2) * s;
+          const spokes = isCryo ? 6 : 4;
+          for (let s = 0; s < spokes; s++) {
+            const rot = ((Math.PI * 2) / spokes) * s;
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(Math.cos(rot) * (fb.radius * 0.85), Math.sin(rot) * (fb.radius * 0.85));
             ctx.stroke();
           }
+          ctx.restore();
+        } else if (isCryo) {
+          // Sharp Icicle Diamond Cap for falling Cryo Spikes
+          ctx.save();
+          ctx.translate(fb.x, fb.y);
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(0, fb.radius + 7);
+          ctx.lineTo(-fb.radius * 0.5, 0);
+          ctx.lineTo(0, -fb.radius * 0.5);
+          ctx.lineTo(fb.radius * 0.5, 0);
+          ctx.closePath();
+          ctx.fill();
           ctx.restore();
         }
 
